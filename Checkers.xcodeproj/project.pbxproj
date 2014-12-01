@@ -64,8 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				C091D1FB1A2C6FCE0033F8BD /* Checkers */,
-				C091D2151A2C6FCE0033F8BD /* CheckersTests */,
-				C091D1FA1A2C6FCE0033F8BD /* Products */,
+				C0DD99191A2C8C3A00E91DD9 /* Other */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,11 +82,13 @@
 			children = (
 				C091D2001A2C6FCE0033F8BD /* AppDelegate.h */,
 				C091D2011A2C6FCE0033F8BD /* AppDelegate.m */,
+				C0DD99171A2C8BCA00E91DD9 /* Data */,
+				C0DD99161A2C8BC700E91DD9 /* Business */,
+				C0DD99151A2C8BC400E91DD9 /* Presentation */,
 				C091D2031A2C6FCE0033F8BD /* ViewController.h */,
 				C091D2041A2C6FCE0033F8BD /* ViewController.m */,
 				C091D2061A2C6FCE0033F8BD /* Main.storyboard */,
-				C091D2091A2C6FCE0033F8BD /* Images.xcassets */,
-				C091D20B1A2C6FCE0033F8BD /* LaunchScreen.xib */,
+				C0DD99181A2C8BFD00E91DD9 /* Resources */,
 				C091D1FC1A2C6FCE0033F8BD /* Supporting Files */,
 			);
 			path = Checkers;
@@ -117,6 +118,45 @@
 				C091D2171A2C6FCE0033F8BD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C0DD99151A2C8BC400E91DD9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Presentation;
+			sourceTree = "<group>";
+		};
+		C0DD99161A2C8BC700E91DD9 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Business;
+			sourceTree = "<group>";
+		};
+		C0DD99171A2C8BCA00E91DD9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		C0DD99181A2C8BFD00E91DD9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C091D2091A2C6FCE0033F8BD /* Images.xcassets */,
+				C091D20B1A2C6FCE0033F8BD /* LaunchScreen.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C0DD99191A2C8C3A00E91DD9 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				C091D2151A2C6FCE0033F8BD /* CheckersTests */,
+				C091D1FA1A2C6FCE0033F8BD /* Products */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,6 +452,7 @@
 				C091D21E1A2C6FCE0033F8BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C091D21F1A2C6FCE0033F8BD /* Build configuration list for PBXNativeTarget "CheckersTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +461,7 @@
 				C091D2211A2C6FCE0033F8BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
