@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D1FE1A2C6FCE0033F8BD /* main.m */; };
 		C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2011A2C6FCE0033F8BD /* AppDelegate.m */; };
-		C091D2051A2C6FCE0033F8BD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2041A2C6FCE0033F8BD /* ViewController.m */; };
 		C091D2081A2C6FCE0033F8BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C091D2061A2C6FCE0033F8BD /* Main.storyboard */; };
 		C091D20A1A2C6FCE0033F8BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C091D2091A2C6FCE0033F8BD /* Images.xcassets */; };
 		C091D20D1A2C6FCE0033F8BD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C091D20B1A2C6FCE0033F8BD /* LaunchScreen.xib */; };
 		C091D2191A2C6FCE0033F8BD /* CheckersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2181A2C6FCE0033F8BD /* CheckersTests.m */; };
+		C0DC69461A2FA84900C8CFC8 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */; };
+		C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC69481A2FA91A00C8CFC8 /* Board.m */; };
+		C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */; };
+		C0DC694F1A2FB45F00C8CFC8 /* BoardSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +30,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C02A10D81A2DAD78000C9CDE /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
 		C091D1F91A2C6FCE0033F8BD /* Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C091D1FD1A2C6FCE0033F8BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C091D1FE1A2C6FCE0033F8BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C091D2001A2C6FCE0033F8BD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C091D2011A2C6FCE0033F8BD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C091D2031A2C6FCE0033F8BD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C091D2041A2C6FCE0033F8BD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C091D2071A2C6FCE0033F8BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C091D2091A2C6FCE0033F8BD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C091D20C1A2C6FCE0033F8BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C091D2121A2C6FCE0033F8BD /* CheckersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C091D2171A2C6FCE0033F8BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C091D2181A2C6FCE0033F8BD /* CheckersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckersTests.m; sourceTree = "<group>"; };
+		C0DC69441A2FA84900C8CFC8 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
+		C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
+		C0DC69471A2FA91A00C8CFC8 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = Model/Board.h; sourceTree = "<group>"; };
+		C0DC69481A2FA91A00C8CFC8 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = Model/Board.m; sourceTree = "<group>"; };
+		C0DC694A1A2FB24F00C8CFC8 /* CheckersBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckersBoard.h; path = Model/CheckersBoard.h; sourceTree = "<group>"; };
+		C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckersBoard.m; path = Model/CheckersBoard.m; sourceTree = "<group>"; };
+		C0DC694D1A2FB45F00C8CFC8 /* BoardSquareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquareView.h; path = View/BoardSquareView.h; sourceTree = "<group>"; };
+		C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquareView.m; path = View/BoardSquareView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,13 +90,12 @@
 		C091D1FB1A2C6FCE0033F8BD /* Checkers */ = {
 			isa = PBXGroup;
 			children = (
+				C0DC69431A2FA83000C8CFC8 /* Utilities */,
 				C091D2001A2C6FCE0033F8BD /* AppDelegate.h */,
 				C091D2011A2C6FCE0033F8BD /* AppDelegate.m */,
 				C0DD99171A2C8BCA00E91DD9 /* Data */,
 				C0DD99161A2C8BC700E91DD9 /* Business */,
 				C0DD99151A2C8BC400E91DD9 /* Presentation */,
-				C091D2031A2C6FCE0033F8BD /* ViewController.h */,
-				C091D2041A2C6FCE0033F8BD /* ViewController.m */,
 				C091D2061A2C6FCE0033F8BD /* Main.storyboard */,
 				C0DD99181A2C8BFD00E91DD9 /* Resources */,
 				C091D1FC1A2C6FCE0033F8BD /* Supporting Files */,
@@ -120,9 +129,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C0DC69431A2FA83000C8CFC8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C0DC69441A2FA84900C8CFC8 /* MulticastDelegate.h */,
+				C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		C0DD99151A2C8BC400E91DD9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C0DD991B1A2CEC8C00E91DD9 /* Controllers */,
+				C0DD991A1A2CEC7C00E91DD9 /* Views */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -137,6 +157,11 @@
 		C0DD99171A2C8BCA00E91DD9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				C02A10D81A2DAD78000C9CDE /* BoardCellState.h */,
+				C0DC69471A2FA91A00C8CFC8 /* Board.h */,
+				C0DC69481A2FA91A00C8CFC8 /* Board.m */,
+				C0DC694A1A2FB24F00C8CFC8 /* CheckersBoard.h */,
+				C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -157,6 +182,22 @@
 				C091D1FA1A2C6FCE0033F8BD /* Products */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		C0DD991A1A2CEC7C00E91DD9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0DC694D1A2FB45F00C8CFC8 /* BoardSquareView.h */,
+				C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		C0DD991B1A2CEC8C00E91DD9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +300,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C091D2051A2C6FCE0033F8BD /* ViewController.m in Sources */,
+				C0DC694F1A2FB45F00C8CFC8 /* BoardSquareView.m in Sources */,
+				C0DC69461A2FA84900C8CFC8 /* MulticastDelegate.m in Sources */,
 				C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */,
+				C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */,
+				C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */,
 				C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
