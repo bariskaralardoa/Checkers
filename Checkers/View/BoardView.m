@@ -66,6 +66,7 @@
             tileView.indexY = j;
             tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:i withY:j];
             _boardTilesArr [i][j] = tileView;
+            
         }
     }
 }
@@ -119,14 +120,43 @@
 
 
 
+-(void) getPiecesIndexes
+{
+    for (int i = 0; i<8; i++) {
+        for (int k= 0; k<8; k++) {
+            CheckersTileView * tileView = _boardTilesArr[i][k];
+            
+            //Check if tile has piece on it or not
+            if (tileView.pieceView) {
+                
+            }
+            
+            
+        }
+    }
 
+
+}
 
 
 
 
 #pragma mark - Touch functions
 
+-(void) viewTapped: (UIGestureRecognizer *) recognizer
+{
+    CGPoint touchPoint = [recognizer locationInView:self];
+//    CGPoint touchPoint2 = [recognizer locationOfTouch:0 inView:nil];
+//    CGPoint touchPoint3 = [recognizer locationOfTouch:0 inView:self];
 
+    TileCoordinates * clickedCoordinate = [[TileCoordinates alloc] initWithX:touchPoint.x withY:touchPoint.y];
+ 
+    
+    
+    
+    
+    
+}
 
 
 

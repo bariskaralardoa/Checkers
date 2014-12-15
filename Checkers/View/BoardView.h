@@ -17,4 +17,6 @@
 
 -(void) generatePieces;
 
+-(void) viewTapped: (UIGestureRecognizer *) recognizer;
+
 @end

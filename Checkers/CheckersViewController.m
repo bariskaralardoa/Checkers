@@ -32,11 +32,18 @@
 {
     [self.boardViewOnController generateTiles];
     [self.boardViewOnController generatePieces];
+    
+    [self addGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addGestureRecognizer
+{
+    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector(viewTapped:)]];
 }
 
 //@implementation CheckersViewController

@@ -14,12 +14,18 @@ typedef NS_ENUM(NSInteger, PlayerSideType) { emptyCell, pieceSideBlack,
 
 @interface Piece : NSObject
 
+//@property(nonatomic, retain) NSString *imageNameStr;
+
 @property(nonatomic, retain) NSString *imageNameStr;
+
 @property(nonatomic) NSInteger currentPositionX;
 @property(nonatomic) NSInteger currentPositionY;
 @property(nonatomic) PlayerSideType sideType;
 
 @property(nonatomic, strong) NSMutableArray *possibleMoves;
+
+- (NSString*) getPieceImageName;
+// Go to global.m, get image name from an array using isDama and SideType
 
 - (instancetype)initWithImageName:(NSString *)imageNameStr
        currentPositionX:(NSInteger)currentPositionX
