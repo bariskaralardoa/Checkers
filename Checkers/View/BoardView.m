@@ -38,15 +38,18 @@
 {
     int noOfTilesX = 8;
     int noOfTilesY = 8;
-
+    float rowHeight = self.frame.size.height/8.0;
+    float columnWidth = self.frame.size.height/8.0;
+    
     _boardTilesArr = [NSMutableArray arrayOfWidth:noOfTilesX andHeight:noOfTilesY];
 
-    for(int i=0; i<noOfTilesX; i++)
+    for(int row=0; row<noOfTilesX; row++)
     {
-        for(int j=0; j<noOfTilesY; j++){
-            CheckersTileView * tileView = [[CheckersTileView alloc] initWithFrame:CGRectMake((i*37)+i, (j*37)+j, 37, 37)];
+        for(int col=0; col<noOfTilesY; col++){
+            CheckersTileView * tileView = [[CheckersTileView alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight)];
             
-            if((i+j) % 2 == 1)
+
+            if((col+row) % 2 == 1)
             {
 //                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tile1.png"]];
                 tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"whiteBoardSquare"]];
@@ -62,10 +65,10 @@
             [self addSubview:tileView];
             
             tileView.isClicked = NO;
-            tileView.indexX = i;
-            tileView.indexY = j;
-            tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:i withY:j];
-            _boardTilesArr [i][j] = tileView;
+            tileView.indexX = row;
+            tileView.indexY = col;
+            tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:row withY:col];
+            _boardTilesArr [row][col] = tileView;
             
         }
     }
@@ -73,14 +76,14 @@
 
 -(void) generatePieces
 {
-    CGRect pieceFrame = CGRectMake(0, 0, 30, 30);
+    CGRect pieceFrame = CGRectMake(0, 0, self.frame.size.height/8.0, self.frame.size.height/8.0);
     
     for (int i = 0; i<8; i++) {
         
         for(int j = 1; j<3; j++)
         {
             //link CheckersTileView with CheckersPieceView
-            CheckersTileView * currentTile = self.boardTilesArr[i][j];
+            CheckersTileView * currentTile = self.boardTilesArr[j][i];
             
             CheckersPieceView * pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
             currentTile.pieceView = pieceView;
@@ -90,13 +93,13 @@
             RegularPiece * regularPiece = [[RegularPiece alloc] initWithImageName:@"siyah-dama" currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
             [pieceView setPieceInfoWithPiece:regularPiece];
 
-            pieceView.center = CGPointMake(currentTile.frame.size.width/2, currentTile.frame.size.height/2);
+            pieceView.center = CGPointMake(currentTile.frame.size.width/1.65, currentTile.frame.size.height/1.65);
             
         }
         
-        for(int k = 5; k<7; k++)
+        for(int k = 5; k<7; k++)    
         {
-            CheckersTileView * currentTile = self.boardTilesArr[i][k];
+            CheckersTileView * currentTile = self.boardTilesArr[k][i];
             
             CheckersPieceView * pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
             currentTile.pieceView = pieceView;
@@ -105,7 +108,7 @@
             RegularPiece * regularPiece = [[RegularPiece alloc] initWithImageName:@"beyaz-dama" currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
             [pieceView setPieceInfoWithPiece:regularPiece];
             
-            pieceView.center = CGPointMake(currentTile.frame.size.width/2, currentTile.frame.size.height/2);
+            pieceView.center = CGPointMake(currentTile.frame.size.width/1.65, currentTile.frame.size.height/1.65);
 
         }
     

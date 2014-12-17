@@ -104,10 +104,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C04C871C1A40AAF50097E26E /* eski */ = {
+			isa = PBXGroup;
+			children = (
+				C0B4D99F1A383669000F3C41 /* eski */,
+				C0B4D9A01A38367F000F3C41 /* eski */,
+			);
+			name = eski;
+			path = Checkers;
+			sourceTree = "<group>";
+		};
+		C04C871D1A40AFE30097E26E /* State */ = {
+			isa = PBXGroup;
+			children = (
+				C0B4D9961A3832DC000F3C41 /* Piece.h */,
+				C0B4D9971A3832DC000F3C41 /* Piece.m */,
+				C0B4D9991A383583000F3C41 /* RegularPiece.h */,
+				C0B4D99A1A383583000F3C41 /* RegularPiece.m */,
+				C0B4D99C1A3835C9000F3C41 /* CheckPiece.h */,
+				C0B4D99D1A3835C9000F3C41 /* CheckPiece.m */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
 		C091D1F01A2C6FCE0033F8BD = {
 			isa = PBXGroup;
 			children = (
 				C091D1FB1A2C6FCE0033F8BD /* Checkers */,
+				C04C871C1A40AAF50097E26E /* eski */,
 				C0DD99191A2C8C3A00E91DD9 /* Other */,
 			);
 			sourceTree = "<group>";
@@ -124,13 +148,16 @@
 		C091D1FB1A2C6FCE0033F8BD /* Checkers */ = {
 			isa = PBXGroup;
 			children = (
-				C0DC69431A2FA83000C8CFC8 /* Utilities */,
+				C04C871D1A40AFE30097E26E /* State */,
 				C091D2001A2C6FCE0033F8BD /* AppDelegate.h */,
 				C091D2011A2C6FCE0033F8BD /* AppDelegate.m */,
+				C0B4D9A81A383D2B000F3C41 /* TileCoordinates.h */,
+				C0B4D9A91A383D2B000F3C41 /* TileCoordinates.m */,
 				C0DD99171A2C8BCA00E91DD9 /* Data */,
 				C0DD99161A2C8BC700E91DD9 /* Business */,
 				C0DD99151A2C8BC400E91DD9 /* Presentation */,
 				C091D2061A2C6FCE0033F8BD /* Main.storyboard */,
+				C0DC69431A2FA83000C8CFC8 /* Utilities */,
 				C0DD99181A2C8BFD00E91DD9 /* Resources */,
 				C091D1FC1A2C6FCE0033F8BD /* Supporting Files */,
 			);
@@ -161,34 +188,6 @@
 				C091D2171A2C6FCE0033F8BD /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C0B4D9911A3831D4000F3C41 /* yeni */ = {
-			isa = PBXGroup;
-			children = (
-				C0B4D9A51A383749000F3C41 /* BoardView.h */,
-				C0B4D9A61A383749000F3C41 /* BoardView.m */,
-				C0B4D9A11A3836A7000F3C41 /* CheckersTileView.h */,
-				C0B4D9A21A3836A7000F3C41 /* CheckersTileView.m */,
-				C0B4D9921A383247000F3C41 /* CheckersPieceView.h */,
-				C0B4D9931A383247000F3C41 /* CheckersPieceView.m */,
-			);
-			name = yeni;
-			sourceTree = "<group>";
-		};
-		C0B4D9951A3832BA000F3C41 /* yeni */ = {
-			isa = PBXGroup;
-			children = (
-				C0B4D9961A3832DC000F3C41 /* Piece.h */,
-				C0B4D9971A3832DC000F3C41 /* Piece.m */,
-				C0B4D9991A383583000F3C41 /* RegularPiece.h */,
-				C0B4D99A1A383583000F3C41 /* RegularPiece.m */,
-				C0B4D99C1A3835C9000F3C41 /* CheckPiece.h */,
-				C0B4D99D1A3835C9000F3C41 /* CheckPiece.m */,
-				C0B4D9A81A383D2B000F3C41 /* TileCoordinates.h */,
-				C0B4D9A91A383D2B000F3C41 /* TileCoordinates.m */,
-			);
-			name = yeni;
 			sourceTree = "<group>";
 		};
 		C0B4D99F1A383669000F3C41 /* eski */ = {
@@ -247,8 +246,6 @@
 		C0DD99171A2C8BCA00E91DD9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				C0B4D99F1A383669000F3C41 /* eski */,
-				C0B4D9951A3832BA000F3C41 /* yeni */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -274,8 +271,12 @@
 		C0DD991A1A2CEC7C00E91DD9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C0B4D9A01A38367F000F3C41 /* eski */,
-				C0B4D9911A3831D4000F3C41 /* yeni */,
+				C0B4D9A51A383749000F3C41 /* BoardView.h */,
+				C0B4D9A61A383749000F3C41 /* BoardView.m */,
+				C0B4D9A11A3836A7000F3C41 /* CheckersTileView.h */,
+				C0B4D9A21A3836A7000F3C41 /* CheckersTileView.m */,
+				C0B4D9921A383247000F3C41 /* CheckersPieceView.h */,
+				C0B4D9931A383247000F3C41 /* CheckersPieceView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";

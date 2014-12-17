@@ -10,7 +10,8 @@
 
 @protocol ISetupBoard <NSObject>
 
--(void) generateTiles;
--(void) generatePieces;
-
+- (void)generateTiles;
+- (void)generatePieces;
+- (void)getTiles;
+- (void)getPieces;
 @end

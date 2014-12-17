@@ -7,19 +7,35 @@
 //
 
 #import "CheckersViewController.h"
-#import "CheckersBoard.h"
-#import "CheckersBoardView.h"
+#import "ISetupBoard.h"
+
+//#import "CheckersBoard.h"
+//#import "CheckersBoardView.h"
 
 
 @interface CheckersViewController ()
-
+@property id <ISetupBoard> boardSetupEngine;
 
 
 @end
-
 @implementation CheckersViewController
 {
     
+}
+
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self) {
+        [_boardSetupEngine generateTiles];
+        [_boardSetupEngine generatePieces];
+        
+        // Custom initialization
+    }
+    return self;
+
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

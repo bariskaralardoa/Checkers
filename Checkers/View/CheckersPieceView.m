@@ -29,7 +29,7 @@
 {
     _currentImage = [UIImage imageNamed:imageName];
     _pieceImageView = [[UIImageView alloc] initWithImage:_currentImage];
-    _pieceImageView.frame = CGRectMake(0, 0, 30, 30);
+    _pieceImageView.frame = CGRectMake(0, 0, self.frame.size.height*0.8, self.frame.size.height*0.8);
     
     [self addSubview:_pieceImageView];
 }
