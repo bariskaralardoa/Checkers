@@ -94,16 +94,16 @@
 - (void)RenderPieces:(NSArray*)pieces withTileArray:(NSArray*)tiles
 {
 
-    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)];  //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi. 
+    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
     for (CheckersPieceView* pieceView in pieces) {
         CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
         tileToPlace.pieceView = pieceView;
 
-                [tileToPlace addSubview:pieceView];
+        [tileToPlace addSubview:pieceView];
         pieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
-//        [pieceView refreshImage];
+        //        [pieceView refreshImage];
     }
-    currentPieces = [pieces copy];  // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
+    currentPieces = [pieces copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
 }
 
 - (void)addGestureRecognizer
