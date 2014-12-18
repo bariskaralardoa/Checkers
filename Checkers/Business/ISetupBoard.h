@@ -9,12 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol ISetupBoard <NSObject>
+//- (void)generateTilesWithTileHeight:(float)tileHeight;
+//- (void)generatePieces;
+- (NSArray*)getTiles;
 
-
-
-
-- (void)generateTiles;
-- (void)generatePieces;
-- (void)getTiles;
-- (void)getPieces;
+- (NSArray*)getPieces;
 @end

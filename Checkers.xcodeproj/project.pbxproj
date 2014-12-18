@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC1488701A438BAB00438E7D /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = AC14886F1A438BAB00438E7D /* Game.m */; };
+		ACA62FAB1A438C790007E72B /* PlayerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FAA1A438C790007E72B /* PlayerInfo.m */; };
+		ACA62FB01A438D1B0007E72B /* PlayerInGame.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FAF1A438D1B0007E72B /* PlayerInGame.m */; };
+		ACA62FB81A438FB80007E72B /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FB71A438FB80007E72B /* Globals.m */; };
 		C02672371A36E1F800C93D6C /* CheckersBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C02672361A36E1F800C93D6C /* CheckersBoardView.m */; };
 		C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D1FE1A2C6FCE0033F8BD /* main.m */; };
 		C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2011A2C6FCE0033F8BD /* AppDelegate.m */; };
@@ -41,6 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC14886E1A438BAB00438E7D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = Model/Game.h; sourceTree = "<group>"; };
+		AC14886F1A438BAB00438E7D /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Game.m; path = Model/Game.m; sourceTree = "<group>"; };
+		ACA62FA91A438C790007E72B /* PlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfo.h; sourceTree = "<group>"; };
+		ACA62FAA1A438C790007E72B /* PlayerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerInfo.m; sourceTree = "<group>"; };
+		ACA62FAE1A438D1B0007E72B /* PlayerInGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInGame.h; sourceTree = "<group>"; };
+		ACA62FAF1A438D1B0007E72B /* PlayerInGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerInGame.m; sourceTree = "<group>"; };
+		ACA62FB11A438E770007E72B /* IGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGameState.h; sourceTree = "<group>"; };
+		ACA62FB61A438FB80007E72B /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		ACA62FB71A438FB80007E72B /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		C02672351A36E1F800C93D6C /* CheckersBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckersBoardView.h; path = View/CheckersBoardView.h; sourceTree = "<group>"; };
 		C02672361A36E1F800C93D6C /* CheckersBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckersBoardView.m; path = View/CheckersBoardView.m; sourceTree = "<group>"; };
 		C02A10D81A2DAD78000C9CDE /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
@@ -104,6 +117,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ACA62FAC1A438CE90007E72B /* Player Related */ = {
+			isa = PBXGroup;
+			children = (
+				ACA62FA91A438C790007E72B /* PlayerInfo.h */,
+				ACA62FAA1A438C790007E72B /* PlayerInfo.m */,
+			);
+			name = "Player Related";
+			sourceTree = "<group>";
+		};
+		ACA62FAD1A438CF40007E72B /* Game Related */ = {
+			isa = PBXGroup;
+			children = (
+				C09D0A031A3F7E9400A35600 /* GameEngine.h */,
+				C09D0A041A3F7E9400A35600 /* GameEngine.m */,
+				AC14886E1A438BAB00438E7D /* Game.h */,
+				AC14886F1A438BAB00438E7D /* Game.m */,
+				ACA62FAE1A438D1B0007E72B /* PlayerInGame.h */,
+				ACA62FAF1A438D1B0007E72B /* PlayerInGame.m */,
+			);
+			name = "Game Related";
+			sourceTree = "<group>";
+		};
+		ACA62FB51A438FB80007E72B /* Crosscutting */ = {
+			isa = PBXGroup;
+			children = (
+				ACA62FB61A438FB80007E72B /* Globals.h */,
+				ACA62FB71A438FB80007E72B /* Globals.m */,
+			);
+			path = Crosscutting;
+			sourceTree = "<group>";
+		};
 		C04C871C1A40AAF50097E26E /* eski */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +192,7 @@
 		C091D1FB1A2C6FCE0033F8BD /* Checkers */ = {
 			isa = PBXGroup;
 			children = (
+				ACA62FB51A438FB80007E72B /* Crosscutting */,
 				C04C871D1A40AFE30097E26E /* State */,
 				C091D2001A2C6FCE0033F8BD /* AppDelegate.h */,
 				C091D2011A2C6FCE0033F8BD /* AppDelegate.m */,
@@ -236,9 +281,10 @@
 		C0DD99161A2C8BC700E91DD9 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				C09D0A031A3F7E9400A35600 /* GameEngine.h */,
-				C09D0A041A3F7E9400A35600 /* GameEngine.m */,
 				C09D0A061A3F928500A35600 /* ISetupBoard.h */,
+				ACA62FB11A438E770007E72B /* IGameState.h */,
+				ACA62FAD1A438CF40007E72B /* Game Related */,
+				ACA62FAC1A438CE90007E72B /* Player Related */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -397,12 +443,16 @@
 				C0B4D9981A3832DC000F3C41 /* Piece.m in Sources */,
 				C0B4D9901A377148000F3C41 /* CheckersViewController.m in Sources */,
 				C0B4D99B1A383583000F3C41 /* RegularPiece.m in Sources */,
+				ACA62FB01A438D1B0007E72B /* PlayerInGame.m in Sources */,
 				C0B4D9AD1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.m in Sources */,
 				C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */,
+				ACA62FAB1A438C790007E72B /* PlayerInfo.m in Sources */,
+				AC1488701A438BAB00438E7D /* Game.m in Sources */,
 				C02672371A36E1F800C93D6C /* CheckersBoardView.m in Sources */,
 				C0B4D9AA1A383D2B000F3C41 /* TileCoordinates.m in Sources */,
 				C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */,
 				C0B4D9941A383247000F3C41 /* CheckersPieceView.m in Sources */,
+				ACA62FB81A438FB80007E72B /* Globals.m in Sources */,
 				C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */,
 				C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */,
 				C0B4D99E1A3835C9000F3C41 /* CheckPiece.m in Sources */,

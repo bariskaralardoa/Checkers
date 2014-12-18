@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ISetupBoard.h"
+#import "IGameState.h"
 
-@interface GameEngine : NSObject <ISetupBoard>
-
-
-
-
+@interface GameEngine : NSObject <ISetupBoard, IGameState>
++ (GameEngine*)getInstance;
 @end

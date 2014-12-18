@@ -8,64 +8,102 @@
 
 #import "CheckersViewController.h"
 #import "ISetupBoard.h"
+#import "IGameState.h"
 #import "GameEngine.h"
-
+#import "Globals.h"
 
 //#import "CheckersBoard.h"
 //#import "CheckersBoardView.h"
 
-
 @interface CheckersViewController ()
-@property id <ISetupBoard> boardSetupEngine;
-
-
+@property id<ISetupBoard> boardSetupEngine;
+@property id<IGameState> gameStateEngine;
 @end
-@implementation CheckersViewController
-{
-    
+@implementation CheckersViewController {
+    NSArray* currentPieces;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
+- (instancetype)initWithCoder:(NSCoder*)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
-        
     }
     return self;
 }
-
 
 - (instancetype)initWithGameEngine:(GameEngine*)engine
 {
     self = [super init];
     if (self) {
-        _boardSetupEngine = engine;
-        [_boardSetupEngine generateTiles];
-
+        /// EKincan: Alttakiler yanlış, bu init fonksiyonu hiçbir zaman çağırılmaz.
+        //        _boardSetupEngine = engine;
+        //        [_boardSetupEngine generateTilesWithTileHeight:30];
     }
     return self;
 }
 
-
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.boardViewOnController generateTiles];
-    [self.boardViewOnController generatePieces];
-  
+
+    /// Ekincan: alttaki player yaratmalar geçici bir çözüm. Normalde playerInfo, daha önceden kaydedilmiş bir player olarak alınmalı ve bu ekranda değil daha önceki bir ekranda ilk olarak yaratılıp, global bir yere koyulmalı. Yani isme göre saklanmalı kaç kez kazandığı, kaybettiği adamın. Şimdilik burada, değişmesi lazım. PlayerInfo yani bizim için şu ana kadar options'dan falan ismini girip oynamış her oyuncuyu represent ediyor.
+    PlayerInfo* blackPlayerInfo = [PlayerInfo new];
+    blackPlayerInfo.Name = @"Black Player";
+    blackPlayerInfo.Loses = 0;
+    blackPlayerInfo.Wins = 0;
+
+    PlayerInfo* whitePlayerInfo = [PlayerInfo new];
+    whitePlayerInfo.Name = @"White Player";
+    whitePlayerInfo.Loses = 0;
+    whitePlayerInfo.Wins = 0;
+
+    /// Ekincan: PlayerInGame bize o oyun için gerekli olan playerlar sadece, şimdilik puanını tutuyoruz ama ileride başka istatistikler ve bilgiler de tutulabilinir. İçinde ana playerInfo'yu da tutuyoruz tabi, daha sonra kazanınca player onun wins'ini 1 arttırıp yeniden dosya sistemine kaydetmek için. Bir oyun bittiğinde yeni bir oyun başlarken bu playerInGame baştan yaratılmalı.
+    PlayerInGame* blackPlayer = [[PlayerInGame alloc] initWithPlayerInfo:blackPlayerInfo];
+    PlayerInGame* whitePlayer = [[PlayerInGame alloc] initWithPlayerInfo:whitePlayerInfo];
+
+    /// Ekincan: Burada önce game engine yoksa eğer yarat, singleton yani. Normalde bu ekrana başka bir ekrandan gelineceği için, o önceki ekrandan buraya game engine pass edilebilir.
+    _boardSetupEngine = [GameEngine getInstance];
+    _gameStateEngine = [GameEngine getInstance];
+    float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
+    [_gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight]; /// Bu fonksiyon bizim için tile array'ını doldurdu ama henüz render edilmedi.
+
+    //    [_boardSetupEngine generateTilesWithTileHeight:40];
+    [self RenderTiles:[_boardSetupEngine getTiles]]; // Bu method, daha önceki adımda yaratılmış tile'ları render edecek. Bu fonkisyon bir kere her oyun başıdna çağırılıyor şu anda çünkü tile üzerinde oyun içinde bir değişiklik olmaz, rengi falan aynı. Yarın bir gün mayın falan koyma gibi dangalakça şeyler gelirse bu yine çağrılmalı.
+    [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
+
+    //        [self.boardViewOnController generateTiles];
+    //    [self.boardViewOnController generatePieces];
+    //
     [self addGestureRecognizer];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)RenderTiles:(NSArray*)tiles
+{
+
+    for (int row = 0; row < [Globals NumberOfTilesInXDirection]; row++) {
+        for (int col = 0; col < [Globals NumberOfTilesInYDirection]; col++) {
+            [_boardViewOnController addSubview:tiles[row][col]];
+        }
+    }
+}
+
+- (void)RenderPieces:(NSArray*)pieces withTileArray:(NSArray*)tiles
+{
+
+    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)];  //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi. 
+    for (CheckersPieceView* pieceView in pieces) {
+        CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
+        tileToPlace.pieceView = pieceView;
+
+                [tileToPlace addSubview:pieceView];
+        pieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
+//        [pieceView refreshImage];
+    }
+    currentPieces = [pieces copy];  // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
 }
 
 - (void)addGestureRecognizer
@@ -79,11 +117,11 @@
 //}
 //- (void)viewDidLoad {
 //    [super viewDidLoad];
-//    
+//
 //    //Create game board
 //    board = [[CheckersBoard alloc] init];
 //    [board setToInitialState];
-//    
+//
 //    //Create view
 //    CheckersBoardView * boardPiecesView = [[CheckersBoardView alloc] initWithFrame:CGRectMake(0,100,320,320) andBoard:board];
 //    [self.view addSubview:boardPiecesView];

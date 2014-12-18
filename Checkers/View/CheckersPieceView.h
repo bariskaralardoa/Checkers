@@ -11,8 +11,10 @@
 
 @interface CheckersPieceView : UIView
 
-@property (nonatomic,retain) Piece * pieceInfo;
+@property (nonatomic, retain) Piece* pieceInfo;
+@property (nonatomic, readonly) NSInteger IndexX;
+@property (nonatomic, readonly) NSInteger IndexY;
 
-- (void) setPieceInfoWithPiece: (Piece*) piece;
-
+- (void)setPieceInfoWithPiece:(Piece*)piece;
+- (void) refreshImage;
 @end
