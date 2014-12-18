@@ -8,6 +8,8 @@
 
 #import "CheckersViewController.h"
 #import "ISetupBoard.h"
+#import "GameEngine.h"
+
 
 //#import "CheckersBoard.h"
 //#import "CheckersBoardView.h"
@@ -23,20 +25,29 @@
     
 }
 
-- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
+    self = [super initWithCoder:coder];
     if (self) {
-        [_boardSetupEngine generateTiles];
-        [_boardSetupEngine generatePieces];
         
-        // Custom initialization
     }
     return self;
-
-
 }
+
+
+- (instancetype)initWithGameEngine:(GameEngine*)engine
+{
+    self = [super init];
+    if (self) {
+        _boardSetupEngine = engine;
+        [_boardSetupEngine generateTiles];
+
+    }
+    return self;
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,7 +59,7 @@
 {
     [self.boardViewOnController generateTiles];
     [self.boardViewOnController generatePieces];
-    
+  
     [self addGestureRecognizer];
 }
 

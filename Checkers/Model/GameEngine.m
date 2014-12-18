@@ -12,8 +12,8 @@
 #import "CheckersTileView.h"
 #import "Piece.h"
 #import "RegularPiece.h"
-
 #import "BoardView.h"
+
 
 
 @interface GameEngine()
@@ -25,41 +25,46 @@
 
 @implementation GameEngine
 
-- (void) generateTiles
+-(void) generateTiles
 {
-//    int noOfTilesX = 8;
-//    int noOfTilesY = 8;
-//    
-//    _boardTilesArr = [NSMutableArray arrayOfWidth:noOfTilesX andHeight:noOfTilesY];
-//    
-//    for(int i=0; i<noOfTilesX; i++)
-//    {
-//        for(int j=0; j<noOfTilesY; j++){
-//            CheckersTileView * tileView = [[CheckersTileView alloc] initWithFrame:CGRectMake((i*37)+i, (j*37)+j, 37, 37)];
-//            
-//            if((i+j) % 2 == 1)
-//            {
-//                //                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tile1.png"]];
-//                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"whiteBoardSquare"]];
-//            }
-//            
-//            else
-//            {
-//                //                tileView.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:234.0f/255.0f blue:254.0f/255.0f alpha:1];
-//                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brownBoardSquare"]];
-//                
-//            }
-//            
-//            [self addSubview:tileView];
-//            
-//            tileView.isClicked = NO;
-//            tileView.indexX = i;
-//            tileView.indexY = j;
-//            tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:i withY:j];
-//            _boardTilesArr [i][j] = tileView;
-//            
-//        }
-//    }
+    BoardView * boardView = [[BoardView alloc] init];
+    
+    int noOfTilesX = 8;
+    int noOfTilesY = 8;
+    float rowHeight = boardView.frame.size.height/8.0;
+    float columnWidth = boardView.frame.size.height/8.0;
+    
+    _boardTilesArr = [NSMutableArray arrayOfWidth:noOfTilesX andHeight:noOfTilesY];
+    
+    for(int row=0; row<noOfTilesX; row++)
+    {
+        for(int col=0; col<noOfTilesY; col++){
+            CheckersTileView * tileView = [[CheckersTileView alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight)];
+            
+            
+            if((col+row) % 2 == 1)
+            {
+                //                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tile1.png"]];
+                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"whiteBoardSquare"]];
+            }
+            
+            else
+            {
+                //                tileView.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:234.0f/255.0f blue:254.0f/255.0f alpha:1];
+                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brownBoardSquare"]];
+                
+            }
+            
+            [boardView addSubview:tileView];
+            
+            tileView.isClicked = NO;
+            tileView.indexX = row;
+            tileView.indexY = col;
+            tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:row withY:col];
+            _boardTilesArr [row][col] = tileView;
+            
+        }
+    }
 }
 
 -(void) generatePieces
