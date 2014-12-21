@@ -1,26 +1,21 @@
 //
-//  SettingsTableViewController.m
+//  AboutTableViewController.m
 //  Checkers
 //
 //  Created by DOA Software Mac on 21/12/14.
 //  Copyright (c) 2014 Baro. All rights reserved.
 //
 
-#import "SettingsTableViewController.h"
-#import "Globals.h"
+#import "AboutTableViewController.h"
 
-@interface SettingsTableViewController ()
+@interface AboutTableViewController ()
 
 @end
 
-@implementation SettingsTableViewController
+@implementation AboutTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Set player name from plist
-    [self loadPlayerName];
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -32,25 +27,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-#pragma mark - Save to and loading from plist
-- (void)savePlayerName {
-    NSMutableData *data = [[NSMutableData alloc] init];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:self.playerNameTextField.text forKey:@"PlayerName"];
-    
-    [archiver finishEncoding];
-    [data writeToFile:[Globals dataFilePath] atomically:YES];
-}
-
-- (void)loadPlayerName {
-    NSString *path = [Globals dataFilePath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        NSData *data = [[NSData alloc] initWithContentsOfFile:path];
-        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-        self.playerNameTextField.text = [unarchiver decodeObjectForKey:@"PlayerName"];
-        [unarchiver finishDecoding];
-    }
 }
 
 #pragma mark - Table view data source
@@ -68,11 +44,9 @@
 }
 
 - (IBAction)done:(id)sender {
-    //NSLog(@"%@", self.playerNameTextField.text);
-    [self savePlayerName];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
 }
-
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];

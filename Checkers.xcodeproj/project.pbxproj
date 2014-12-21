@@ -13,6 +13,7 @@
 		ACA62FB81A438FB80007E72B /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FB71A438FB80007E72B /* Globals.m */; };
 		C02672371A36E1F800C93D6C /* CheckersBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C02672361A36E1F800C93D6C /* CheckersBoardView.m */; };
 		C0509B371A47252B00E69AFE /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0509B361A47252B00E69AFE /* SettingsTableViewController.m */; };
+		C0917E8F1A476E8A00D9A5F8 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0917E8E1A476E8A00D9A5F8 /* AboutTableViewController.m */; };
 		C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D1FE1A2C6FCE0033F8BD /* main.m */; };
 		C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2011A2C6FCE0033F8BD /* AppDelegate.m */; };
 		C091D2081A2C6FCE0033F8BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C091D2061A2C6FCE0033F8BD /* Main.storyboard */; };
@@ -61,6 +62,8 @@
 		C02A10D81A2DAD78000C9CDE /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
 		C0509B351A47252B00E69AFE /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		C0509B361A47252B00E69AFE /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		C0917E8D1A476E8A00D9A5F8 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
+		C0917E8E1A476E8A00D9A5F8 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableViewController.m; sourceTree = "<group>"; };
 		C091D1F91A2C6FCE0033F8BD /* Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C091D1FD1A2C6FCE0033F8BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C091D1FE1A2C6FCE0033F8BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -342,6 +345,8 @@
 				C0B4D98F1A377148000F3C41 /* CheckersViewController.m */,
 				C0509B351A47252B00E69AFE /* SettingsTableViewController.h */,
 				C0509B361A47252B00E69AFE /* SettingsTableViewController.m */,
+				C0917E8D1A476E8A00D9A5F8 /* AboutTableViewController.h */,
+				C0917E8E1A476E8A00D9A5F8 /* AboutTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 				C0B4D9981A3832DC000F3C41 /* Piece.m in Sources */,
 				C0509B371A47252B00E69AFE /* SettingsTableViewController.m in Sources */,
 				C0B4D9901A377148000F3C41 /* CheckersViewController.m in Sources */,
+				C0917E8F1A476E8A00D9A5F8 /* AboutTableViewController.m in Sources */,
 				C0A81F171A461A220056B4EC /* MainMenuViewController.m in Sources */,
 				C0B4D99B1A383583000F3C41 /* RegularPiece.m in Sources */,
 				ACA62FB01A438D1B0007E72B /* PlayerInGame.m in Sources */,
