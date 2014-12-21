@@ -27,5 +27,15 @@ static int _NumberOfTilesInYDirection;
     return _NumberOfTilesInYDirection;
 }
 
+#pragma mark - Documents Directory
++ (NSString *)documentsDirectory {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    return documentsDirectory;
+}
+
++ (NSString *)dataFilePath {
+    return [[self documentsDirectory] stringByAppendingPathComponent:@"Checkers.plist"];
+}
 
 @end

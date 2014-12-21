@@ -11,5 +11,5 @@
 #import "IGameState.h"
 
 @interface GameEngine : NSObject <ISetupBoard, IGameState>
-+ (GameEngine*)getInstance;
++ (GameEngine*)sharedInstance;
 @end

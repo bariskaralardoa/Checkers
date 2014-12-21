@@ -12,6 +12,7 @@
 		ACA62FB01A438D1B0007E72B /* PlayerInGame.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FAF1A438D1B0007E72B /* PlayerInGame.m */; };
 		ACA62FB81A438FB80007E72B /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FB71A438FB80007E72B /* Globals.m */; };
 		C02672371A36E1F800C93D6C /* CheckersBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C02672361A36E1F800C93D6C /* CheckersBoardView.m */; };
+		C0509B371A47252B00E69AFE /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0509B361A47252B00E69AFE /* SettingsTableViewController.m */; };
 		C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D1FE1A2C6FCE0033F8BD /* main.m */; };
 		C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2011A2C6FCE0033F8BD /* AppDelegate.m */; };
 		C091D2081A2C6FCE0033F8BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C091D2061A2C6FCE0033F8BD /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 		C091D20D1A2C6FCE0033F8BD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C091D20B1A2C6FCE0033F8BD /* LaunchScreen.xib */; };
 		C091D2191A2C6FCE0033F8BD /* CheckersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D2181A2C6FCE0033F8BD /* CheckersTests.m */; };
 		C09D0A051A3F7E9400A35600 /* GameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D0A041A3F7E9400A35600 /* GameEngine.m */; };
+		C0A81F171A461A220056B4EC /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A81F161A461A220056B4EC /* MainMenuViewController.m */; };
 		C0B4D9901A377148000F3C41 /* CheckersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D98F1A377148000F3C41 /* CheckersViewController.m */; };
 		C0B4D9941A383247000F3C41 /* CheckersPieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D9931A383247000F3C41 /* CheckersPieceView.m */; };
 		C0B4D9981A3832DC000F3C41 /* Piece.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D9971A3832DC000F3C41 /* Piece.m */; };
@@ -57,6 +59,8 @@
 		C02672351A36E1F800C93D6C /* CheckersBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckersBoardView.h; path = View/CheckersBoardView.h; sourceTree = "<group>"; };
 		C02672361A36E1F800C93D6C /* CheckersBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckersBoardView.m; path = View/CheckersBoardView.m; sourceTree = "<group>"; };
 		C02A10D81A2DAD78000C9CDE /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
+		C0509B351A47252B00E69AFE /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		C0509B361A47252B00E69AFE /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		C091D1F91A2C6FCE0033F8BD /* Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C091D1FD1A2C6FCE0033F8BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C091D1FE1A2C6FCE0033F8BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 		C09D0A031A3F7E9400A35600 /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameEngine.h; path = Model/GameEngine.h; sourceTree = "<group>"; };
 		C09D0A041A3F7E9400A35600 /* GameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameEngine.m; path = Model/GameEngine.m; sourceTree = "<group>"; };
 		C09D0A061A3F928500A35600 /* ISetupBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISetupBoard.h; path = Business/ISetupBoard.h; sourceTree = "<group>"; };
+		C0A81F151A461A220056B4EC /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		C0A81F161A461A220056B4EC /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		C0B4D98E1A377148000F3C41 /* CheckersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckersViewController.h; sourceTree = "<group>"; };
 		C0B4D98F1A377148000F3C41 /* CheckersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckersViewController.m; sourceTree = "<group>"; };
 		C0B4D9921A383247000F3C41 /* CheckersPieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckersPieceView.h; path = View/CheckersPieceView.h; sourceTree = "<group>"; };
@@ -201,7 +207,6 @@
 				C0DD99171A2C8BCA00E91DD9 /* Data */,
 				C0DD99161A2C8BC700E91DD9 /* Business */,
 				C0DD99151A2C8BC400E91DD9 /* Presentation */,
-				C091D2061A2C6FCE0033F8BD /* Main.storyboard */,
 				C0DC69431A2FA83000C8CFC8 /* Utilities */,
 				C0DD99181A2C8BFD00E91DD9 /* Resources */,
 				C091D1FC1A2C6FCE0033F8BD /* Supporting Files */,
@@ -272,6 +277,7 @@
 		C0DD99151A2C8BC400E91DD9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C091D2061A2C6FCE0033F8BD /* Main.storyboard */,
 				C0DD991B1A2CEC8C00E91DD9 /* Controllers */,
 				C0DD991A1A2CEC7C00E91DD9 /* Views */,
 			);
@@ -330,8 +336,12 @@
 		C0DD991B1A2CEC8C00E91DD9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0A81F151A461A220056B4EC /* MainMenuViewController.h */,
+				C0A81F161A461A220056B4EC /* MainMenuViewController.m */,
 				C0B4D98E1A377148000F3C41 /* CheckersViewController.h */,
 				C0B4D98F1A377148000F3C41 /* CheckersViewController.m */,
+				C0509B351A47252B00E69AFE /* SettingsTableViewController.h */,
+				C0509B361A47252B00E69AFE /* SettingsTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -441,7 +451,9 @@
 				C0B4D9A31A3836A7000F3C41 /* CheckersTileView.m in Sources */,
 				C0DC69461A2FA84900C8CFC8 /* MulticastDelegate.m in Sources */,
 				C0B4D9981A3832DC000F3C41 /* Piece.m in Sources */,
+				C0509B371A47252B00E69AFE /* SettingsTableViewController.m in Sources */,
 				C0B4D9901A377148000F3C41 /* CheckersViewController.m in Sources */,
+				C0A81F171A461A220056B4EC /* MainMenuViewController.m in Sources */,
 				C0B4D99B1A383583000F3C41 /* RegularPiece.m in Sources */,
 				ACA62FB01A438D1B0007E72B /* PlayerInGame.m in Sources */,
 				C0B4D9AD1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.m in Sources */,

@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BoardView.h"
+#import "PlayerInfo.h"
 
 @interface CheckersViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet BoardView *boardViewOnController;
+
+@property (strong,nonatomic) PlayerInfo * blackPlayerInfo;
+@property (strong,nonatomic) PlayerInfo * whitePlayerInfo;
+
 @end

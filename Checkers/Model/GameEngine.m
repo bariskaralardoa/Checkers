@@ -26,7 +26,7 @@
 
 #pragma mark Singleton
 __strong static id _sharedObject = nil;
-+ (GameEngine*)getInstance
++ (GameEngine*)sharedInstance
 {
     static dispatch_once_t pred = 0;
     dispatch_once(&pred, ^{
@@ -39,13 +39,13 @@ __strong static id _sharedObject = nil;
 #pragma mark IGameState Members
 
 /// Ekincan
-- (void)startNewGameWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer withTileHeight:(float)tileHeight
+- (void)startNewGameWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer withTileHeight:(float)tileHeight withPieceHeight:(float)pieceHeight
 {
     whitePlayer.CurrentPoint = [NSNumber numberWithInt:0];
     blackPlayer.CurrentPoint = [NSNumber numberWithInt:0];
     _currentGame = [[Game alloc] initWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer];
     [self generateTilesWithTileHeight:tileHeight];
-    [self generatePiecesWithHeight:40]; /// Ekincan: Bu tabi ki statik olmayacak. Üşendim yukardaki fonk. koymaya :)
+    [self generatePiecesWithHeight:pieceHeight]; /// Ekincan: Bu tabi ki statik olmayacak. Üşendim yukardaki fonk. koymaya :)
 }
 
 - (void)endGame

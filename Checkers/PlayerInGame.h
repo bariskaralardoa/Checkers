@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PlayerInfo.h";
+#import "PlayerInfo.h"
 
 @interface PlayerInGame : NSObject
 
 - (instancetype)initWithPlayerInfo:(PlayerInfo*)playerInfo;
+
 @property (nonatomic) NSNumber* CurrentPoint;
 
 @end

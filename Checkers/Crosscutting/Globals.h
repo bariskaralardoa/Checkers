@@ -13,4 +13,8 @@
 + (int)NumberOfTilesInXDirection;
 + (int)NumberOfTilesInYDirection;
 
+
++ (NSString *)documentsDirectory;
++ (NSString *)dataFilePath;
+
 @end

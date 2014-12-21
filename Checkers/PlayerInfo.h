@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PlayerInfo : NSObject
-@property (nonatomic) NSString* Name;
-@property (nonatomic) NSNumber* Wins;
-@property (nonatomic) NSNumber* Loses;
+@property (nonatomic) NSString* name;
+@property (nonatomic) NSNumber* wins;
+@property (nonatomic) NSNumber* loses;
 @end
