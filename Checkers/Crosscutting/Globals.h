@@ -13,7 +13,17 @@
 + (int)NumberOfTilesInXDirection;
 + (int)NumberOfTilesInYDirection;
 
+//Piece images
++ (NSString *) whiteRegular;
++ (NSString *) whiteChecker;
++ (NSString *) blackRegular;
++ (NSString *) blackChecker;
 
+//Tile images
++ (NSString *) whiteBoardSquare;
++ (NSString *) brownBoardSquare;
+
+//Documents directory
 + (NSString *)documentsDirectory;
 + (NSString *)dataFilePath;
 

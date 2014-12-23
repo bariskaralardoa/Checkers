@@ -12,6 +12,7 @@
 #import "IPieceMovements.h"
 #import "GameEngine.h"
 #import "Globals.h"
+#import "TileCoordinates.h"
 
 //#import "CheckersBoard.h"
 //#import "CheckersBoardView.h"
@@ -25,6 +26,7 @@
 @end
 @implementation CheckersViewController {
     NSArray* currentPieces;
+    TileCoordinates * clickedCoordinate;
 }
 
 - (instancetype)initWithCoder:(NSCoder*)coder
@@ -117,6 +119,7 @@
 }
 
 
+#pragma mark - Touch functions
 
 - (void)addGestureRecognizer
 {
@@ -127,6 +130,25 @@
     //[_pieceMovementsEngine ]
     
 }
+
+
+-(void) boardViewTapped: (UIGestureRecognizer *) recognizer
+{
+    CGPoint touchPoint = [recognizer locationInView:_boardViewOnController];
+    //    CGPoint touchPoint2 = [recognizer locationOfTouch:0 inView:nil];
+    //    CGPoint touchPoint3 = [recognizer locationOfTouch:0 inView:self];
+    float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
+    
+    clickedCoordinate = [[TileCoordinates alloc] initWithX:floor(touchPoint.x/tileHeight) withY:floor(touchPoint.y/tileHeight)];
+    
+    
+    
+    //    TileCoordinates *coord = [[TileCoordinates alloc] initWithX:floor(((coords.x)-9)/38) withY:floor(((coords.y)-20)/38)];
+    
+    
+    
+}
+
 
 //@implementation CheckersViewController
 //{

@@ -73,12 +73,12 @@ __strong static id _sharedObject = nil;
 
             if ((col + row) % 2 == 1) {
                 //                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tile1.png"]];
-                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"whiteBoardSquare"]];
+                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:[Globals whiteBoardSquare]]];
             }
 
             else {
                 //                tileView.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:234.0f/255.0f blue:254.0f/255.0f alpha:1];
-                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brownBoardSquare"]];
+                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:[Globals brownBoardSquare]]];
             }
 
             //            [boardView addSubview:tileView];/// Ekincan: Bu kısım burada olmayacak, bu noktadan pres. layer'a yok erişim.
@@ -107,7 +107,7 @@ __strong static id _sharedObject = nil;
             //            [currentTile addSubview:pieceView];
 
             //link Piece with CheckersPieceView
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:@"siyah-dama" currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
             [pieceView setPieceInfoWithPiece:regularPiece];
 
             //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
@@ -122,7 +122,7 @@ __strong static id _sharedObject = nil;
             //            currentTile.pieceView = pieceView;
             //            [currentTile addSubview:pieceView];
 
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:@"beyaz-dama" currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
+            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteRegular] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
             [pieceView setPieceInfoWithPiece:regularPiece];
 
             //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
@@ -142,6 +142,14 @@ __strong static id _sharedObject = nil;
 }
 
 #pragma mark IPieceMovements Members
+- (void)placePiece:(TileCoordinates *) coord
+{
+    
+    
+}
+
+
+
 - (void)getTouchCoordinates
 {
 
