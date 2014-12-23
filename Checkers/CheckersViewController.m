@@ -27,6 +27,7 @@
 @implementation CheckersViewController {
     NSArray* currentPieces;
     TileCoordinates * clickedCoordinate;
+    float pieceHeight;
 }
 
 - (instancetype)initWithCoder:(NSCoder*)coder
@@ -80,7 +81,7 @@
     
     
     float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
-    float pieceHeight = tileHeight * 0.8;
+    pieceHeight = tileHeight * 0.8;
     [_gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight withPieceHeight:pieceHeight]; /// Bu fonksiyon bizim için tile array'ını doldurdu ama henüz render edilmedi.
 
     //    [_boardSetupEngine generateTilesWithTileHeight:40];
@@ -118,6 +119,23 @@
     currentPieces = [pieces copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
 }
 
+- (void)RenderMoveSuggestion:(NSArray*)moveSuggestion withTileArray:(NSArray*)tiles
+{
+    
+    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
+    
+//    for (UIImage* img in moveSuggestion) {
+//        CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
+//        tileToPlace.pieceView = pieceView;
+//        
+//        [tileToPlace addSubview:pieceView];
+//        pieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
+//        //        [pieceView refreshImage];
+//    }
+//    currentPieces = [pieces copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
+}
+
+
 
 #pragma mark - Touch functions
 
@@ -142,11 +160,15 @@
     clickedCoordinate = [[TileCoordinates alloc] initWithX:floor(touchPoint.x/tileHeight) withY:floor(touchPoint.y/tileHeight)];
     
     
+//    [_pieceMovementsEngine createPieceOn:clickedCoordinate withHeight:pieceHeight];
+//    [_pieceMovementsEngine whitePiecesCoordinates:clickedCoordinate];
+//    [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
+
     
-    //    TileCoordinates *coord = [[TileCoordinates alloc] initWithX:floor(((coords.x)-9)/38) withY:floor(((coords.y)-20)/38)];
+    [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate];
+
     
-    
-    
+    [self.pieceMovementsEngine placePossibleMoveImageOnTile:clickedCoordinate withHeight:tileHeight];
 }
 
 

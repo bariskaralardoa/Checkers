@@ -16,10 +16,11 @@
 {
     self = [super init];
     if (self) {
-        _WhitePlayer = whitePlayer;
-        _BlackPlayer = blackPlayer;
-        _Tiles = [NSMutableArray arrayOfWidth:[Globals NumberOfTilesInXDirection] andHeight:[Globals NumberOfTilesInYDirection]];
-        _Pieces = [NSMutableArray new];
+        _whitePlayer = whitePlayer;
+        _blackPlayer = blackPlayer;
+        _tiles = [NSMutableArray arrayOfWidth:[Globals NumberOfTilesInXDirection] andHeight:[Globals NumberOfTilesInYDirection]];
+        _pieces = [NSMutableArray new];
+        _moveSuggestion = [NSMutableArray new];
     }
     return self;
 }

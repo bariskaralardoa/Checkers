@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TileCoordinates.h"
 
 @protocol IPieceMovements <NSObject>
+
+- (void) createPieceOn:(TileCoordinates *) coord withHeight:(float)height;
+- (NSMutableArray *)whitePiecesCoordinates:(TileCoordinates *)coord;
+- (void)possibleMoveIndicator:(TileCoordinates *) coord;
+
+- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height;
+
 
 @end

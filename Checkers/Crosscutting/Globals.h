@@ -23,6 +23,9 @@
 + (NSString *) whiteBoardSquare;
 + (NSString *) brownBoardSquare;
 
+//In game images
++ (NSString *) suggest;
+
 //Documents directory
 + (NSString *)documentsDirectory;
 + (NSString *)dataFilePath;

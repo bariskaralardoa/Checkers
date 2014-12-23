@@ -19,10 +19,23 @@
 
 @property (strong, nonatomic) NSMutableArray* boardTilesArr;
 @property (nonatomic) Game* currentGame;
+@property(nonatomic, strong) NSMutableArray *possibleMoves;
+
+@property (nonatomic) UIImageView * suggestImageView;
+@property (nonatomic) UIImage *suggestImage;
+
 
 @end
 
 @implementation GameEngine
+
+- (NSMutableArray*) possibleMoves
+{
+    if (!_possibleMoves){
+        _possibleMoves = [[NSMutableArray alloc] init];
+    }
+    return _possibleMoves;
+}
 
 #pragma mark Singleton
 __strong static id _sharedObject = nil;
@@ -87,7 +100,7 @@ __strong static id _sharedObject = nil;
             tileView.indexX = row;
             tileView.indexY = col;
             tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:row withY:col];
-            _currentGame.Tiles[row][col] = tileView;
+            _currentGame.tiles[row][col] = tileView;
         }
     }
 }
@@ -111,7 +124,7 @@ __strong static id _sharedObject = nil;
             [pieceView setPieceInfoWithPiece:regularPiece];
 
             //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.Pieces addObject:pieceView];
+            [_currentGame.pieces addObject:pieceView];
         }
 
         for (int k = 5; k < 7; k++) {
@@ -126,34 +139,127 @@ __strong static id _sharedObject = nil;
             [pieceView setPieceInfoWithPiece:regularPiece];
 
             //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.Pieces addObject:pieceView];
+            [_currentGame.pieces addObject:pieceView];
         }
     }
 }
+//
+- (void)possibleMoveIndicator:(TileCoordinates *) coord
+{
+    self.possibleMoves = [[NSMutableArray alloc] init];
+    [self regularPiecePossibleMoves:coord];
+    for (TileCoordinates *  coordinates in self.possibleMoves) {
+        
+    }
+}
+
+
+- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height
+{
+    CGRect pieceFrame = CGRectMake(0, 0, height, height);
+    
+    _suggestImage = [UIImage imageNamed:[Globals suggest]];
+    _suggestImageView = [[UIImageView alloc]initWithImage:self.suggestImage] ;
+    _suggestImageView.frame = pieceFrame;
+    
+    [_currentGame.moveSuggestion addObject:_suggestImageView];
+    
+    
+}
+//
 
 - (NSArray*)getTiles
 {
-    return _currentGame.Tiles;
+    return _currentGame.tiles;
 }
 
 - (NSArray*)getPieces
 {
-    return _currentGame.Pieces;
+    return _currentGame.pieces;
 }
 
 #pragma mark IPieceMovements Members
-- (void)placePiece:(TileCoordinates *) coord
+- (void) createPieceOn:(TileCoordinates *)coord withHeight:(float)height
 {
-    
-    
+    CGRect pieceFrame = CGRectMake(0, 0, height, height);
+    CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+
+    RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:coord.x currentPositionY:coord.y playerSideType:pieceSideBlack];
+    [pieceView setPieceInfoWithPiece:regularPiece];
+    [_currentGame.pieces addObject:pieceView];
+
 }
 
 
 
-- (void)getTouchCoordinates
+- (NSMutableArray *)whitePiecesCoordinates:(TileCoordinates *)coord
 {
-
-
+    NSMutableArray * whitePiecesArr = [[NSMutableArray alloc ]init];
+    for (CheckersPieceView *  pieceView in _currentGame.pieces) {
+        if (pieceView.pieceInfo.sideType == pieceSideWhite) {
+            [whitePiecesArr addObject:pieceView];
+        }
+    }
+    return whitePiecesArr;
 }
+
+- (NSMutableArray *)blackPiecesCoordinates:(TileCoordinates *)coord
+{
+    NSMutableArray * blackPiecesArr = [[NSMutableArray alloc ]init];
+    for (CheckersPieceView *  pieceView in _currentGame.pieces) {
+        if (pieceView.pieceInfo.sideType == pieceSideBlack) {
+            [blackPiecesArr addObject:pieceView];
+        }
+    }
+    return blackPiecesArr;
+}
+
+#pragma mark - Piece Movements
+
+- (void)regularPiecePossibleMoves:(TileCoordinates *) coord
+{
+    [self regularPieceMovementNorth:coord];
+    [self regularPieceMovementEast:coord];
+    [self regularPieceMovementWest:coord];
+    [self regularPieceMovementSouth:coord];
+}
+
+
+- (void)regularPieceMovementNorth:(TileCoordinates *) coord
+{
+    if (coord.y != 0) {
+        coord.y--;
+        [self.possibleMoves addObject:coord];
+    }
+    
+}
+
+- (void)regularPieceMovementSouth:(TileCoordinates *) coord
+{
+    if (coord.y != [Globals NumberOfTilesInXDirection]-1) {
+        coord.y++;
+        [self.possibleMoves addObject:coord];
+    }
+    
+}
+
+- (void)regularPieceMovementEast:(TileCoordinates *) coord
+{
+    if (coord.x != [Globals NumberOfTilesInXDirection]-1) {
+        coord.x++;
+        [self.possibleMoves addObject:coord];
+    }
+    
+}
+
+- (void)regularPieceMovementWest:(TileCoordinates *) coord
+{
+    if (coord.x != 0) {
+        coord.x--;
+        [self.possibleMoves addObject:coord];
+    }
+    
+}
+
 
 @end

@@ -62,6 +62,13 @@ static int _NumberOfTilesInYDirection;
     
 }
 
+#pragma mark - In game images
+
++ (NSString *) suggest
+{
+    return @"suggest.png";
+}
+
 #pragma mark - Documents Directory
 + (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES);

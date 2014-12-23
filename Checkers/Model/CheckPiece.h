@@ -10,6 +10,5 @@
 
 @interface CheckPiece : Piece
 
-- (NSMutableArray *) generateMoves;
 
 @end

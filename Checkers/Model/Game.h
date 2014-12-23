@@ -11,10 +11,12 @@
 
 @interface Game : NSObject
 
-@property (nonatomic) NSMutableArray* Tiles;
-@property (nonatomic) NSMutableArray* Pieces;
-@property (nonatomic) PlayerInGame* WhitePlayer;
-@property (nonatomic) PlayerInGame* BlackPlayer;
+@property (nonatomic) NSMutableArray* tiles;
+@property (nonatomic) NSMutableArray* pieces;
+@property (nonatomic) NSMutableArray* moveSuggestion;
+
+@property (nonatomic) PlayerInGame* whitePlayer;
+@property (nonatomic) PlayerInGame* blackPlayer;
 
 - (instancetype)initWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer;
 

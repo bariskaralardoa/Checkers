@@ -14,4 +14,5 @@
 - (NSArray*)getTiles;
 
 - (NSArray*)getPieces;
+
 @end
