@@ -178,6 +178,14 @@ __strong static id _sharedObject = nil;
     return _currentGame.pieces;
 }
 
+
+- (NSArray*)getMoveSuggestion
+{
+    return _currentGame.moveSuggestion;
+}
+
+
+
 #pragma mark IPieceMovements Members
 - (void) createPieceOn:(TileCoordinates *)coord withHeight:(float)height
 {

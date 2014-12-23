@@ -26,6 +26,7 @@
 @end
 @implementation CheckersViewController {
     NSArray* currentPieces;
+    NSArray* currentMoveSuggestion;
     TileCoordinates * clickedCoordinate;
     float pieceHeight;
 }
@@ -122,7 +123,7 @@
 - (void)RenderMoveSuggestion:(NSArray*)moveSuggestion withTileArray:(NSArray*)tiles
 {
     
-    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
+    [currentMoveSuggestion makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
     
 //    for (UIImage* img in moveSuggestion) {
 //        CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
@@ -132,7 +133,7 @@
 //        pieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
 //        //        [pieceView refreshImage];
 //    }
-//    currentPieces = [pieces copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
+    currentMoveSuggestion = [moveSuggestion copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
 }
 
 
@@ -169,6 +170,7 @@
 
     
     [self.pieceMovementsEngine placePossibleMoveImageOnTile:clickedCoordinate withHeight:tileHeight];
+    [self RenderMoveSuggestion:[_boardSetupEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
 }
 
 
