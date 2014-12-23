@@ -120,7 +120,8 @@
 
 - (void)addGestureRecognizer
 {
-    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector(viewTapped:) ]];
+    ///[self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector(viewTapped:) ]];
+    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(boardViewTapped:) ]]; /// Ekincan. Bu fonksiyonu yarat bir yerde
 //    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector([_pieceMovementsEngine  ])]];
 
     //[_pieceMovementsEngine ]
