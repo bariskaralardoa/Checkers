@@ -9,6 +9,7 @@
 #import "CheckersViewController.h"
 #import "ISetupBoard.h"
 #import "IGameState.h"
+#import "IPieceMovements.h"
 #import "GameEngine.h"
 #import "Globals.h"
 
@@ -16,8 +17,11 @@
 //#import "CheckersBoardView.h"
 
 @interface CheckersViewController ()
-@property id<ISetupBoard> boardSetupEngine;
-@property id<IGameState> gameStateEngine;
+
+@property id <ISetupBoard> boardSetupEngine;
+@property id <IGameState> gameStateEngine;
+@property id <IPieceMovements> pieceMovementsEngine;
+
 @end
 @implementation CheckersViewController {
     NSArray* currentPieces;
@@ -70,6 +74,9 @@
     // Ekincan: Burada önce game engine yoksa eğer yarat, singleton yani. Normalde bu ekrana başka bir ekrandan gelineceği için, o önceki ekrandan buraya game engine pass edilebilir.
     _boardSetupEngine = [GameEngine sharedInstance];
     _gameStateEngine = [GameEngine sharedInstance];
+    _pieceMovementsEngine = [GameEngine sharedInstance];
+    
+    
     float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
     float pieceHeight = tileHeight * 0.8;
     [_gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight withPieceHeight:pieceHeight]; /// Bu fonksiyon bizim için tile array'ını doldurdu ama henüz render edilmedi.
@@ -109,9 +116,15 @@
     currentPieces = [pieces copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
 }
 
+
+
 - (void)addGestureRecognizer
 {
-    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector(viewTapped:)]];
+    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector(viewTapped:) ]];
+//    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector([_pieceMovementsEngine  ])]];
+
+    //[_pieceMovementsEngine ]
+    
 }
 
 //@implementation CheckersViewController

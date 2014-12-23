@@ -13,10 +13,6 @@
 
 @property (nonatomic,strong) CheckersTileView * tileView;
 
--(void) generateTiles;
-
--(void) generatePieces;
-
 -(void) viewTapped: (UIGestureRecognizer *) recognizer;
 
 @end

@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ISetupBoard.h"
 #import "IGameState.h"
+#import "IPieceMovements.h"
 
-@interface GameEngine : NSObject <ISetupBoard, IGameState>
+@interface GameEngine : NSObject <ISetupBoard, IGameState, IPieceMovements>
 + (GameEngine*)sharedInstance;
 @end

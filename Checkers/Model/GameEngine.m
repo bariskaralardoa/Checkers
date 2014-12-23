@@ -141,4 +141,11 @@ __strong static id _sharedObject = nil;
     return _currentGame.Pieces;
 }
 
+#pragma mark IPieceMovements Members
+- (void)getTouchCoordinates
+{
+
+
+}
+
 @end

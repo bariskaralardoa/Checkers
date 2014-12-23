@@ -98,6 +98,7 @@
 		C0B4D9A91A383D2B000F3C41 /* TileCoordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileCoordinates.m; sourceTree = "<group>"; };
 		C0B4D9AB1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+MultidimensionExtension.h"; sourceTree = "<group>"; };
 		C0B4D9AC1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+MultidimensionExtension.m"; sourceTree = "<group>"; };
+		C0C2F1491A48446600125BD7 /* IPieceMovements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPieceMovements.h; path = Business/IPieceMovements.h; sourceTree = "<group>"; };
 		C0DC69441A2FA84900C8CFC8 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
 		C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
 		C0DC69471A2FA91A00C8CFC8 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = Model/Board.h; sourceTree = "<group>"; };
@@ -292,6 +293,7 @@
 			children = (
 				C09D0A061A3F928500A35600 /* ISetupBoard.h */,
 				ACA62FB11A438E770007E72B /* IGameState.h */,
+				C0C2F1491A48446600125BD7 /* IPieceMovements.h */,
 				ACA62FAD1A438CF40007E72B /* Game Related */,
 				ACA62FAC1A438CE90007E72B /* Player Related */,
 			);

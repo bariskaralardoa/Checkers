@@ -7,8 +7,10 @@
 //
 
 #import "Piece.h"
+#import "Globals.h"
 
 @implementation Piece
+
 
 - (instancetype)initWithImageName:(NSString *)imageNameStr
                  currentPositionX:(NSInteger)currentPositionX

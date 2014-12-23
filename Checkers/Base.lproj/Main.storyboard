@@ -214,8 +214,26 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXW-sI-yUk" customClass="BoardView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34h-Zj-hvS" userLabel="whitePlayerLabel">
+                                        <rect key="frame" x="275" y="606" width="49" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWa-aX-Bok" userLabel="blackPlayerLabel">
+                                        <rect key="frame" x="275.5" y="-30" width="49" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="34h-Zj-hvS" secondAttribute="bottom" constant="-30" id="680-I8-M4O"/>
+                                    <constraint firstAttribute="centerX" secondItem="QWa-aX-Bok" secondAttribute="centerX" id="8XS-1b-qA7"/>
                                     <constraint firstAttribute="width" secondItem="AXW-sI-yUk" secondAttribute="height" multiplier="1:1" id="a7o-C9-08A"/>
+                                    <constraint firstAttribute="centerX" secondItem="34h-Zj-hvS" secondAttribute="centerX" id="lSh-6K-IJz"/>
+                                    <constraint firstItem="QWa-aX-Bok" firstAttribute="top" secondItem="AXW-sI-yUk" secondAttribute="top" constant="-30" id="w2n-Kl-rNT"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -228,7 +246,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blackPlayerLabel" destination="QWa-aX-Bok" id="Vef-Ru-UXf"/>
                         <outlet property="boardViewOnController" destination="AXW-sI-yUk" id="KSX-0S-Dk7"/>
+                        <outlet property="whitePlayerLabel" destination="34h-Zj-hvS" id="PHk-mF-yce"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

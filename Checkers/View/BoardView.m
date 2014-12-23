@@ -11,6 +11,7 @@
 #import "TileCoordinates.h"
 #import "Piece.h"
 #import "RegularPiece.h"
+#import "Globals.h"
 
 #define whiteBoardSquare whiteBoardSquare.png
 #define brownBoardSquare brownBoardSquare.png
@@ -30,97 +31,6 @@
 
 
 
-
-
-
-
--(void) generateTiles
-{
-    int noOfTilesX = 8;
-    int noOfTilesY = 8;
-    float rowHeight = self.frame.size.height/8.0;
-    float columnWidth = self.frame.size.height/8.0;
-    
-    _boardTilesArr = [NSMutableArray arrayOfWidth:noOfTilesX andHeight:noOfTilesY];
-
-    for(int row=0; row<noOfTilesX; row++)
-    {
-        for(int col=0; col<noOfTilesY; col++){
-            CheckersTileView * tileView = [[CheckersTileView alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight)];
-            
-
-            if((col+row) % 2 == 1)
-            {
-                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"whiteBoardSquare"]];
-            }
-        
-            else
-            {
-                tileView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brownBoardSquare"]];
-
-            }
-            
-            [self addSubview:tileView];
-            
-            tileView.isClicked = NO;
-            tileView.indexX = row;
-            tileView.indexY = col;
-            tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:row withY:col];
-            _boardTilesArr [row][col] = tileView;
-            
-        }
-    }
-}
-
--(void) generatePieces
-{
-    CGRect pieceFrame = CGRectMake(0, 0, self.frame.size.height/8.0, self.frame.size.height/8.0);
-    
-    for (int i = 0; i<8; i++) {
-        
-        for(int j = 1; j<3; j++)
-        {
-            //link CheckersTileView with CheckersPieceView
-            CheckersTileView * currentTile = self.boardTilesArr[j][i];
-            
-            CheckersPieceView * pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            currentTile.pieceView = pieceView;
-            [currentTile addSubview:pieceView];
-            
-            //link Piece with CheckersPieceView
-            RegularPiece * regularPiece = [[RegularPiece alloc] initWithImageName:@"siyah-dama" currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-
-            pieceView.center = CGPointMake(currentTile.frame.size.width/1.65, currentTile.frame.size.height/1.65);
-            
-        }
-        
-        for(int k = 5; k<7; k++)    
-        {
-            CheckersTileView * currentTile = self.boardTilesArr[k][i];
-            
-            CheckersPieceView * pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            currentTile.pieceView = pieceView;
-            [currentTile addSubview:pieceView];
-            
-            RegularPiece * regularPiece = [[RegularPiece alloc] initWithImageName:@"beyaz-dama" currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-            
-            pieceView.center = CGPointMake(currentTile.frame.size.width/1.65, currentTile.frame.size.height/1.65);
-
-        }
-    
-    }
-    
-}
-
-
-
-
-
-
-
-
 -(void) getPiecesIndexes
 {
     for (int i = 0; i<8; i++) {
@@ -131,8 +41,7 @@
             if (tileView.pieceView) {
                 
             }
-            
-            
+                        
         }
     }
 
@@ -149,12 +58,14 @@
     CGPoint touchPoint = [recognizer locationInView:self];
 //    CGPoint touchPoint2 = [recognizer locationOfTouch:0 inView:nil];
 //    CGPoint touchPoint3 = [recognizer locationOfTouch:0 inView:self];
+    float tileHeight = self.frame.size.width / [Globals NumberOfTilesInXDirection];
 
-    TileCoordinates * clickedCoordinate = [[TileCoordinates alloc] initWithX:touchPoint.x withY:touchPoint.y];
+    TileCoordinates * clickedCoordinate = [[TileCoordinates alloc] initWithX:floor(touchPoint.x/tileHeight) withY:floor(touchPoint.y/tileHeight)];
  
     
     
-    
+    //    TileCoordinates *coord = [[TileCoordinates alloc] initWithX:floor(((coords.x)-9)/38) withY:floor(((coords.y)-20)/38)];
+
     
     
 }
