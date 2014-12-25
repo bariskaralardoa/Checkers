@@ -10,8 +10,8 @@
 
 @interface TileCoordinates : NSObject
 
-- (instancetype)initWithX:(long)X withY:(long)Y;
+- (instancetype)initWithX:(NSInteger)X withY:(NSInteger)Y;
 
-@property(nonatomic) long x;
-@property(nonatomic) long y;
+@property(nonatomic) NSInteger x;
+@property(nonatomic) NSInteger y;
 @end

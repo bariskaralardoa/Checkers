@@ -13,6 +13,8 @@
 #import "GameEngine.h"
 #import "Globals.h"
 #import "TileCoordinates.h"
+#import "Suggestion.h"
+#import "SuggestionView.h"
 
 //#import "CheckersBoard.h"
 //#import "CheckersBoardView.h"
@@ -84,7 +86,7 @@
     float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
     pieceHeight = tileHeight * 0.8;
     [_gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight withPieceHeight:pieceHeight]; /// Bu fonksiyon bizim için tile array'ını doldurdu ama henüz render edilmedi.
-
+    
     //    [_boardSetupEngine generateTilesWithTileHeight:40];
     [self RenderTiles:[_boardSetupEngine getTiles]]; // Bu method, daha önceki adımda yaratılmış tile'ları render edecek. Bu fonkisyon bir kere her oyun başıdna çağırılıyor şu anda çünkü tile üzerinde oyun içinde bir değişiklik olmaz, rengi falan aynı. Yarın bir gün mayın falan koyma gibi dangalakça şeyler gelirse bu yine çağrılmalı.
     [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
@@ -125,15 +127,14 @@
     
     [currentMoveSuggestion makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
     
-//    for (UIImage* img in moveSuggestion) {
-//        CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
-//        tileToPlace.pieceView = pieceView;
-//        
-//        [tileToPlace addSubview:pieceView];
-//        pieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
-//        //        [pieceView refreshImage];
-//    }
-    currentMoveSuggestion = [moveSuggestion copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
+    for (SuggestionView* suggestionView in moveSuggestion) {
+        CheckersTileView* tileToPlace = tiles[suggestionView.indexY][suggestionView.indexX];
+        tileToPlace.suggestionView = suggestionView;
+        
+        [tileToPlace addSubview:suggestionView];
+        suggestionView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
+    }
+    currentMoveSuggestion = [moveSuggestion copy];
 }
 
 
@@ -165,12 +166,13 @@
 //    [_pieceMovementsEngine whitePiecesCoordinates:clickedCoordinate];
 //    [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
 
-    
-    [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate];
+    [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
 
-    
-    [self.pieceMovementsEngine placePossibleMoveImageOnTile:clickedCoordinate withHeight:tileHeight];
-    [self RenderMoveSuggestion:[_boardSetupEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
+    //Move suggestion
+    [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate withHeight:tileHeight];
+    [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
+
+
 }
 
 

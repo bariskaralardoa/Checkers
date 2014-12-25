@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CheckersPieceView.h"
+#import "SuggestionView.h"
 
 @class  TileCoordinates;
 
@@ -22,6 +23,7 @@
 @property(nonatomic) BOOL isClicked;
 @property(nonatomic) TileCoordinates *tileCoordinates;
 
+@property (nonatomic,retain) SuggestionView* suggestionView;
 
 
 @end

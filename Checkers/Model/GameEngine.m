@@ -15,11 +15,15 @@
 #import "BoardView.h"
 #import "Game.h"
 #import "Globals.h"
+#import "SuggestionView.h"
+#import "Suggestion.h"
+
 @interface GameEngine ()
 
 @property (strong, nonatomic) NSMutableArray* boardTilesArr;
 @property (nonatomic) Game* currentGame;
 @property(nonatomic, strong) NSMutableArray *possibleMoves;
+@property(nonatomic, strong) NSMutableArray *possibleEaten;
 
 @property (nonatomic) UIImageView * suggestImageView;
 @property (nonatomic) UIImage *suggestImage;
@@ -28,6 +32,13 @@
 @end
 
 @implementation GameEngine
+{
+    NSMutableArray * blackPiecesArr;
+    NSMutableArray * whitePiecesArr;
+    BOOL isClickedWhite;
+    BOOL isClickedBlack;
+    CheckersPieceView * clickedPieceView;
+}
 
 - (NSMutableArray*) possibleMoves
 {
@@ -35,6 +46,14 @@
         _possibleMoves = [[NSMutableArray alloc] init];
     }
     return _possibleMoves;
+}
+
+- (NSMutableArray*) possibleEaten
+{
+    if (!_possibleEaten){
+        _possibleEaten = [[NSMutableArray alloc] init];
+    }
+    return _possibleEaten;
 }
 
 #pragma mark Singleton
@@ -101,6 +120,7 @@ __strong static id _sharedObject = nil;
             tileView.indexY = col;
             tileView.tileCoordinates = [[TileCoordinates alloc] initWithX:row withY:col];
             _currentGame.tiles[row][col] = tileView;
+            //_currentGame.moveSuggestion[row][col] = tileView;
         }
     }
 }
@@ -126,6 +146,21 @@ __strong static id _sharedObject = nil;
             //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
             [_currentGame.pieces addObject:pieceView];
         }
+//        for (int j = 5; j < 6; j++) {
+//            //link CheckersTileView with CheckersPieceView
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+//            
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//            
+//            //link Piece with CheckersPieceView
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//            
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
 
         for (int k = 5; k < 7; k++) {
             //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
@@ -144,26 +179,25 @@ __strong static id _sharedObject = nil;
     }
 }
 //
-- (void)possibleMoveIndicator:(TileCoordinates *) coord
+- (void)possibleMoveIndicator:(TileCoordinates *) coord withHeight:(float)height
 {
     self.possibleMoves = [[NSMutableArray alloc] init];
     [self regularPiecePossibleMoves:coord];
+    
     for (TileCoordinates *  coordinates in self.possibleMoves) {
-        
+        [self placePossibleMoveImageOnTile:coordinates withHeight:height];
     }
 }
 
 
 - (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height
 {
-    CGRect pieceFrame = CGRectMake(0, 0, height, height);
-    
-    _suggestImage = [UIImage imageNamed:[Globals suggest]];
-    _suggestImageView = [[UIImageView alloc]initWithImage:self.suggestImage] ;
-    _suggestImageView.frame = pieceFrame;
-    
-    [_currentGame.moveSuggestion addObject:_suggestImageView];
-    
+    CGRect suggestionFrame = CGRectMake(0, 0, height, height);
+
+    SuggestionView * suggestionView = [[SuggestionView alloc] initWithFrame:suggestionFrame];
+    Suggestion * suggest = [[Suggestion alloc] initWithCurrentX:coord.x currentY:coord.y imageName:[Globals suggest]];
+    [suggestionView setSuggestionInfoWithSuggestion:suggest];
+    [_currentGame.moveSuggestion addObject:suggestionView];
     
 }
 //
@@ -200,74 +234,171 @@ __strong static id _sharedObject = nil;
 
 
 
-- (NSMutableArray *)whitePiecesCoordinates:(TileCoordinates *)coord
+- (void)whitePiecesCoordinates
 {
-    NSMutableArray * whitePiecesArr = [[NSMutableArray alloc ]init];
+    whitePiecesArr = [[NSMutableArray alloc ]init];
     for (CheckersPieceView *  pieceView in _currentGame.pieces) {
         if (pieceView.pieceInfo.sideType == pieceSideWhite) {
             [whitePiecesArr addObject:pieceView];
         }
     }
-    return whitePiecesArr;
 }
 
-- (NSMutableArray *)blackPiecesCoordinates:(TileCoordinates *)coord
+- (void)blackPiecesCoordinates
 {
-    NSMutableArray * blackPiecesArr = [[NSMutableArray alloc ]init];
+    blackPiecesArr = [[NSMutableArray alloc ]init];
     for (CheckersPieceView *  pieceView in _currentGame.pieces) {
         if (pieceView.pieceInfo.sideType == pieceSideBlack) {
             [blackPiecesArr addObject:pieceView];
         }
     }
-    return blackPiecesArr;
 }
+
+- (void) detectClickedCellStatus:(TileCoordinates *)coord
+{
+    isClickedWhite = NO;
+    isClickedBlack = NO;
+    //Add pieces to whitePiecesArr and blackPiecesArr
+    [self blackPiecesCoordinates];
+    [self whitePiecesCoordinates];
+    
+    
+    //White clicked
+    for (CheckersPieceView *  pieceView in whitePiecesArr) {
+        if (coord.x == pieceView.IndexX && coord.y == pieceView.IndexY) {
+            isClickedWhite = YES;
+        }
+    }
+    //Black clicked
+    for (CheckersPieceView *  pieceView in blackPiecesArr) {
+        if (coord.x == pieceView.IndexX && coord.y == pieceView.IndexY) {
+            isClickedBlack = YES;
+        }
+    }
+    
+    
+}
+
+- (void)getCurrentClickedPieceObject:(TileCoordinates *) coord
+{
+    for (CheckersPieceView * pieceView in _currentGame.pieces) {
+        if (pieceView.IndexX == coord.x && pieceView.IndexY == coord.y) {
+            clickedPieceView = pieceView;
+        }
+    }
+}
+
+#pragma mark - Possible Moves
+- (void) checkNorthForRegularPieceMove:(TileCoordinates *) coord
+{
+    
+}
+
 
 #pragma mark - Piece Movements
 
 - (void)regularPiecePossibleMoves:(TileCoordinates *) coord
 {
-    [self regularPieceMovementNorth:coord];
-    [self regularPieceMovementEast:coord];
-    [self regularPieceMovementWest:coord];
-    [self regularPieceMovementSouth:coord];
+    [self getCurrentClickedPieceObject:coord];
+    
+    if (isClickedWhite) {
+        [self regularPieceMovementNorth:coord];
+        [self regularPieceMovementEast:coord];
+        [self regularPieceMovementWest:coord];
+    }
+    else if (isClickedBlack)
+    {
+        [self regularPieceMovementEast:coord];
+        [self regularPieceMovementWest:coord];
+        [self regularPieceMovementSouth:coord];
+    }
 }
 
+- (BOOL)isCellOccupied:(TileCoordinates *) coord
+{
+    for (CheckersPieceView * pieceView in _currentGame.pieces) {
+        if (coord.x == pieceView.IndexX && coord.y == pieceView.IndexY) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
+//- (void)regularPieceMovementNorth:(TileCoordinates *) coord
+//{
+//    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+//    if (tempCoord.y != 0) {
+//        tempCoord.y--;
+//        [self.possibleMoves addObject:tempCoord];
+//    }
+//    
+//}
 - (void)regularPieceMovementNorth:(TileCoordinates *) coord
 {
-    if (coord.y != 0) {
-        coord.y--;
-        [self.possibleMoves addObject:coord];
+    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+    if (tempCoord.y != 0) {
+        tempCoord.y--;
+        for (CheckersPieceView * pieceView in _currentGame.pieces) {
+            NSLog(@"%d,%d",pieceView.IndexX,pieceView.IndexY);
+            //Check if north of clicked cell is in pieces array
+            if (pieceView.IndexX == tempCoord.x && pieceView.IndexY == tempCoord.y) {
+                //Check if north's side is same with clickedPiece, if it's different, then add it to possibleMoves array
+                if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
+                    //Add opposite color piece to possibleEaten array
+                    [self.possibleEaten addObject:tempCoord];
+                    tempCoord.y--;
+                    if (![self isCellOccupied:tempCoord]) {
+                        [self.possibleMoves addObject:tempCoord];
+                    }
+                }
+            }
+            // if north of the clicked cell is empty
+            else if (![self isCellOccupied:tempCoord]){
+                [self.possibleMoves addObject:tempCoord];
+            }
+        }
     }
-    
 }
 
+//- (void)regularPieceMovementSouth:(TileCoordinates *) coord
+//{
+//    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+//    if (tempCoord.y != [Globals NumberOfTilesInXDirection]-1) {
+//        tempCoord.y++;
+//        [self.possibleMoves addObject:tempCoord];
+//    }
+//    
+//}
 - (void)regularPieceMovementSouth:(TileCoordinates *) coord
 {
-    if (coord.y != [Globals NumberOfTilesInXDirection]-1) {
-        coord.y++;
-        [self.possibleMoves addObject:coord];
+    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+    if (tempCoord.y != [Globals NumberOfTilesInXDirection]-1) {
+        tempCoord.y++;
+        [self.possibleMoves addObject:tempCoord];
     }
     
 }
-
 - (void)regularPieceMovementEast:(TileCoordinates *) coord
 {
-    if (coord.x != [Globals NumberOfTilesInXDirection]-1) {
-        coord.x++;
-        [self.possibleMoves addObject:coord];
+    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+    if (tempCoord.x != [Globals NumberOfTilesInXDirection]-1) {
+        tempCoord.x++;
+        [self.possibleMoves addObject:tempCoord];
     }
     
 }
 
 - (void)regularPieceMovementWest:(TileCoordinates *) coord
 {
-    if (coord.x != 0) {
-        coord.x--;
-        [self.possibleMoves addObject:coord];
+    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+    if (tempCoord.x != 0) {
+        tempCoord.x--;
+        [self.possibleMoves addObject:tempCoord];
     }
     
 }
+
+
 
 
 @end

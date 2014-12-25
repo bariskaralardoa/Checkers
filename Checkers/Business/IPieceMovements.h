@@ -12,10 +12,12 @@
 @protocol IPieceMovements <NSObject>
 
 - (void) createPieceOn:(TileCoordinates *) coord withHeight:(float)height;
-- (NSMutableArray *)whitePiecesCoordinates:(TileCoordinates *)coord;
-- (void)possibleMoveIndicator:(TileCoordinates *) coord;
+- (void)possibleMoveIndicator:(TileCoordinates *)coord withHeight:(float)height;
 
-- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height;
+//- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height;
 
+- (NSArray*)getMoveSuggestion;
+
+- (void) detectClickedCellStatus:(TileCoordinates *)coord;
 
 @end

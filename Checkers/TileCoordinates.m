@@ -9,7 +9,7 @@
 #import "TileCoordinates.h"
 
 @implementation TileCoordinates
-- (instancetype)initWithX:(long)X withY:(long)Y {
+- (instancetype)initWithX:(NSInteger)X withY:(NSInteger)Y {
     self = [super init];
     if (self) {
         self.x = X;

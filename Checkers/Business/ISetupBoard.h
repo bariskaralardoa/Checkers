@@ -14,5 +14,4 @@
 - (NSArray*)getTiles;
 
 - (NSArray*)getPieces;
-- (NSArray*)getMoveSuggestion;
 @end

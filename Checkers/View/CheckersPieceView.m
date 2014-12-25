@@ -30,6 +30,7 @@
     _pieceImageView.frame = CGRectMake(0, 0, self.frame.size.height * 1.0, self.frame.size.height * 1.0);
 
     [self addSubview:_pieceImageView];
+    
 }
 - (NSInteger)IndexX
 {
