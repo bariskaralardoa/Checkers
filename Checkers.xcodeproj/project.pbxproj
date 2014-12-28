@@ -37,6 +37,7 @@
 		C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC69481A2FA91A00C8CFC8 /* Board.m */; };
 		C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */; };
 		C0DC694F1A2FB45F00C8CFC8 /* BoardSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */; };
+		C0E562761A5026DC00B3C1B9 /* Eatable.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E562751A5026DC00B3C1B9 /* Eatable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckersBoard.m; path = Model/CheckersBoard.m; sourceTree = "<group>"; };
 		C0DC694D1A2FB45F00C8CFC8 /* BoardSquareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquareView.h; path = View/BoardSquareView.h; sourceTree = "<group>"; };
 		C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquareView.m; path = View/BoardSquareView.m; sourceTree = "<group>"; };
+		C0E562741A5026DC00B3C1B9 /* Eatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eatable.h; path = State/Eatable.h; sourceTree = "<group>"; };
+		C0E562751A5026DC00B3C1B9 /* Eatable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Eatable.m; path = State/Eatable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +188,8 @@
 				C0B4D99D1A3835C9000F3C41 /* CheckPiece.m */,
 				C0BE38691A4AA5DC008BCB3D /* Suggestion.h */,
 				C0BE386A1A4AA5DC008BCB3D /* Suggestion.m */,
+				C0E562741A5026DC00B3C1B9 /* Eatable.h */,
+				C0E562751A5026DC00B3C1B9 /* Eatable.m */,
 			);
 			name = State;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */,
 				C0B4D9941A383247000F3C41 /* CheckersPieceView.m in Sources */,
 				ACA62FB81A438FB80007E72B /* Globals.m in Sources */,
+				C0E562761A5026DC00B3C1B9 /* Eatable.m in Sources */,
 				C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */,
 				C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */,
 				C0B4D99E1A3835C9000F3C41 /* CheckPiece.m in Sources */,
