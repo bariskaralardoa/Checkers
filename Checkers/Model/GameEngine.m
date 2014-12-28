@@ -42,6 +42,12 @@
     BOOL isClickedWhite;
     BOOL isClickedBlack;
     CheckersPieceView * clickedPieceView;
+    BOOL isInPossibleMoves;
+    BOOL isInPossibleEaten;
+    
+    TileCoordinates * clickedPossibleMoves;
+    TileCoordinates * clickedCapturedPiece;
+    
 }
 
 - (NSMutableArray*) possibleMoves
@@ -328,6 +334,57 @@ __strong static id _sharedObject = nil;
     }
 }
 
+
+- (BOOL) isLegalMove:(TileCoordinates *)coord
+{
+    isInPossibleMoves = NO;
+    isInPossibleEaten = NO;
+    
+    for (TileCoordinates * posMove in _possibleMoves) {
+        if (coord.x == posMove.x && coord.y == posMove.y) {
+            clickedPossibleMoves = posMove;
+            isInPossibleMoves = YES;
+            return YES;
+        }
+    }
+    for (Eatable * eat in _possibleEaten) {
+        if (coord.x == eat.coordinateOfPossibleMove.x && coord.y == eat.coordinateOfPossibleMove.y) {
+            clickedPossibleMoves = eat.coordinateOfPossibleMove;
+            clickedCapturedPiece = eat.coordinatesOfCapturedPiece;
+            isInPossibleEaten = YES;
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void)movePiece:(TileCoordinates *)coord
+{
+    SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
+    
+    if (isInPossibleMoves) {
+        for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+            if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
+                CheckersPieceView* newPieceView = [pieceView copy];
+                //newPieceView.IndexX = clickedPossibleMoves.x;
+                
+                [_currentGame.pieces removeObject:pieceView];
+                
+//                [_currentGame.pieces removeObject:pieceView];
+//                [_currentGame.pieces addObject:<#(id)#>]
+            }
+        }
+        
+        
+        
+    }
+    else if (isInPossibleEaten) {
+        
+    }
+    
+
+}
+
 #pragma mark - Possible Moves
 - (void) checkNorthForRegularPieceMove:(TileCoordinates *) coord
 {
@@ -398,34 +455,6 @@ __strong static id _sharedObject = nil;
 //    }
 //    
 //}
-
-
-- (void)regularPieceMovementNorthhhhh:(TileCoordinates *) coord
-{
-    TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
-    if (coord.y != 0) {
-        tempCoord.y--;
-        for (CheckersPieceView * pieceView in _currentGame.pieces) {
-            NSLog(@"%d,%d",pieceView.IndexX,pieceView.IndexY);
-            //Check if north of clicked cell is in pieces array
-            if (pieceView.IndexX == tempCoord.x && pieceView.IndexY == tempCoord.y && coord.y != 1) {
-                //Check if north's side is same with clickedPiece, if it's different, then add it to possibleMoves array
-                if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
-                    //Add opposite color piece to possibleEaten array
-                    [self.possibleEaten addObject:tempCoord];
-                    tempCoord.y--;
-                    if (![self isCellOccupied:tempCoord]) {
-                        [self.possibleMoves addObject:tempCoord];
-                    }
-                }
-            }
-            // if north of the clicked cell is empty
-            else if (![self isCellOccupied:tempCoord]){
-                [self.possibleMoves addObject:tempCoord];
-            }
-        }
-    }
-}
 
 
 

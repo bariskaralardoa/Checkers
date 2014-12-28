@@ -112,7 +112,8 @@
 - (void)RenderPieces:(NSArray*)pieces withTileArray:(NSArray*)tiles
 {
 
-    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
+    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     for (CheckersPieceView* pieceView in pieces) {
         CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
         tileToPlace.pieceView = pieceView;
@@ -127,7 +128,7 @@
 - (void)RenderMoveSuggestion:(NSArray*)moveSuggestion withTileArray:(NSArray*)tiles
 {
     
-    [currentMoveSuggestion makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
+    [currentMoveSuggestion makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     for (SuggestionView* suggestionView in moveSuggestion) {
         CheckersTileView* tileToPlace = tiles[suggestionView.indexY][suggestionView.indexX];
@@ -142,7 +143,7 @@
 - (void)RenderSelectedPiece:(NSArray*)selectedPiece withTileArray:(NSArray*)tiles
 {
     
-    [currentSelectedPiece makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
+    [currentSelectedPiece makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     for (SelectedPieceView* selectedPieceView in selectedPiece) {
         CheckersTileView* tileToPlace = tiles[selectedPieceView.indexY][selectedPieceView.indexX];
@@ -177,12 +178,18 @@
     
     clickedCoordinate = [[TileCoordinates alloc] initWithX:floor(touchPoint.x/tileHeight) withY:floor(touchPoint.y/tileHeight)];
     
-    
+    [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
+
+    //Check if clicked in range of possibleMoves or possibleEaten arrays
+    if ([self.pieceMovementsEngine isLegalMove:clickedCoordinate]) {
+        [self.pieceMovementsEngine movePiece:clickedCoordinate];
+    }
+    else
+    {
 //    [_pieceMovementsEngine createPieceOn:clickedCoordinate withHeight:pieceHeight];
 //    [_pieceMovementsEngine whitePiecesCoordinates:clickedCoordinate];
 //    [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
 
-    [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
 
     //Move suggestion
     [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate withHeight:tileHeight];
@@ -192,7 +199,7 @@
     [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
     [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
 
-    
+    }
 }
 
 
