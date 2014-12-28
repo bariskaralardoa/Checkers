@@ -69,6 +69,11 @@ static int _NumberOfTilesInYDirection;
     return @"suggest.png";
 }
 
++ (NSString *) selectedPiece
+{
+    return @"active.png";
+}
+
 #pragma mark - Documents Directory
 + (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES);

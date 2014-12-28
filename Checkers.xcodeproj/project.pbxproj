@@ -38,6 +38,8 @@
 		C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */; };
 		C0DC694F1A2FB45F00C8CFC8 /* BoardSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */; };
 		C0E562761A5026DC00B3C1B9 /* Eatable.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E562751A5026DC00B3C1B9 /* Eatable.m */; };
+		C0E562791A505F2C00B3C1B9 /* SelectedPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E562781A505F2C00B3C1B9 /* SelectedPiece.m */; };
+		C0E5627F1A5060EC00B3C1B9 /* SelectedPieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E5627E1A5060EC00B3C1B9 /* SelectedPieceView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,10 @@
 		C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquareView.m; path = View/BoardSquareView.m; sourceTree = "<group>"; };
 		C0E562741A5026DC00B3C1B9 /* Eatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eatable.h; path = State/Eatable.h; sourceTree = "<group>"; };
 		C0E562751A5026DC00B3C1B9 /* Eatable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Eatable.m; path = State/Eatable.m; sourceTree = "<group>"; };
+		C0E562771A505F2C00B3C1B9 /* SelectedPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectedPiece.h; path = State/SelectedPiece.h; sourceTree = "<group>"; };
+		C0E562781A505F2C00B3C1B9 /* SelectedPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectedPiece.m; path = State/SelectedPiece.m; sourceTree = "<group>"; };
+		C0E5627D1A5060EC00B3C1B9 /* SelectedPieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedPieceView.h; sourceTree = "<group>"; };
+		C0E5627E1A5060EC00B3C1B9 /* SelectedPieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedPieceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,8 @@
 				C0B4D99D1A3835C9000F3C41 /* CheckPiece.m */,
 				C0BE38691A4AA5DC008BCB3D /* Suggestion.h */,
 				C0BE386A1A4AA5DC008BCB3D /* Suggestion.m */,
+				C0E562771A505F2C00B3C1B9 /* SelectedPiece.h */,
+				C0E562781A505F2C00B3C1B9 /* SelectedPiece.m */,
 				C0E562741A5026DC00B3C1B9 /* Eatable.h */,
 				C0E562751A5026DC00B3C1B9 /* Eatable.m */,
 			);
@@ -349,6 +357,8 @@
 				C0B4D9931A383247000F3C41 /* CheckersPieceView.m */,
 				C0BE386C1A4AC640008BCB3D /* SuggestionView.h */,
 				C0BE386D1A4AC640008BCB3D /* SuggestionView.m */,
+				C0E5627D1A5060EC00B3C1B9 /* SelectedPieceView.h */,
+				C0E5627E1A5060EC00B3C1B9 /* SelectedPieceView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -489,8 +499,10 @@
 				C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */,
 				C0B4D9941A383247000F3C41 /* CheckersPieceView.m in Sources */,
 				ACA62FB81A438FB80007E72B /* Globals.m in Sources */,
+				C0E562791A505F2C00B3C1B9 /* SelectedPiece.m in Sources */,
 				C0E562761A5026DC00B3C1B9 /* Eatable.m in Sources */,
 				C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */,
+				C0E5627F1A5060EC00B3C1B9 /* SelectedPieceView.m in Sources */,
 				C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */,
 				C0B4D99E1A3835C9000F3C41 /* CheckPiece.m in Sources */,
 				C0BE386B1A4AA5DC008BCB3D /* Suggestion.m in Sources */,

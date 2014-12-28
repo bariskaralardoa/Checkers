@@ -13,10 +13,12 @@
 
 - (void) createPieceOn:(TileCoordinates *) coord withHeight:(float)height;
 - (void)possibleMoveIndicator:(TileCoordinates *)coord withHeight:(float)height;
+- (void)selectedPieceIndicator:(TileCoordinates *) coord withHeight:(float)height;
 
 //- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height;
 
 - (NSArray*)getMoveSuggestion;
+- (NSArray *)getSelectedPieceArr;
 
 - (void) detectClickedCellStatus:(TileCoordinates *)coord;
 

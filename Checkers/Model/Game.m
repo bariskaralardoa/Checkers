@@ -21,6 +21,7 @@
         _tiles = [NSMutableArray arrayOfWidth:[Globals NumberOfTilesInXDirection] andHeight:[Globals NumberOfTilesInYDirection]];
         _pieces = [NSMutableArray new];
         _moveSuggestion = [NSMutableArray new];
+        _selectedPieceArr = [NSMutableArray new];
     }
     return self;
 }

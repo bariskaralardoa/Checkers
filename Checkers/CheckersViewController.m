@@ -15,6 +15,7 @@
 #import "TileCoordinates.h"
 #import "Suggestion.h"
 #import "SuggestionView.h"
+#import "SelectedPieceView.h"
 
 //#import "CheckersBoard.h"
 //#import "CheckersBoardView.h"
@@ -29,6 +30,7 @@
 @implementation CheckersViewController {
     NSArray* currentPieces;
     NSArray* currentMoveSuggestion;
+    NSArray* currentSelectedPiece;
     TileCoordinates * clickedCoordinate;
     float pieceHeight;
 }
@@ -137,6 +139,20 @@
     currentMoveSuggestion = [moveSuggestion copy];
 }
 
+- (void)RenderSelectedPiece:(NSArray*)selectedPiece withTileArray:(NSArray*)tiles
+{
+    
+    [currentSelectedPiece makeObjectsPerformSelector:@selector(removeFromSuperview)]; //  Hepsi gitsin. Bunu optimize etmemiz gerekebilir, sadece değişikliği track etmek gibi.
+    
+    for (SelectedPieceView* selectedPieceView in selectedPiece) {
+        CheckersTileView* tileToPlace = tiles[selectedPieceView.indexY][selectedPieceView.indexX];
+        tileToPlace.selectedPieceView = selectedPieceView;
+        
+        [tileToPlace addSubview:selectedPieceView];
+        selectedPieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
+    }
+    currentSelectedPiece = [selectedPiece copy];
+}
 
 
 #pragma mark - Touch functions
@@ -171,8 +187,12 @@
     //Move suggestion
     [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate withHeight:tileHeight];
     [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
+    
+    //Selected piece
+    [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
+    [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
 
-
+    
 }
 
 

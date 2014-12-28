@@ -14,6 +14,8 @@
 @property (nonatomic) NSMutableArray* tiles;
 @property (nonatomic) NSMutableArray* pieces;
 @property (nonatomic) NSMutableArray* moveSuggestion;
+@property (nonatomic) NSMutableArray* selectedPieceArr;
+
 
 @property (nonatomic) PlayerInGame* whitePlayer;
 @property (nonatomic) PlayerInGame* blackPlayer;

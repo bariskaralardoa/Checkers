@@ -25,7 +25,7 @@
 
 //In game images
 + (NSString *) suggest;
-
++ (NSString *) selectedPiece;
 //Documents directory
 + (NSString *)documentsDirectory;
 + (NSString *)dataFilePath;

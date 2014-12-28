@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CheckersPieceView.h"
 #import "SuggestionView.h"
+#import "SelectedPieceView.h"
 
 @class  TileCoordinates;
 
@@ -25,5 +26,6 @@
 
 @property (nonatomic,retain) SuggestionView* suggestionView;
 
+@property (nonatomic,retain) SelectedPieceView* selectedPieceView;
 
 @end

@@ -18,6 +18,9 @@
 #import "SuggestionView.h"
 #import "Suggestion.h"
 #import "Eatable.h"
+#import "SelectedPiece.h"
+#import "SelectedPieceView.h"
+
 
 @interface GameEngine ()
 
@@ -182,6 +185,9 @@ __strong static id _sharedObject = nil;
 //
 - (void)possibleMoveIndicator:(TileCoordinates *) coord withHeight:(float)height
 {
+    //reset
+    [_currentGame.moveSuggestion removeAllObjects];
+
     self.possibleMoves = [[NSMutableArray alloc] init];
     self.possibleEaten = [[NSMutableArray alloc] init];
     [self regularPiecePossibleMoves:coord];
@@ -196,9 +202,22 @@ __strong static id _sharedObject = nil;
     }
 }
 
+- (void)selectedPieceIndicator:(TileCoordinates *) coord withHeight:(float)height
+{
+    //reset
+    [_currentGame.selectedPieceArr removeAllObjects];
+    
+    if ([self isCellOccupied:coord]) {
+        [self placeSelectedPieceImageOnTile:coord withHeight:height];
+    }
+    
+
+}
+
 
 - (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height
 {
+//    [_currentGame.moveSuggestion removeAllObjects];
     CGRect suggestionFrame = CGRectMake(0, 0, height, height);
 
     SuggestionView * suggestionView = [[SuggestionView alloc] initWithFrame:suggestionFrame];
@@ -207,7 +226,18 @@ __strong static id _sharedObject = nil;
     [_currentGame.moveSuggestion addObject:suggestionView];
     
 }
-//
+
+- (void)placeSelectedPieceImageOnTile:(TileCoordinates *)coord withHeight:(float)height
+{
+    CGRect selectedPieceFrame = CGRectMake(0, 0, height, height);
+    
+    SelectedPieceView * selectedPieceView = [[SelectedPieceView alloc] initWithFrame:selectedPieceFrame];
+    SelectedPiece * selectedPiece = [[SelectedPiece alloc] initWithCurrentX:coord.x currentY:coord.y imageName:[Globals selectedPiece]];
+    [selectedPieceView setSelectedPieceInfoWithPiece:selectedPiece];
+    [_currentGame.selectedPieceArr addObject:selectedPieceView];
+    
+}
+
 
 - (NSArray*)getTiles
 {
@@ -225,7 +255,10 @@ __strong static id _sharedObject = nil;
     return _currentGame.moveSuggestion;
 }
 
-
+- (NSArray *)getSelectedPieceArr
+{
+    return _currentGame.selectedPieceArr;
+}
 
 #pragma mark IPieceMovements Members
 - (void) createPieceOn:(TileCoordinates *)coord withHeight:(float)height
