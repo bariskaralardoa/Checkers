@@ -183,6 +183,11 @@
     //Check if clicked in range of possibleMoves or possibleEaten arrays
     if ([self.pieceMovementsEngine isLegalMove:clickedCoordinate]) {
         [self.pieceMovementsEngine movePiece:clickedCoordinate];
+        [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
+        
+        //Selected piece
+        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
+        [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
     }
     else
     {

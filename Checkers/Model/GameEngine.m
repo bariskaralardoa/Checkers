@@ -363,12 +363,14 @@ __strong static id _sharedObject = nil;
     SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
     
     if (isInPossibleMoves) {
-        for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+        for (CheckersPieceView *  pieceView in _currentGame.pieces) {
             if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
-                CheckersPieceView* newPieceView = [pieceView copy];
-                //newPieceView.IndexX = clickedPossibleMoves.x;
-                
-                [_currentGame.pieces removeObject:pieceView];
+                pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
+                pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
+//                pieceView.IndexY = clickedPossibleMoves.y;
+//                pieceView.IndexX = clickedPossibleMoves.x;
+
+
                 
 //                [_currentGame.pieces removeObject:pieceView];
 //                [_currentGame.pieces addObject:<#(id)#>]
