@@ -358,33 +358,37 @@ __strong static id _sharedObject = nil;
     return NO;
 }
 
-- (void)movePiece:(TileCoordinates *)coord
+- (void)handleMoveAndCapture:(TileCoordinates *)coord
 {
-    SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
-    
     if (isInPossibleMoves) {
-        for (CheckersPieceView *  pieceView in _currentGame.pieces) {
-            if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
-                pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
-                pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
-//                pieceView.IndexY = clickedPossibleMoves.y;
-//                pieceView.IndexX = clickedPossibleMoves.x;
-
-
-                
-//                [_currentGame.pieces removeObject:pieceView];
-//                [_currentGame.pieces addObject:<#(id)#>]
-            }
-        }
-        
-        
-        
+        [self movePiece];
     }
     else if (isInPossibleEaten) {
-        
+        [self movePiece];
+        [self capturePiece];
     }
-    
+}
 
+- (void)movePiece
+{
+    SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
+    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+        if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
+            pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
+            pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
+        }
+    }
+
+
+}
+
+- (void)capturePiece
+{
+    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+        if (pieceView.IndexX == clickedCapturedPiece.x && pieceView.IndexY == clickedCapturedPiece.y) {
+            [_currentGame.pieces removeObject:pieceView];
+        }
+    }
 }
 
 #pragma mark - Possible Moves

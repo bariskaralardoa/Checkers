@@ -24,6 +24,6 @@
 
 - (BOOL)isLegalMove:(TileCoordinates *)coord;
 
-- (void)movePiece:(TileCoordinates *)coord;
+- (void)handleMoveAndCapture:(TileCoordinates *)coord;
 
 @end
