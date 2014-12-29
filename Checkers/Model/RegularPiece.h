@@ -10,6 +10,5 @@
 
 @interface RegularPiece : Piece
 
-- (NSMutableArray *) generateMoves;
 
 @end

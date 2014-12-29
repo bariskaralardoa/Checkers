@@ -78,7 +78,7 @@ __strong static id _sharedObject = nil;
 }
 
 /* IGameState Members  */
-#pragma mark IGameState Members
+#pragma mark - IGameState Members
 
 /// Ekincan
 - (void)startNewGameWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer withTileHeight:(float)tileHeight withPieceHeight:(float)pieceHeight
@@ -95,7 +95,7 @@ __strong static id _sharedObject = nil;
 }
 
 /* ISetupBoard Members  */
-#pragma mark ISetupBoard Members
+#pragma mark - ISetupBoard Members
 - (void)generateTilesWithTileHeight:(float)tileHeight
 {
 
@@ -141,28 +141,28 @@ __strong static id _sharedObject = nil;
 
     for (int i = 0; i < 8; i++) {
 
-        for (int j = 1; j < 3; j++) {
+//        for (int j = 1; j < 3; j++) {
+//            //link CheckersTileView with CheckersPieceView
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+//
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//
+//            //link Piece with CheckersPieceView
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
+        for (int j = 1; j < 5; j++) {
             //link CheckersTileView with CheckersPieceView
             //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-
+            
             CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
             //            currentTile.pieceView = pieceView;
             //            [currentTile addSubview:pieceView];
-
-            //link Piece with CheckersPieceView
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-
-            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.pieces addObject:pieceView];
-        }
-        for (int j = 5; j < 6; j++) {
-            //link CheckersTileView with CheckersPieceView
-            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-            
-            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            //            currentTile.pieceView = pieceView;
-            //            [currentTile addSubview:pieceView];
             
             //link Piece with CheckersPieceView
             RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
@@ -172,7 +172,7 @@ __strong static id _sharedObject = nil;
             [_currentGame.pieces addObject:pieceView];
         }
 
-        for (int k = 6; k < 7; k++) {
+        for (int k = 7; k < 8; k++) {
             //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
 
             CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
@@ -188,62 +188,6 @@ __strong static id _sharedObject = nil;
         }
     }
 }
-//
-- (void)possibleMoveIndicator:(TileCoordinates *) coord withHeight:(float)height
-{
-    //reset
-    [_currentGame.moveSuggestion removeAllObjects];
-
-    self.possibleMoves = [[NSMutableArray alloc] init];
-    self.possibleEaten = [[NSMutableArray alloc] init];
-    [self regularPiecePossibleMoves:coord];
-    
-    for (TileCoordinates *  coordinates in self.possibleMoves) {
-        [self placePossibleMoveImageOnTile:coordinates withHeight:height];
-    }
-    //Cycle through coordinateOfPossibleMove
-    for (Eatable *  eat in self.possibleEaten) {
-        
-        [self placePossibleMoveImageOnTile:eat.coordinateOfPossibleMove withHeight:height];
-    }
-}
-
-- (void)selectedPieceIndicator:(TileCoordinates *) coord withHeight:(float)height
-{
-    //reset
-    [_currentGame.selectedPieceArr removeAllObjects];
-    
-    if ([self isCellOccupied:coord]) {
-        [self placeSelectedPieceImageOnTile:coord withHeight:height];
-    }
-    
-
-}
-
-
-- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height
-{
-//    [_currentGame.moveSuggestion removeAllObjects];
-    CGRect suggestionFrame = CGRectMake(0, 0, height, height);
-
-    SuggestionView * suggestionView = [[SuggestionView alloc] initWithFrame:suggestionFrame];
-    Suggestion * suggest = [[Suggestion alloc] initWithCurrentX:coord.x currentY:coord.y imageName:[Globals suggest]];
-    [suggestionView setSuggestionInfoWithSuggestion:suggest];
-    [_currentGame.moveSuggestion addObject:suggestionView];
-    
-}
-
-- (void)placeSelectedPieceImageOnTile:(TileCoordinates *)coord withHeight:(float)height
-{
-    CGRect selectedPieceFrame = CGRectMake(0, 0, height, height);
-    
-    SelectedPieceView * selectedPieceView = [[SelectedPieceView alloc] initWithFrame:selectedPieceFrame];
-    SelectedPiece * selectedPiece = [[SelectedPiece alloc] initWithCurrentX:coord.x currentY:coord.y imageName:[Globals selectedPiece]];
-    [selectedPieceView setSelectedPieceInfoWithPiece:selectedPiece];
-    [_currentGame.selectedPieceArr addObject:selectedPieceView];
-    
-}
-
 
 - (NSArray*)getTiles
 {
@@ -266,39 +210,59 @@ __strong static id _sharedObject = nil;
     return _currentGame.selectedPieceArr;
 }
 
-#pragma mark IPieceMovements Members
+
+
+
+#pragma mark - IPieceMovements Members
+
 - (void) createPieceOn:(TileCoordinates *)coord withHeight:(float)height
 {
     CGRect pieceFrame = CGRectMake(0, 0, height, height);
     CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-
+    
     RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:coord.x currentPositionY:coord.y playerSideType:pieceSideBlack];
     [pieceView setPieceInfoWithPiece:regularPiece];
     [_currentGame.pieces addObject:pieceView];
-
+    
 }
 
-
-
-- (void)whitePiecesCoordinates
+- (void)handleMoveAndCapture:(TileCoordinates *)coord
 {
-    whitePiecesArr = [[NSMutableArray alloc ]init];
-    for (CheckersPieceView *  pieceView in _currentGame.pieces) {
-        if (pieceView.pieceInfo.sideType == pieceSideWhite) {
-            [whitePiecesArr addObject:pieceView];
+    if (isInPossibleMoves) {
+        [self movePiece];
+    }
+    else if (isInPossibleEaten) {
+        [self movePiece];
+        [self capturePiece];
+    }
+}
+
+- (void)movePiece
+{
+    SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
+    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+        if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
+            pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
+            pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
+        }
+    }
+    
+    
+}
+
+- (void)capturePiece
+{
+    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+        if (pieceView.IndexX == clickedCapturedPiece.x && pieceView.IndexY == clickedCapturedPiece.y) {
+            [_currentGame.pieces removeObject:pieceView];
         }
     }
 }
 
-- (void)blackPiecesCoordinates
-{
-    blackPiecesArr = [[NSMutableArray alloc ]init];
-    for (CheckersPieceView *  pieceView in _currentGame.pieces) {
-        if (pieceView.pieceInfo.sideType == pieceSideBlack) {
-            [blackPiecesArr addObject:pieceView];
-        }
-    }
-}
+
+
+#pragma mark Piece and cell states
+
 
 - (void) detectClickedCellStatus:(TileCoordinates *)coord
 {
@@ -321,8 +285,27 @@ __strong static id _sharedObject = nil;
             isClickedBlack = YES;
         }
     }
-    
-    
+
+}
+
+- (void)whitePiecesCoordinates
+{
+    whitePiecesArr = [[NSMutableArray alloc ]init];
+    for (CheckersPieceView *  pieceView in _currentGame.pieces) {
+        if (pieceView.pieceInfo.sideType == pieceSideWhite) {
+            [whitePiecesArr addObject:pieceView];
+        }
+    }
+}
+
+- (void)blackPiecesCoordinates
+{
+    blackPiecesArr = [[NSMutableArray alloc ]init];
+    for (CheckersPieceView *  pieceView in _currentGame.pieces) {
+        if (pieceView.pieceInfo.sideType == pieceSideBlack) {
+            [blackPiecesArr addObject:pieceView];
+        }
+    }
 }
 
 - (void)getCurrentClickedPieceObject:(TileCoordinates *) coord
@@ -330,6 +313,8 @@ __strong static id _sharedObject = nil;
     for (CheckersPieceView * pieceView in _currentGame.pieces) {
         if (pieceView.IndexX == coord.x && pieceView.IndexY == coord.y) {
             clickedPieceView = pieceView;
+            clickedPieceView.IndexX = pieceView.IndexX;
+            clickedPieceView.IndexY = pieceView.IndexY;
         }
     }
 }
@@ -358,38 +343,63 @@ __strong static id _sharedObject = nil;
     return NO;
 }
 
-- (void)handleMoveAndCapture:(TileCoordinates *)coord
+
+#pragma mark Move indicators
+- (void)possibleMoveIndicator:(TileCoordinates *) coord withHeight:(float)height
 {
-    if (isInPossibleMoves) {
-        [self movePiece];
+    //reset
+    [_currentGame.moveSuggestion removeAllObjects];
+    
+    self.possibleMoves = [[NSMutableArray alloc] init];
+    self.possibleEaten = [[NSMutableArray alloc] init];
+    [self regularPiecePossibleMoves:coord];
+    
+    for (TileCoordinates *  coordinates in self.possibleMoves) {
+        [self placePossibleMoveImageOnTile:coordinates withHeight:height];
     }
-    else if (isInPossibleEaten) {
-        [self movePiece];
-        [self capturePiece];
+    //Cycle through coordinateOfPossibleMove
+    for (Eatable *  eat in self.possibleEaten) {
+        
+        [self placePossibleMoveImageOnTile:eat.coordinateOfPossibleMove withHeight:height];
     }
 }
 
-- (void)movePiece
+- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height
 {
-    SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
-    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
-        if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
-            pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
-            pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
-        }
-    }
-
-
+    CGRect suggestionFrame = CGRectMake(0, 0, height, height);
+    
+    SuggestionView * suggestionView = [[SuggestionView alloc] initWithFrame:suggestionFrame];
+    Suggestion * suggest = [[Suggestion alloc] initWithCurrentX:coord.x currentY:coord.y imageName:[Globals suggest]];
+    [suggestionView setSuggestionInfoWithSuggestion:suggest];
+    [_currentGame.moveSuggestion addObject:suggestionView];
+    
 }
 
-- (void)capturePiece
+
+- (void)selectedPieceIndicator:(TileCoordinates *) coord withHeight:(float)height
 {
-    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
-        if (pieceView.IndexX == clickedCapturedPiece.x && pieceView.IndexY == clickedCapturedPiece.y) {
-            [_currentGame.pieces removeObject:pieceView];
-        }
+    //reset
+    [_currentGame.selectedPieceArr removeAllObjects];
+    
+    if ([self isCellOccupied:coord]) {
+        [self placeSelectedPieceImageOnTile:coord withHeight:height];
     }
+    
+    
 }
+
+
+- (void)placeSelectedPieceImageOnTile:(TileCoordinates *)coord withHeight:(float)height
+{
+    CGRect selectedPieceFrame = CGRectMake(0, 0, height, height);
+    
+    SelectedPieceView * selectedPieceView = [[SelectedPieceView alloc] initWithFrame:selectedPieceFrame];
+    SelectedPiece * selectedPiece = [[SelectedPiece alloc] initWithCurrentX:coord.x currentY:coord.y imageName:[Globals selectedPiece]];
+    [selectedPieceView setSelectedPieceInfoWithPiece:selectedPiece];
+    [_currentGame.selectedPieceArr addObject:selectedPieceView];
+    
+}
+
 
 #pragma mark - Possible Moves
 - (void) checkNorthForRegularPieceMove:(TileCoordinates *) coord
@@ -405,7 +415,8 @@ __strong static id _sharedObject = nil;
     [self getCurrentClickedPieceObject:coord];
     
     if (isClickedWhite) {
-        [self regularPieceMovementNorth:coord];
+        [self checkPieceMovementNorth:coord];
+        //[self regularPieceMovementNorth:coord];
         [self regularPieceMovementEast:coord];
         [self regularPieceMovementWest:coord];
     }
@@ -462,6 +473,117 @@ __strong static id _sharedObject = nil;
 //    
 //}
 
+- (void)checkPieceMovementNorth:(TileCoordinates *) coord
+{
+    TileCoordinates * coords = [[TileCoordinates alloc] initWithX:coord.x withY:coord.y];
+    TileCoordinates * possibleEatablePieceCoord;
+    TileCoordinates * possibleEatenMove;
+
+    int edibleCounter = 0;
+    
+    if (coords.y != 0) {
+        coords.y--;
+        while (coords.y>=0) {
+            //Check if cell is occupied, if it's not, add it to posssibleMoves
+            //If its occupied by opposite color, check the cell behind (pieceView.y--),
+            //if its empty, add that cell to possibleEaten, then
+            
+            
+            
+            if ([self isCellOccupied:coords]) {
+                if (edibleCounter != 0) {
+                    //[self.possibleEaten removeAllObjects];
+                    return;
+                }
+                for (CheckersPieceView * pieceView in _currentGame.pieces) {
+                    //Occupied
+                    if (pieceView.IndexX == coords.x && pieceView.IndexY == coords.y) {
+                        //if clicked cell's side is different, add that coord to possibleEaten
+                        if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
+                            possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:coords.x withY:coords.y];
+//                            TileCoordinates * possibleEatenMove = [[TileCoordinates alloc] initWithX:capturedPieceCoord.x withY:capturedPieceCoord.y-1];
+//                            Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:capturedPieceCoord possibleMoves:possibleEatenMove];
+//                            [self.possibleEaten addObject:possibleEatenAndMove];
+                            
+                            edibleCounter++;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+                
+                
+            }
+            else if (edibleCounter == 0)  //cell is empty
+            {
+                TileCoordinates * tempCoord = [[TileCoordinates alloc] initWithX:coords.x withY:coords.y];
+                [self.possibleMoves addObject:tempCoord];
+            }
+            else if (edibleCounter == 1)
+            {
+                possibleEatenMove = [[TileCoordinates alloc] initWithX:coords.x withY:coords.y];
+                Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:possibleEatablePieceCoord possibleMoves:possibleEatenMove];
+                [self.possibleEaten addObject:possibleEatenAndMove];
+                [self.possibleMoves removeAllObjects];
+                //self.possibleMoves = [[NSMutableArray alloc] init];
+                
+            }
+
+            
+            
+            
+            coords.y--;
+        }
+    }
+//    - (BOOL)isCellOccupied:(TileCoordinates *) coord
+//    {
+//        for (CheckersPieceView * pieceView in _currentGame.pieces) {
+//            if (coord.x == pieceView.IndexX && coord.y == pieceView.IndexY) {
+//                return YES;
+//            }
+//        }
+//        return NO;
+    
+
+    
+    
+//    if (coord.y != 0) {
+//        tempCoord.y--;
+//        for (CheckersPieceView * pieceView in _currentGame.pieces) {
+//            NSLog(@"%d,%d",pieceView.IndexX,pieceView.IndexY);
+//            //Check if north of clicked cell is in pieces array and is in eligible position on board
+//            if (pieceView.IndexX == tempCoord.x && pieceView.IndexY == tempCoord.y && coord.y != 1) {
+//                //Check if north's side is same with clickedPiece, if it's different, and if the next north cell is empty,
+//                //then add possibleEatablePieceCoord and tempCoord to possibleEaten array
+//                if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
+//                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];
+//                    tempCoord.y--;
+//                    if (![self isCellOccupied:tempCoord]) {
+//                        Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:possibleEatablePieceCoord possibleMoves:tempCoord];
+//                        [self.possibleEaten addObject:possibleEatenAndMove];
+//                        //Back to previous position
+//                        tempCoord.y++;
+//                        //return;
+//                    }
+//                    
+//                }
+//            }
+//            // if north of the clicked cell is empty, add
+//            else if (![self isCellOccupied:tempCoord]){
+//                [self.possibleMoves addObject:tempCoord];
+//                return;
+//            }
+//        }
+//    }
+    
+}
 
 
 - (void)regularPieceMovementNorth:(TileCoordinates *) coord
@@ -476,16 +598,16 @@ __strong static id _sharedObject = nil;
                 //Check if north's side is same with clickedPiece, if it's different, and if the next north cell is empty,
                 //then add possibleEatablePieceCoord and tempCoord to possibleEaten array
                 if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
-                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];;
+                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];
                     tempCoord.y--;
                     if (![self isCellOccupied:tempCoord]) {
                         Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:possibleEatablePieceCoord possibleMoves:tempCoord];
                         [self.possibleEaten addObject:possibleEatenAndMove];
-                        //Back to previous position
-                        tempCoord.y++;
+                        
                         //return;
                     }
-                    
+                    //Back to previous position
+                    tempCoord.y++;
                 }
             }
             // if north of the clicked cell is empty, add
@@ -519,16 +641,16 @@ __strong static id _sharedObject = nil;
                 //Check if south's side is same with clickedPiece, if it's different, and if the next south cell is empty,
                 //then add possibleEatablePieceCoord and tempCoord to possibleEaten array
                 if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
-                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];;
+                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];
                     tempCoord.y++;
                     if (![self isCellOccupied:tempCoord]) {
                         Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:possibleEatablePieceCoord possibleMoves:tempCoord];
                         [self.possibleEaten addObject:possibleEatenAndMove];
-                        //Back to previous position
-                        tempCoord.y--;
+                        
                         //return;
                     }
-                    
+                    //Back to previous position
+                    tempCoord.y--;
                 }
             }
             // if south of the clicked cell is empty, add
@@ -563,16 +685,16 @@ __strong static id _sharedObject = nil;
                 //Check if east's side is same with clickedPiece, if it's different, and if the next south cell is empty,
                 //then add possibleEatablePieceCoord and tempCoord to possibleEaten array
                 if (pieceView.pieceInfo.sideType != clickedPieceView.pieceInfo.sideType) {
-                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];;
+                    TileCoordinates * possibleEatablePieceCoord = [[TileCoordinates alloc] initWithX:tempCoord.x withY:tempCoord.y];
                     tempCoord.x++;
                     if (![self isCellOccupied:tempCoord]) {
                         Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:possibleEatablePieceCoord possibleMoves:tempCoord];
                         [self.possibleEaten addObject:possibleEatenAndMove];
-                        //Back to previous position
-                        tempCoord.x--;
+                        
                         //return;
                     }
-                    
+                    //Back to previous position
+                    tempCoord.x--;
                 }
             }
             // if east of the clicked cell is empty, add
@@ -612,11 +734,11 @@ __strong static id _sharedObject = nil;
                     if (![self isCellOccupied:tempCoord]) {
                         Eatable * possibleEatenAndMove = [[Eatable alloc] initWithCapturedPiece:possibleEatablePieceCoord possibleMoves:tempCoord];
                         [self.possibleEaten addObject:possibleEatenAndMove];
-                        //Back to previous position
-                        tempCoord.x++;
+                        
                         //return;
                     }
-                    
+                    //Back to previous position
+                    tempCoord.x++;
                 }
             }
             // if west of the clicked cell is empty, add

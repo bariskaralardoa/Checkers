@@ -11,7 +11,7 @@
 
 @protocol IPieceMovements <NSObject>
 
-- (void)createPieceOn:(TileCoordinates *) coord withHeight:(float)height;
+//- (void)createPieceOn:(TileCoordinates *) coord withHeight:(float)height;
 - (void)possibleMoveIndicator:(TileCoordinates *)coord withHeight:(float)height;
 - (void)selectedPieceIndicator:(TileCoordinates *) coord withHeight:(float)height;
 

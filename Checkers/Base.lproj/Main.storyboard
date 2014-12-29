@@ -342,35 +342,6 @@
             </objects>
             <point key="canvasLocation" x="335" y="1247"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="3my-R9-Yqb">
-            <objects>
-                <viewController id="rIO-dr-Bnc" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="GXs-Cv-ol3"/>
-                        <viewControllerLayoutGuide type="bottom" id="T61-6v-sZM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZUP-SU-8nG" userLabel="CellView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uae-Am-94U" customClass="CheckersPieceView">
-                                <rect key="frame" x="107" y="282" width="29" height="29"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCP-qO-Zcy" customClass="CheckersTileView">
-                                <rect key="frame" x="126" y="158" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A9t-Sh-bie" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2034" y="-545"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="tDX-b3-1P4">
             <objects>

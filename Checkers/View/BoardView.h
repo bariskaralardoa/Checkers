@@ -13,6 +13,5 @@
 
 @property (nonatomic,strong) CheckersTileView * tileView;
 
--(void) boardViewTapped: (UIGestureRecognizer *) recognizer;
 
 @end
