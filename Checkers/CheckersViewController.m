@@ -180,26 +180,18 @@
     
     [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
 
-    //Check if clicked cell is in range of possibleMoves or possibleEaten arrays
+    //Check if clicked in range of possibleMoves or possibleEaten arrays
     if ([self.pieceMovementsEngine isLegalMove:clickedCoordinate]) {
         [self.pieceMovementsEngine handleMoveAndCapture:clickedCoordinate];
         [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
         
-        //Selected piece
-        //[self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
-        
-        //Clear
+        //Clear indicators and render selected piece, move suggestion indicators
+//        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
         [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
         [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
         [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
+
     }
-    // if empty cell selected, clear indicators and render selected piece and move suggestion indicators
-    else if (![self.pieceMovementsEngine isCellOccupied:clickedCoordinate]){
-        [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
-        [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
-        [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
-    }
-        
     else
     {
 //    [_pieceMovementsEngine createPieceOn:clickedCoordinate withHeight:pieceHeight];
@@ -211,8 +203,8 @@
     [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate withHeight:tileHeight];
     [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
     
-//    //Selected piece
-//    [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
+    //Selected piece
+    [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
     [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
 
     }

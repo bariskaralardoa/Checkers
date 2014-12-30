@@ -455,7 +455,7 @@ __strong static id _sharedObject = nil;
 {
     [self getCurrentClickedPieceObject:coord];
     
-    if (isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) {
+    if (isClickedWhite) {//&& _currentGame.currentPlayer == _currentGame.whitePlayer) {
         [self checkPieceMovementNorth:coord];
         [self checkPieceMovementSouth:coord];
         [self checkPieceMovementEast:coord];
@@ -472,9 +472,10 @@ __strong static id _sharedObject = nil;
         float pieceHeight = height * 0.8;
         [self selectedPieceIndicator:coord withHeight:pieceHeight];
         
-        [_currentGame nextTurn];
+        
+        //[_currentGame nextTurn];
     }
-    else if (isClickedBlack && _currentGame.currentPlayer == _currentGame.blackPlayer) {
+    else if (isClickedBlack) {// && _currentGame.currentPlayer == _currentGame.blackPlayer) {
         [self checkPieceMovementNorth:coord];
         [self checkPieceMovementSouth:coord];
         [self checkPieceMovementEast:coord];
@@ -486,7 +487,8 @@ __strong static id _sharedObject = nil;
 //        [self regularPieceMovementEast:coord];
 //        [self regularPieceMovementWest:coord];
 //        [self regularPieceMovementSouth:coord];
-        [_currentGame nextTurn];
+        
+//        [_currentGame nextTurn];
 
     }
 }
