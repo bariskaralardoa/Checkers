@@ -26,4 +26,6 @@
 
 - (void)handleMoveAndCapture:(TileCoordinates *)coord;
 
+- (BOOL)isCellOccupied:(TileCoordinates *) coord;
+- (void)clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:(TileCoordinates *)coord;
 @end

@@ -19,7 +19,9 @@
 
 @property (nonatomic) PlayerInGame* whitePlayer;
 @property (nonatomic) PlayerInGame* blackPlayer;
+@property (nonatomic) PlayerInGame* currentPlayer;
 
 - (instancetype)initWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer;
 
+- (int)nextTurn;
 @end

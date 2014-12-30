@@ -271,13 +271,15 @@ __strong static id _sharedObject = nil;
 
 - (void)movePiece
 {
-    SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
-    for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
-        if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
-            pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
-            pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
+//    if ([_currentGame.selectedPieceArr count]>0) {
+        SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
+        for (CheckersPieceView *  pieceView in [_currentGame.pieces copy]) {
+            if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
+                pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
+                pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
+            }
         }
-    }
+//    }
     
     
 }
@@ -384,7 +386,7 @@ __strong static id _sharedObject = nil;
     
     self.possibleMoves = [[NSMutableArray alloc] init];
     self.possibleEaten = [[NSMutableArray alloc] init];
-    [self regularPiecePossibleMoves:coord];
+    [self regularPiecePossibleMoves:coord withHeight:height];
     
     for (TileCoordinates *  coordinates in self.possibleMoves) {
         [self placePossibleMoveImageOnTile:coordinates withHeight:height];
@@ -432,6 +434,13 @@ __strong static id _sharedObject = nil;
     
 }
 
+- (void)clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:(TileCoordinates *)coord
+{
+    [_currentGame.selectedPieceArr removeAllObjects];
+    [_currentGame.moveSuggestion removeAllObjects];
+    [self.possibleEaten removeAllObjects];
+    [self.possibleMoves removeAllObjects];
+}
 
 #pragma mark - Possible Moves
 - (void) checkNorthForRegularPieceMove:(TileCoordinates *) coord
@@ -442,11 +451,11 @@ __strong static id _sharedObject = nil;
 
 #pragma mark - Piece Movements
 
-- (void)regularPiecePossibleMoves:(TileCoordinates *) coord
+- (void)regularPiecePossibleMoves:(TileCoordinates *) coord withHeight:(float)height
 {
     [self getCurrentClickedPieceObject:coord];
     
-    if (isClickedWhite) {
+    if (isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) {
         [self checkPieceMovementNorth:coord];
         [self checkPieceMovementSouth:coord];
         [self checkPieceMovementEast:coord];
@@ -459,8 +468,13 @@ __strong static id _sharedObject = nil;
 //        [self regularPieceMovementEast:coord];
 //        [self regularPieceMovementWest:coord];
         
+        // Set selected piece indicator
+        float pieceHeight = height * 0.8;
+        [self selectedPieceIndicator:coord withHeight:pieceHeight];
+        
+        [_currentGame nextTurn];
     }
-    else if (isClickedBlack) {
+    else if (isClickedBlack && _currentGame.currentPlayer == _currentGame.blackPlayer) {
         [self checkPieceMovementNorth:coord];
         [self checkPieceMovementSouth:coord];
         [self checkPieceMovementEast:coord];
@@ -472,6 +486,8 @@ __strong static id _sharedObject = nil;
 //        [self regularPieceMovementEast:coord];
 //        [self regularPieceMovementWest:coord];
 //        [self regularPieceMovementSouth:coord];
+        [_currentGame nextTurn];
+
     }
 }
 
@@ -484,6 +500,8 @@ __strong static id _sharedObject = nil;
     }
     return NO;
 }
+
+
 
 //- (void)regularPieceMovementNorthhhh:(TileCoordinates *) coord
 //{
