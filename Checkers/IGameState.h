@@ -10,6 +10,12 @@
 #import "PlayerInGame.h"
 
 @protocol IGameState <NSObject>
+
 - (void)startNewGameWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer withTileHeight:(float)tileHeight withPieceHeight:(float)pieceHeight;
+
+- (void)nextTurn;
+
 - (void)endGame;
+
+
 @end

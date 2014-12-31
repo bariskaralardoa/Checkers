@@ -191,6 +191,8 @@
         [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
         [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
 
+        [self.gameStateEngine nextTurn];
+        
     }
     else
     {

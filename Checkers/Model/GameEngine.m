@@ -90,6 +90,11 @@ __strong static id _sharedObject = nil;
     [self generatePiecesWithHeight:pieceHeight]; /// Ekincan: Bu tabi ki statik olmayacak. Üşendim yukardaki fonk. koymaya :)
 }
 
+- (void)nextTurn
+{
+    [_currentGame nextTurn];
+}
+
 - (void)endGame
 {
 }
@@ -342,6 +347,7 @@ __strong static id _sharedObject = nil;
     }
 }
 
+
 - (void)getCurrentClickedPieceObject:(TileCoordinates *) coord
 {
     for (CheckersPieceView * pieceView in _currentGame.pieces) {
@@ -354,7 +360,7 @@ __strong static id _sharedObject = nil;
 }
 
 
-- (BOOL) isLegalMove:(TileCoordinates *)coord
+- (BOOL)isLegalMove:(TileCoordinates *)coord
 {
     isInPossibleMoves = NO;
     isInPossibleEaten = NO;
@@ -376,6 +382,8 @@ __strong static id _sharedObject = nil;
     }
     return NO;
 }
+
+
 
 
 #pragma mark Move indicators
@@ -415,11 +423,12 @@ __strong static id _sharedObject = nil;
     //reset
     [_currentGame.selectedPieceArr removeAllObjects];
     
+    
     if ([self isCellOccupied:coord]) {
-        [self placeSelectedPieceImageOnTile:coord withHeight:height];
+        if ((isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) || (isClickedBlack && _currentGame.currentPlayer == _currentGame.blackPlayer)) {
+            [self placeSelectedPieceImageOnTile:coord withHeight:height];
+        }
     }
-    
-    
 }
 
 
@@ -455,7 +464,7 @@ __strong static id _sharedObject = nil;
 {
     [self getCurrentClickedPieceObject:coord];
     
-    if (isClickedWhite) {//&& _currentGame.currentPlayer == _currentGame.whitePlayer) {
+    if (isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) {
         [self checkPieceMovementNorth:coord];
         [self checkPieceMovementSouth:coord];
         [self checkPieceMovementEast:coord];
@@ -475,7 +484,7 @@ __strong static id _sharedObject = nil;
         
         //[_currentGame nextTurn];
     }
-    else if (isClickedBlack) {// && _currentGame.currentPlayer == _currentGame.blackPlayer) {
+    else if (isClickedBlack && _currentGame.currentPlayer == _currentGame.blackPlayer) {
         [self checkPieceMovementNorth:coord];
         [self checkPieceMovementSouth:coord];
         [self checkPieceMovementEast:coord];
