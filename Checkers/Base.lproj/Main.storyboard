@@ -10,7 +10,7 @@
         <!--Main Menu View Controller-->
         <scene sceneID="OrY-EV-gZb">
             <objects>
-                <viewController id="zje-GM-b9k" customClass="MainMenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainMenuViewController" id="zje-GM-b9k" customClass="MainMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uSK-YA-jPw"/>
                         <viewControllerLayoutGuide type="bottom" id="jD5-JR-OAb"/>
@@ -211,6 +211,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcR-sR-FAt">
+                                <rect key="frame" x="0.0" y="570" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="Omf-uV-zwP"/>
+                                    <constraint firstAttribute="height" constant="30" id="XvY-LW-5ng"/>
+                                </constraints>
+                                <state key="normal" title="Exit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gIl-iD-5nN"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXW-sI-yUk" customClass="BoardView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -306,6 +319,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="zcR-sR-FAt" secondAttribute="bottom" id="Dri-XE-gU7"/>
+                            <constraint firstItem="zcR-sR-FAt" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="apH-BE-36J"/>
                             <constraint firstAttribute="centerY" secondItem="AXW-sI-yUk" secondAttribute="centerY" id="rpC-rD-9df"/>
                             <constraint firstItem="AXW-sI-yUk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="tSw-eQ-J1G"/>
                             <constraint firstAttribute="centerX" secondItem="AXW-sI-yUk" secondAttribute="centerX" id="zKl-OR-Tei"/>
@@ -324,7 +339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-665" y="319"/>
+            <point key="canvasLocation" x="-689" y="319"/>
         </scene>
         <!--Dama Game Settings-->
         <scene sceneID="DoB-MP-1sC">

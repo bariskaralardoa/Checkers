@@ -14,12 +14,14 @@
 @end
 
 @implementation SettingsTableViewController
-
+{
+    NSNumber * whitePlayerWinCount;
+    NSNumber * blackPlayerWinCount;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Set player name from plist
-    [self loadPlayerName];
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -27,6 +29,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //Set player name from plist
+    [self loadPlayerName];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +47,8 @@
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     [archiver encodeObject:self.playerNameTextField.text forKey:@"PlayerName"];
-    
+    [archiver encodeObject:whitePlayerWinCount forKey:@"WhitePlayerWinCount"];
+    [archiver encodeObject:blackPlayerWinCount forKey:@"BlackPlayerWinCount"];
     [archiver finishEncoding];
     [data writeToFile:[Globals dataFilePath] atomically:YES];
 }
@@ -49,6 +59,8 @@
         NSData *data = [[NSData alloc] initWithContentsOfFile:path];
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         self.playerNameTextField.text = [unarchiver decodeObjectForKey:@"PlayerName"];
+        whitePlayerWinCount = [unarchiver decodeObjectForKey:@"WhitePlayerWinCount"];
+        blackPlayerWinCount = [unarchiver decodeObjectForKey:@"BlackPlayerWinCount"];
         [unarchiver finishDecoding];
     }
 }

@@ -10,7 +10,7 @@
 #import "BoardView.h"
 #import "PlayerInfo.h"
 
-@interface CheckersViewController : UIViewController
+@interface CheckersViewController : UIViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet BoardView *boardViewOnController;
 
@@ -25,5 +25,6 @@
 
 @property (strong,nonatomic) PlayerInfo * blackPlayerInfo;
 @property (strong,nonatomic) PlayerInfo * whitePlayerInfo;
+- (IBAction)exitButton:(id)sender;
 
 @end

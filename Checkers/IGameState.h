@@ -15,7 +15,7 @@
 
 - (void)nextTurn;
 
-- (void)endGame;
+- (NSString *)endGame;
 
 
 @end

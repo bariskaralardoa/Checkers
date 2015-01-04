@@ -29,11 +29,5 @@
 
 }
 
-- (NSMutableArray *) generateMoves
-{
-    
-    return nil;
-}
-
 
 @end

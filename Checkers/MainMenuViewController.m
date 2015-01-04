@@ -22,12 +22,21 @@
 @implementation MainMenuViewController
 {
     NSString * playerName;
-
+    NSNumber * whitePlayerWinCount;
+    NSNumber * blackPlayerWinCount;
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    [self setDefaultPlistValues];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +55,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"startGameSegue"]) {
-        [self loadDataFromPlist];
         [self getPlayerInformations];
         
         CheckersViewController * checkersVC = [segue destinationViewController];
@@ -57,31 +65,51 @@
 
 }
 
-- (void)loadDataFromPlist {
+
+- (void)setDefaultPlistValues {
     NSString *path = [Globals dataFilePath];
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSData *data = [[NSData alloc] initWithContentsOfFile:path];
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         playerName = [unarchiver decodeObjectForKey:@"PlayerName"];
-#warning  Get no of wins
+        whitePlayerWinCount = [unarchiver decodeObjectForKey:@"WhitePlayerWinCount"];
+        blackPlayerWinCount = [unarchiver decodeObjectForKey:@"BlackPlayerWinCount"];
+        
         [unarchiver finishDecoding];
     }
-    else{ //Set default name for player
+    else{ //Create path and set default values
         playerName = @"Baris";
-    
+        whitePlayerWinCount = [NSNumber numberWithInteger:0];
+        blackPlayerWinCount = [NSNumber numberWithInteger:0];
+        
+        [self saveToPlist];
+        
     }
 }
+
+
+- (void)saveToPlist {
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:playerName forKey:@"PlayerName"];
+    [archiver encodeObject:whitePlayerWinCount forKey:@"WhitePlayerWinCount"];
+    [archiver encodeObject:blackPlayerWinCount forKey:@"BlackPlayerWinCount"];
+
+    [archiver finishEncoding];
+    [data writeToFile:[Globals dataFilePath] atomically:YES];
+}
+
 
 - (void) getPlayerInformations
 {
     
     self.blackPlayerInfo = [PlayerInfo new];
     self.blackPlayerInfo.name = @"Computer";
-    self.blackPlayerInfo.wins = 0;
+    self.blackPlayerInfo.wins = blackPlayerWinCount;
     
     self.whitePlayerInfo = [PlayerInfo new];
     self.whitePlayerInfo.name = playerName;
-    self.whitePlayerInfo.wins = 0;
+    self.whitePlayerInfo.wins = whitePlayerWinCount;
 
 }
 

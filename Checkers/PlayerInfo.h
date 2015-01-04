@@ -10,5 +10,5 @@
 
 @interface PlayerInfo : NSObject
 @property (nonatomic) NSString* name;
-@property (nonatomic) int wins;
+@property (nonatomic) NSNumber* wins;
 @end

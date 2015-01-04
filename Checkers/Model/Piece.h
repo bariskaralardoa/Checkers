@@ -32,7 +32,5 @@ typedef NS_ENUM(NSInteger, PlayerSideType) { emptyCell, pieceSideBlack,
        currentPositionY:(NSInteger)currentPositionY
          playerSideType:(PlayerSideType)sideType;
 
-- (NSMutableArray *)generateMoves;
-
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CheckersViewController.h"
+#import "MainMenuViewController.h"
 #import "ISetupBoard.h"
 #import "IGameState.h"
 #import "IPieceMovements.h"
@@ -60,9 +61,9 @@
     
     //Setup player properties on screen
     _whitePlayerLabel.text = self.whitePlayerInfo.name;
-    _whitePlayerPointLabel.text = [NSString stringWithFormat:@"%d",self.whitePlayerInfo.wins];
+    _whitePlayerPointLabel.text = [NSString stringWithFormat:@"%@",self.whitePlayerInfo.wins];
     _blackPlayerLabel.text = self.blackPlayerInfo.name;
-    _blackPlayerPointLabel.text = [NSString stringWithFormat:@"%d",self.blackPlayerInfo.wins];
+    _blackPlayerPointLabel.text = [NSString stringWithFormat:@"%@",self.blackPlayerInfo.wins];
 
 }
 
@@ -202,6 +203,22 @@
 
         [self.gameStateEngine nextTurn];
         [self changActivePlayerLabelImage];
+        
+        if ([[self.gameStateEngine endGame] isEqualToString:@"White wins"]) {
+            //self.whitePlayerInfo.wins++;
+            int whiteWinsCount = [self.whitePlayerInfo.wins intValue];
+            self.whitePlayerInfo.wins = [NSNumber numberWithInt:whiteWinsCount + 1];
+            [self saveNoOfWins];
+            [self alertView:[NSString stringWithFormat:@"%@ wins",self.whitePlayerInfo.name]];
+            
+        }
+        else if ([[self.gameStateEngine endGame] isEqualToString:@"Black wins"]) {
+            //self.blackPlayerInfo.wins++;
+            int whiteWinsCount = [self.blackPlayerInfo.wins intValue];
+            self.blackPlayerInfo.wins = [NSNumber numberWithInt:whiteWinsCount + 1];
+            [self saveNoOfWins];
+            [self alertView:[NSString stringWithFormat:@"%@ wins",self.blackPlayerInfo.name]];
+        }
     }
     else
     {
@@ -236,6 +253,54 @@
 
 }
 
+- (IBAction)exitButton:(id)sender {
+    [self returnToInitialVc];
+}
+
+#pragma mark Alertview
+- (void)alertView:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        
+        [self returnToInitialVc];
+    
+    }
+}
+
+- (void)returnToInitialVc
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                         bundle:nil];
+    MainMenuViewController *mainMenuVC =
+    [storyboard instantiateViewControllerWithIdentifier:@"mainMenuViewController"];
+    
+    [self presentViewController:mainMenuVC
+                       animated:YES
+                     completion:nil];
+}
+
+#pragma mark - Save to and loading from plist
+- (void)saveNoOfWins {
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:self.whitePlayerInfo.name forKey:@"PlayerName"];
+    [archiver encodeObject:self.whitePlayerInfo.wins forKey:@"WhitePlayerWinCount"];
+    [archiver encodeObject:self.blackPlayerInfo.wins forKey:@"BlackPlayerWinCount"];
+    [archiver finishEncoding];
+    [data writeToFile:[Globals dataFilePath] atomically:YES];
+}
+
+
 //@implementation CheckersViewController
 //{
 //    CheckersBoard * board;
@@ -267,5 +332,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end
