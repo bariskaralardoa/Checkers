@@ -184,10 +184,13 @@
     if ([self.pieceMovementsEngine isLegalMove:clickedCoordinate]) {
         [self.pieceMovementsEngine handleMoveAndCapture:clickedCoordinate];
         [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
+
         
-        //Clear indicators and render selected piece, move suggestion indicators
-//        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
+        //Clear indicators
         [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
+
+        //render selected piece, move suggestion indicators
+//        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
         [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
         [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
 
@@ -210,6 +213,7 @@
     [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
 
     }
+    
 }
 
 

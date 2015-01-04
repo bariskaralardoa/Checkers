@@ -12,6 +12,7 @@
 #import "CheckersTileView.h"
 #import "Piece.h"
 #import "RegularPiece.h"
+#import "CheckPiece.h"
 #import "BoardView.h"
 #import "Game.h"
 #import "Globals.h"
@@ -41,6 +42,7 @@
     NSMutableArray * whitePiecesArr;
     BOOL isClickedWhite;
     BOOL isClickedBlack;
+    BOOL isCheckPieceSelected;
     CheckersPieceView * clickedPieceView;
     BOOL isInPossibleMoves;
     BOOL isInPossibleEaten;
@@ -161,55 +163,60 @@ __strong static id _sharedObject = nil;
 //            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
 //            [_currentGame.pieces addObject:pieceView];
 //        }
-        for (int j = 1; j < 2; j++) {
-            //link CheckersTileView with CheckersPieceView
-            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-            
-            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            //            currentTile.pieceView = pieceView;
-            //            [currentTile addSubview:pieceView];
-            
-            //link Piece with CheckersPieceView
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-            
-            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.pieces addObject:pieceView];
-        }
-
         
-        for (int k = 3; k < 4; k++) {
-            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
-            
-            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            //
-            //            currentTile.pieceView = pieceView;
-            //            [currentTile addSubview:pieceView];
-            
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteRegular] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-            
-            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.pieces addObject:pieceView];
-        }
+        
+        
+        
+        
+//        for (int j = 6; j < 7; j++) {
+//            //link CheckersTileView with CheckersPieceView
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+//            
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//            
+//            //link Piece with CheckersPieceView
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//            
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
+//
+//        
+//        for (int k = 3; k < 4; k++) {
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
+//            
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//            
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//            
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
+//
+//        for (int j = 4; j < 5; j++) {
+//            //link CheckersTileView with CheckersPieceView
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+//            
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//            
+//            //link Piece with CheckersPieceView
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackChecker] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//            
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
 
-        for (int j = 4; j < 5; j++) {
-            //link CheckersTileView with CheckersPieceView
-            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-            
-            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            //            currentTile.pieceView = pieceView;
-            //            [currentTile addSubview:pieceView];
-            
-            //link Piece with CheckersPieceView
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-            
-            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.pieces addObject:pieceView];
-        }
-
-        for (int k = 7; k < 8; k++) {
+        for (int k = 1; k < 2; k++) {
             //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
 
             CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
@@ -252,29 +259,19 @@ __strong static id _sharedObject = nil;
 
 #pragma mark - IPieceMovements Members
 
-- (void) createPieceOn:(TileCoordinates *)coord withHeight:(float)height
-{
-    CGRect pieceFrame = CGRectMake(0, 0, height, height);
-    CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-    
-    RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:coord.x currentPositionY:coord.y playerSideType:pieceSideBlack];
-    [pieceView setPieceInfoWithPiece:regularPiece];
-    [_currentGame.pieces addObject:pieceView];
-    
-}
 
 - (void)handleMoveAndCapture:(TileCoordinates *)coord
 {
     if (isInPossibleMoves) {
-        [self movePiece];
+        [self movePiece:coord];
     }
     else if (isInPossibleEaten) {
-        [self movePiece];
+        [self movePiece:coord];
         [self capturePiece];
     }
 }
 
-- (void)movePiece
+- (void)movePiece:(TileCoordinates *)coord
 {
 //    if ([_currentGame.selectedPieceArr count]>0) {
         SelectedPieceView * lastSelectedPieceView = _currentGame.selectedPieceArr[0];
@@ -282,6 +279,10 @@ __strong static id _sharedObject = nil;
             if (pieceView.IndexX == lastSelectedPieceView.indexX && pieceView.IndexY == lastSelectedPieceView.indexY) {
                 pieceView.pieceInfo.currentPositionX = clickedPossibleMoves.x;
                 pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
+                pieceView.IndexX = clickedPossibleMoves.x;
+                pieceView.IndexY = clickedPossibleMoves.y;
+                [self convertRegularPiece:coord pieceView:pieceView];
+                
             }
         }
 //    }
@@ -298,7 +299,58 @@ __strong static id _sharedObject = nil;
     }
 }
 
+- (void)convertRegularPiece:(TileCoordinates *)clickedPossibleMove pieceView:(CheckersPieceView *)pieceView
+{
+    //Convert black regular
+    if (clickedPossibleMove.y == [Globals NumberOfTilesInXDirection]-1 && pieceView.pieceInfo.sideType == pieceSideBlack) {
+        [self createCheckPiece:pieceSideBlack withPieceView:pieceView];
+        [_currentGame.pieces removeObject:pieceView];
+    }
+    //convert white regular
+    else if (clickedPossibleMove.y == 0 && pieceView.pieceInfo.sideType == pieceSideWhite){
 
+        [self createCheckPiece:pieceSideWhite withPieceView:pieceView];
+        [_currentGame.pieces removeObject:pieceView];
+
+    }
+
+}
+
+- (void) createCheckPiece:(PlayerSideType )playerSideType withPieceView:(CheckersPieceView *)pieceView
+{
+    CheckersPieceView* newPieceView = [[CheckersPieceView alloc]initWithFrame:pieceView.frame];
+    CheckPiece* checkPiece = [[CheckPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:pieceView.IndexX currentPositionY:pieceView.IndexY playerSideType:pieceSideWhite];
+    [newPieceView setPieceInfoWithPiece:checkPiece];
+    
+    newPieceView.IndexX = pieceView.IndexX;
+    newPieceView.IndexY = pieceView.IndexY;
+    
+    [_currentGame.pieces addObject:newPieceView];
+    
+
+}
+
+//- (void) createCheckPieceOn:(TileCoordinates *)coord withHeight:(float)height
+//{
+//    CGRect pieceFrame = CGRectMake(0, 0, height, height);
+//    CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//    
+//    RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:coord.x currentPositionY:coord.y playerSideType:pieceSideBlack];
+//    [pieceView setPieceInfoWithPiece:regularPiece];
+//    [_currentGame.pieces addObject:pieceView];
+//    
+//}
+
+- (void) createPieceOn:(TileCoordinates *)coord withHeight:(float)height
+{
+    CGRect pieceFrame = CGRectMake(0, 0, height, height);
+    CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+    
+    RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:coord.x currentPositionY:coord.y playerSideType:pieceSideBlack];
+    [pieceView setPieceInfoWithPiece:regularPiece];
+    [_currentGame.pieces addObject:pieceView];
+    
+}
 
 #pragma mark Piece and cell states
 
@@ -307,6 +359,7 @@ __strong static id _sharedObject = nil;
 {
     isClickedWhite = NO;
     isClickedBlack = NO;
+    isCheckPieceSelected = NO;
     //Add pieces to whitePiecesArr and blackPiecesArr
     [self blackPiecesCoordinates];
     [self whitePiecesCoordinates];
@@ -316,12 +369,18 @@ __strong static id _sharedObject = nil;
     for (CheckersPieceView *  pieceView in whitePiecesArr) {
         if (coord.x == pieceView.IndexX && coord.y == pieceView.IndexY) {
             isClickedWhite = YES;
+            if ([pieceView.pieceInfo.imageNameStr isEqualToString:[Globals whiteChecker]]) {
+                isCheckPieceSelected = YES;
+            }
         }
     }
     //Black clicked
     for (CheckersPieceView *  pieceView in blackPiecesArr) {
         if (coord.x == pieceView.IndexX && coord.y == pieceView.IndexY) {
             isClickedBlack = YES;
+            if ([pieceView.pieceInfo.imageNameStr isEqualToString:[Globals blackChecker]]) {
+                isCheckPieceSelected = YES;
+            }
         }
     }
 
@@ -394,8 +453,15 @@ __strong static id _sharedObject = nil;
     
     self.possibleMoves = [[NSMutableArray alloc] init];
     self.possibleEaten = [[NSMutableArray alloc] init];
-    [self regularPiecePossibleMoves:coord withHeight:height];
     
+    if (isCheckPieceSelected) {
+//        [self checkPiecePossibleMoves:coord withHeight:height];
+        [self checkPiecePossibleMoves:coord withHeight:height];
+
+    }
+    else{
+        [self regularPiecePossibleMoves:coord withHeight:height];
+    }
     for (TileCoordinates *  coordinates in self.possibleMoves) {
         [self placePossibleMoveImageOnTile:coordinates withHeight:height];
     }
@@ -425,6 +491,7 @@ __strong static id _sharedObject = nil;
     
     
     if ([self isCellOccupied:coord]) {
+        //Place selected piece indicator only if it's current player's turn
         if ((isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) || (isClickedBlack && _currentGame.currentPlayer == _currentGame.blackPlayer)) {
             [self placeSelectedPieceImageOnTile:coord withHeight:height];
         }
@@ -462,6 +529,38 @@ __strong static id _sharedObject = nil;
 
 - (void)regularPiecePossibleMoves:(TileCoordinates *) coord withHeight:(float)height
 {
+    float pieceHeight = height * 0.8;
+    
+    [self getCurrentClickedPieceObject:coord];
+    
+    if (isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) {
+        
+        [self regularPieceMovementNorth:coord];
+        [self regularPieceMovementEast:coord];
+        [self regularPieceMovementWest:coord];
+
+        //if edible piece is found, remove all objects in possibleMoves array that may be found in other directions
+        if ([self.possibleEaten count]>0) {
+            [self.possibleMoves removeAllObjects];
+        }
+        
+//        // Set selected piece indicator
+//        [self selectedPieceIndicator:coord withHeight:pieceHeight];
+        
+    }
+    else if (isClickedBlack && _currentGame.currentPlayer == _currentGame.blackPlayer) {
+        [self regularPieceMovementEast:coord];
+        [self regularPieceMovementWest:coord];
+        [self regularPieceMovementSouth:coord];
+        //if edible piece is found, remove all objects in possibleMoves array that may be found in other directions
+        if ([self.possibleEaten count]>0) {
+            [self.possibleMoves removeAllObjects];
+        }
+    }
+}
+
+- (void)checkPiecePossibleMoves:(TileCoordinates *) coord withHeight:(float)height
+{
     [self getCurrentClickedPieceObject:coord];
     
     if (isClickedWhite && _currentGame.currentPlayer == _currentGame.whitePlayer) {
@@ -473,13 +572,13 @@ __strong static id _sharedObject = nil;
         if ([self.possibleEaten count]>0) {
             [self.possibleMoves removeAllObjects];
         }
-//        [self regularPieceMovementNorth:coord];
-//        [self regularPieceMovementEast:coord];
-//        [self regularPieceMovementWest:coord];
+        //        [self regularPieceMovementNorth:coord];
+        //        [self regularPieceMovementEast:coord];
+        //        [self regularPieceMovementWest:coord];
         
         // Set selected piece indicator
-        float pieceHeight = height * 0.8;
-        [self selectedPieceIndicator:coord withHeight:pieceHeight];
+//        float pieceHeight = height * 0.8;
+//        [self selectedPieceIndicator:coord withHeight:pieceHeight];
         
         
         //[_currentGame nextTurn];
@@ -493,13 +592,14 @@ __strong static id _sharedObject = nil;
         if ([self.possibleEaten count]>0) {
             [self.possibleMoves removeAllObjects];
         }
-//        [self regularPieceMovementEast:coord];
-//        [self regularPieceMovementWest:coord];
-//        [self regularPieceMovementSouth:coord];
+        //        [self regularPieceMovementEast:coord];
+        //        [self regularPieceMovementWest:coord];
+        //        [self regularPieceMovementSouth:coord];
         
-//        [_currentGame nextTurn];
-
+        //        [_currentGame nextTurn];
+        
     }
+
 }
 
 - (BOOL)isCellOccupied:(TileCoordinates *) coord
