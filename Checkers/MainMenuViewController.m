@@ -66,6 +66,10 @@
 #warning  Get no of wins
         [unarchiver finishDecoding];
     }
+    else{ //Set default name for player
+        playerName = @"Baris";
+    
+    }
 }
 
 - (void) getPlayerInformations
@@ -74,12 +78,10 @@
     self.blackPlayerInfo = [PlayerInfo new];
     self.blackPlayerInfo.name = @"Computer";
     self.blackPlayerInfo.wins = 0;
-    self.blackPlayerInfo.loses = 0;
     
     self.whitePlayerInfo = [PlayerInfo new];
     self.whitePlayerInfo.name = playerName;
     self.whitePlayerInfo.wins = 0;
-    self.whitePlayerInfo.loses = 0;
 
 }
 

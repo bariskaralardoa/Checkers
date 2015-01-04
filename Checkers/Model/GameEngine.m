@@ -85,8 +85,8 @@ __strong static id _sharedObject = nil;
 /// Ekincan
 - (void)startNewGameWithWhitePlayer:(PlayerInGame*)whitePlayer withBlackPlayer:(PlayerInGame*)blackPlayer withTileHeight:(float)tileHeight withPieceHeight:(float)pieceHeight
 {
-    whitePlayer.CurrentPoint = [NSNumber numberWithInt:0];
-    blackPlayer.CurrentPoint = [NSNumber numberWithInt:0];
+    whitePlayer.currentPoint = 0;
+    blackPlayer.currentPoint = 0;
     _currentGame = [[Game alloc] initWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer];
     [self generateTilesWithTileHeight:tileHeight];
     [self generatePiecesWithHeight:pieceHeight]; /// Ekincan: Bu tabi ki statik olmayacak. Üşendim yukardaki fonk. koymaya :)
@@ -168,53 +168,53 @@ __strong static id _sharedObject = nil;
         
         
         
-//        for (int j = 6; j < 7; j++) {
-//            //link CheckersTileView with CheckersPieceView
-//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-//            
-//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-//            //            currentTile.pieceView = pieceView;
-//            //            [currentTile addSubview:pieceView];
-//            
-//            //link Piece with CheckersPieceView
-//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-//            [pieceView setPieceInfoWithPiece:regularPiece];
-//            
-//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-//            [_currentGame.pieces addObject:pieceView];
-//        }
-//
-//        
-//        for (int k = 3; k < 4; k++) {
-//            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
-//            
-//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-//            //
-//            //            currentTile.pieceView = pieceView;
-//            //            [currentTile addSubview:pieceView];
-//            
-//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
-//            [pieceView setPieceInfoWithPiece:regularPiece];
-//            
-//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-//            [_currentGame.pieces addObject:pieceView];
-//        }
-//
-//        for (int j = 4; j < 5; j++) {
-//            //link CheckersTileView with CheckersPieceView
-//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-//            
-//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-//            //            currentTile.pieceView = pieceView;
-//            //            [currentTile addSubview:pieceView];
-//            
-//            //link Piece with CheckersPieceView
-//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackChecker] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-//            [pieceView setPieceInfoWithPiece:regularPiece];
-//            
-//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-//            [_currentGame.pieces addObject:pieceView];
-//        }
+        for (int j = 6; j < 7; j++) {
+            //link CheckersTileView with CheckersPieceView
+            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+            
+            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+            //            currentTile.pieceView = pieceView;
+            //            [currentTile addSubview:pieceView];
+            
+            //link Piece with CheckersPieceView
+            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+            [pieceView setPieceInfoWithPiece:regularPiece];
+            
+            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+            [_currentGame.pieces addObject:pieceView];
+        }
+
+        
+        for (int k = 3; k < 4; k++) {
+            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
+            
+            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+            //
+            //            currentTile.pieceView = pieceView;
+            //            [currentTile addSubview:pieceView];
+            
+            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
+            [pieceView setPieceInfoWithPiece:regularPiece];
+            
+            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+            [_currentGame.pieces addObject:pieceView];
+        }
+
+        for (int j = 4; j < 5; j++) {
+            //link CheckersTileView with CheckersPieceView
+            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+            
+            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+            //            currentTile.pieceView = pieceView;
+            //            [currentTile addSubview:pieceView];
+            
+            //link Piece with CheckersPieceView
+            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackChecker] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+            [pieceView setPieceInfoWithPiece:regularPiece];
+            
+            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+            [_currentGame.pieces addObject:pieceView];
+        }
 
         for (int k = 1; k < 2; k++) {
             //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
@@ -303,23 +303,23 @@ __strong static id _sharedObject = nil;
 {
     //Convert black regular
     if (clickedPossibleMove.y == [Globals NumberOfTilesInXDirection]-1 && pieceView.pieceInfo.sideType == pieceSideBlack) {
-        [self createCheckPiece:pieceSideBlack withPieceView:pieceView];
+        [self createCheckPiece:pieceSideBlack withPieceView:pieceView withImageName:[Globals blackChecker]];
         [_currentGame.pieces removeObject:pieceView];
     }
     //convert white regular
     else if (clickedPossibleMove.y == 0 && pieceView.pieceInfo.sideType == pieceSideWhite){
 
-        [self createCheckPiece:pieceSideWhite withPieceView:pieceView];
+        [self createCheckPiece:pieceSideWhite withPieceView:pieceView withImageName:[Globals whiteChecker]];
         [_currentGame.pieces removeObject:pieceView];
 
     }
 
 }
 
-- (void) createCheckPiece:(PlayerSideType )playerSideType withPieceView:(CheckersPieceView *)pieceView
+- (void) createCheckPiece:(PlayerSideType )playerSideType withPieceView:(CheckersPieceView *)pieceView withImageName:(NSString *)imageName
 {
     CheckersPieceView* newPieceView = [[CheckersPieceView alloc]initWithFrame:pieceView.frame];
-    CheckPiece* checkPiece = [[CheckPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:pieceView.IndexX currentPositionY:pieceView.IndexY playerSideType:pieceSideWhite];
+    CheckPiece* checkPiece = [[CheckPiece alloc] initWithImageName:imageName currentPositionX:pieceView.IndexX currentPositionY:pieceView.IndexY playerSideType:playerSideType];
     [newPieceView setPieceInfoWithPiece:checkPiece];
     
     newPieceView.IndexX = pieceView.IndexX;
@@ -529,7 +529,7 @@ __strong static id _sharedObject = nil;
 
 - (void)regularPiecePossibleMoves:(TileCoordinates *) coord withHeight:(float)height
 {
-    float pieceHeight = height * 0.8;
+    float pieceHeight = height * [Globals pieceHeightToTileHeightProportion];
     
     [self getCurrentClickedPieceObject:coord];
     

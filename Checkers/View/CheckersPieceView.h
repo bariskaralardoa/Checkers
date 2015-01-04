@@ -16,5 +16,4 @@
 @property (nonatomic, assign) NSInteger IndexY;
 
 - (void)setPieceInfoWithPiece:(Piece*)piece;
-- (void) refreshImage;
 @end

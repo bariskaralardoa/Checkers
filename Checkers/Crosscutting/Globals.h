@@ -12,7 +12,7 @@
 
 + (int)NumberOfTilesInXDirection;
 + (int)NumberOfTilesInYDirection;
-
++ (double)pieceHeightToTileHeightProportion;
 //Piece images
 + (NSString *) whiteRegular;
 + (NSString *) whiteChecker;

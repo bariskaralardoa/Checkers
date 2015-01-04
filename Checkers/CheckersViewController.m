@@ -58,7 +58,12 @@
 {
     [super viewDidLoad];
     
-    
+    //Setup player properties on screen
+    _whitePlayerLabel.text = self.whitePlayerInfo.name;
+    _whitePlayerPointLabel.text = [NSString stringWithFormat:@"%d",self.whitePlayerInfo.wins];
+    _blackPlayerLabel.text = self.blackPlayerInfo.name;
+    _blackPlayerPointLabel.text = [NSString stringWithFormat:@"%d",self.blackPlayerInfo.wins];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -79,6 +84,7 @@
     PlayerInGame* blackPlayer = [[PlayerInGame alloc] initWithPlayerInfo:self.blackPlayerInfo];
     PlayerInGame* whitePlayer = [[PlayerInGame alloc] initWithPlayerInfo:self.whitePlayerInfo];
 
+    
     // Ekincan: Burada önce game engine yoksa eğer yarat, singleton yani. Normalde bu ekrana başka bir ekrandan gelineceği için, o önceki ekrandan buraya game engine pass edilebilir.
     _boardSetupEngine = [GameEngine sharedInstance];
     _gameStateEngine = [GameEngine sharedInstance];
@@ -86,7 +92,7 @@
     
     
     float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
-    pieceHeight = tileHeight * 0.8;
+    pieceHeight = tileHeight * [Globals pieceHeightToTileHeightProportion];
     [_gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight withPieceHeight:pieceHeight]; /// Bu fonksiyon bizim için tile array'ını doldurdu ama henüz render edilmedi.
     
     //    [_boardSetupEngine generateTilesWithTileHeight:40];
@@ -195,7 +201,7 @@
         [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
 
         [self.gameStateEngine nextTurn];
-        
+        [self changActivePlayerLabelImage];
     }
     else
     {
@@ -216,6 +222,19 @@
     
 }
 
+- (void)changActivePlayerLabelImage
+{
+    if ([_whiteImageView.image isEqual:[UIImage imageNamed:@"name.png"]]) {
+        [_whiteImageView setImage:[UIImage imageNamed:@"name-active"]];
+        [_blackImageView setImage:[UIImage imageNamed:@"name"]];
+    }
+    else if ([_whiteImageView.image isEqual:[UIImage imageNamed:@"name-active.png"]]) {
+
+        [_whiteImageView setImage:[UIImage imageNamed:@"name"]];
+        [_blackImageView setImage:[UIImage imageNamed:@"name-active"]];
+    }
+
+}
 
 //@implementation CheckersViewController
 //{

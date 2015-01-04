@@ -27,6 +27,11 @@ static int _NumberOfTilesInYDirection;
     return _NumberOfTilesInYDirection;
 }
 
++ (double)pieceHeightToTileHeightProportion
+{
+    return 0.8;
+}
+
 #pragma mark - Piece images
 
 + (NSString *) whiteRegular

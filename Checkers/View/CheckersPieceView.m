@@ -41,8 +41,4 @@
 {
     return _pieceInfo.currentPositionY;
 }
-- (void)refreshImage
-{
-//    _pieceImageView.frame = CGRectMake(0, 0, self.frame.size.height * 0.8, self.frame.size.height * 0.8);
-}
 @end

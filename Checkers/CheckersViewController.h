@@ -13,8 +13,15 @@
 @interface CheckersViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet BoardView *boardViewOnController;
+
 @property (strong, nonatomic) IBOutlet UILabel *whitePlayerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *whitePlayerPointLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *whiteImageView;
+
+
 @property (strong, nonatomic) IBOutlet UILabel *blackPlayerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *blackPlayerPointLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *blackImageView;
 
 @property (strong,nonatomic) PlayerInfo * blackPlayerInfo;
 @property (strong,nonatomic) PlayerInfo * whitePlayerInfo;

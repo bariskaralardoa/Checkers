@@ -13,6 +13,6 @@
 
 - (instancetype)initWithPlayerInfo:(PlayerInfo*)playerInfo;
 
-@property (nonatomic) NSNumber* CurrentPoint;
+@property (nonatomic) int currentPoint;
 
 @end
