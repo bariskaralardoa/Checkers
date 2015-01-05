@@ -34,6 +34,8 @@
     NSArray* currentSelectedPiece;
     TileCoordinates * clickedCoordinate;
     float pieceHeight;
+    
+    BOOL isPieceMustMove;
 }
 
 - (instancetype)initWithCoder:(NSCoder*)coder
@@ -189,6 +191,7 @@
 
     //Check if clicked in range of possibleMoves or possibleEaten arrays
     if ([self.pieceMovementsEngine isLegalMove:clickedCoordinate]) {
+        isPieceMustMove = NO;
         [self.pieceMovementsEngine handleMoveAndCapture:clickedCoordinate];
         [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
 
@@ -196,39 +199,41 @@
         //Clear indicators
         [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
 
-        //render selected piece, move suggestion indicators
-//        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
-        [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
+        //Check again for edible possible next move
+        [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
+
+        [self.pieceMovementsEngine calculatePossibleMovesWithMoveSuggestionIndicator:clickedCoordinate withHeight:tileHeight isCheckingNextEdiblePossibleMoves:YES];
         [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
 
-        [self.gameStateEngine nextTurn];
-        [self changActivePlayerLabelImage];
+        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
         
-        if ([[self.gameStateEngine endGame] isEqualToString:@"White wins"]) {
-            //self.whitePlayerInfo.wins++;
-            int whiteWinsCount = [self.whitePlayerInfo.wins intValue];
-            self.whitePlayerInfo.wins = [NSNumber numberWithInt:whiteWinsCount + 1];
-            [self saveNoOfWins];
-            [self alertView:[NSString stringWithFormat:@"%@ wins",self.whitePlayerInfo.name]];
-            
+        //Next turn if possibleEaten array is empty,
+        //Same player continues if possibleEaten has elements
+        if ([self.pieceMovementsEngine isPossibleEatenArrayEmpty]) {
+            [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
+            [self.gameStateEngine nextTurn];
+            [self changActivePlayerLabelImage];
+            [self checkEndGame];
         }
-        else if ([[self.gameStateEngine endGame] isEqualToString:@"Black wins"]) {
-            //self.blackPlayerInfo.wins++;
-            int whiteWinsCount = [self.blackPlayerInfo.wins intValue];
-            self.blackPlayerInfo.wins = [NSNumber numberWithInt:whiteWinsCount + 1];
-            [self saveNoOfWins];
-            [self alertView:[NSString stringWithFormat:@"%@ wins",self.blackPlayerInfo.name]];
+        else
+        {
+            isPieceMustMove = YES;
         }
+        
+        [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
+        
+
+        //[self.gameStateEngine nextTurn];
+        //[self changActivePlayerLabelImage];
+    }
+    else if (isPieceMustMove)
+    {
+        //This prevents player to click on another cell while player must continue playing
     }
     else
     {
-//    [_pieceMovementsEngine createPieceOn:clickedCoordinate withHeight:pieceHeight];
-//    [_pieceMovementsEngine whitePiecesCoordinates:clickedCoordinate];
-//    [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
-
-
     //Move suggestion
-    [self.pieceMovementsEngine possibleMoveIndicator:clickedCoordinate withHeight:tileHeight];
+    [self.pieceMovementsEngine calculatePossibleMovesWithMoveSuggestionIndicator:clickedCoordinate withHeight:tileHeight isCheckingNextEdiblePossibleMoves:NO];
     [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
     
     //Selected piece
@@ -239,6 +244,24 @@
     
 }
 
+- (void)checkEndGame
+{
+    if ([[self.gameStateEngine endGame] isEqualToString:@"White wins"]) {
+        int whiteWinsCount = [self.whitePlayerInfo.wins intValue];
+        self.whitePlayerInfo.wins = [NSNumber numberWithInt:whiteWinsCount + 1];
+        [self saveNoOfWins];
+        [self alertView:[NSString stringWithFormat:@"%@ wins",self.whitePlayerInfo.name]];
+        
+    }
+    else if ([[self.gameStateEngine endGame] isEqualToString:@"Black wins"]) {
+        int whiteWinsCount = [self.blackPlayerInfo.wins intValue];
+        self.blackPlayerInfo.wins = [NSNumber numberWithInt:whiteWinsCount + 1];
+        [self saveNoOfWins];
+        [self alertView:[NSString stringWithFormat:@"%@ wins",self.blackPlayerInfo.name]];
+    }
+}
+
+
 - (void)changActivePlayerLabelImage
 {
     if ([_whiteImageView.image isEqual:[UIImage imageNamed:@"name.png"]]) {
@@ -246,12 +269,13 @@
         [_blackImageView setImage:[UIImage imageNamed:@"name"]];
     }
     else if ([_whiteImageView.image isEqual:[UIImage imageNamed:@"name-active.png"]]) {
-
         [_whiteImageView setImage:[UIImage imageNamed:@"name"]];
         [_blackImageView setImage:[UIImage imageNamed:@"name-active"]];
     }
-
 }
+
+
+
 
 - (IBAction)exitButton:(id)sender {
     [self returnToInitialVc];
@@ -299,39 +323,6 @@
     [archiver finishEncoding];
     [data writeToFile:[Globals dataFilePath] atomically:YES];
 }
-
-
-//@implementation CheckersViewController
-//{
-//    CheckersBoard * board;
-//}
-//- (void)viewDidLoad {
-//    [super viewDidLoad];
-//
-//    //Create game board
-//    board = [[CheckersBoard alloc] init];
-//    [board setToInitialState];
-//
-//    //Create view
-//    CheckersBoardView * boardPiecesView = [[CheckersBoardView alloc] initWithFrame:CGRectMake(0,100,320,320) andBoard:board];
-//    [self.view addSubview:boardPiecesView];
-//    //CGRectMake(88,151,600,585)
-//}
-//
-//- (void)didReceiveMemoryWarning {
-//    [super didReceiveMemoryWarning];
-//    // Dispose of any resources that can be recreated.
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 @end

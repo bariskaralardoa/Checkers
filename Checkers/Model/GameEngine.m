@@ -47,6 +47,8 @@
     BOOL isInPossibleMoves;
     BOOL isInPossibleEaten;
     
+    BOOL isCheckingNextPossibleEatableMove;
+    
     TileCoordinates * clickedPossibleMoves;
     TileCoordinates * clickedCapturedPiece;
     
@@ -102,11 +104,9 @@ __strong static id _sharedObject = nil;
 - (NSString *)endGame
 {
     if (whitePiecesArr.count == 0) {
-        NSLog(@"Black wins");
         return @"Black wins";
     }
     else if (blackPiecesArr.count == 0) {
-        NSLog(@"White wins");
         return @"White wins";
     }
     return @"";
@@ -159,21 +159,21 @@ __strong static id _sharedObject = nil;
 
     for (int i = 0; i < 8; i++) {
 
-//        for (int j = 1; j < 3; j++) {
-//            //link CheckersTileView with CheckersPieceView
-//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-//
-//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-//            //            currentTile.pieceView = pieceView;
-//            //            [currentTile addSubview:pieceView];
-//
-//            //link Piece with CheckersPieceView
-//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-//            [pieceView setPieceInfoWithPiece:regularPiece];
-//
-//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-//            [_currentGame.pieces addObject:pieceView];
-//        }
+        for (int j = 1; j < 2; j++) {
+            //link CheckersTileView with CheckersPieceView
+            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+
+            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+            //            currentTile.pieceView = pieceView;
+            //            [currentTile addSubview:pieceView];
+
+            //link Piece with CheckersPieceView
+            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackRegular] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+            [pieceView setPieceInfoWithPiece:regularPiece];
+
+            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+            [_currentGame.pieces addObject:pieceView];
+        }
         
         
         
@@ -292,7 +292,7 @@ __strong static id _sharedObject = nil;
                 pieceView.pieceInfo.currentPositionY = clickedPossibleMoves.y;
                 pieceView.IndexX = clickedPossibleMoves.x;
                 pieceView.IndexY = clickedPossibleMoves.y;
-                [self convertRegularPiece:coord pieceView:pieceView];
+                [self convertRegularPieceToCheckPiece:coord pieceView:pieceView];
                 
             }
         }
@@ -315,7 +315,7 @@ __strong static id _sharedObject = nil;
 
 
 
-- (void)convertRegularPiece:(TileCoordinates *)clickedPossibleMove pieceView:(CheckersPieceView *)pieceView
+- (void)convertRegularPieceToCheckPiece:(TileCoordinates *)clickedPossibleMove pieceView:(CheckersPieceView *)pieceView
 {
     //Convert black regular
     if (clickedPossibleMove.y == [Globals NumberOfTilesInXDirection]-1 && pieceView.pieceInfo.sideType == pieceSideBlack) {
@@ -376,6 +376,8 @@ __strong static id _sharedObject = nil;
     isClickedWhite = NO;
     isClickedBlack = NO;
     isCheckPieceSelected = NO;
+    isInPossibleMoves = NO;
+    isInPossibleEaten = NO;
     //Add pieces to whitePiecesArr and blackPiecesArr
     [self blackPiecesCoordinates];
     [self whitePiecesCoordinates];
@@ -437,8 +439,6 @@ __strong static id _sharedObject = nil;
 
 - (BOOL)isLegalMove:(TileCoordinates *)coord
 {
-    isInPossibleMoves = NO;
-    isInPossibleEaten = NO;
     
     for (TileCoordinates * posMove in _possibleMoves) {
         if (coord.x == posMove.x && coord.y == posMove.y) {
@@ -478,15 +478,72 @@ __strong static id _sharedObject = nil;
     else{
         [self regularPiecePossibleMoves:coord withHeight:height];
     }
+    
     for (TileCoordinates *  coordinates in self.possibleMoves) {
         [self placePossibleMoveImageOnTile:coordinates withHeight:height];
     }
-    //Cycle through coordinateOfPossibleMove
+    
     for (Eatable *  eat in self.possibleEaten) {
         
         [self placePossibleMoveImageOnTile:eat.coordinateOfPossibleMove withHeight:height];
     }
 }
+
+- (void)calculatePossibleMovesWithMoveSuggestionIndicator:(TileCoordinates *) coord withHeight:(float)height isCheckingNextEdiblePossibleMoves:(BOOL)isChecking
+{
+    //reset
+    [_currentGame.moveSuggestion removeAllObjects];
+    
+    self.possibleMoves = [[NSMutableArray alloc] init];
+    self.possibleEaten = [[NSMutableArray alloc] init];
+    
+    if (isCheckPieceSelected) {
+        //        [self checkPiecePossibleMoves:coord withHeight:height];
+        [self checkPiecePossibleMoves:coord withHeight:height];
+        
+    }
+    else{
+        [self regularPiecePossibleMoves:coord withHeight:height];
+    }
+    
+    for (Eatable *  eat in self.possibleEaten) {
+        
+        [self placePossibleMoveImageOnTile:eat.coordinateOfPossibleMove withHeight:height];
+    }
+    //If we are checking next possible edible move, we dont need to check possible moves
+    if (!isChecking) {
+        for (TileCoordinates *  coordinates in self.possibleMoves) {
+            [self placePossibleMoveImageOnTile:coordinates withHeight:height];
+        }
+    }
+    
+    
+}
+
+- (BOOL)isPossibleEatenArrayEmpty
+{
+    if ([self.possibleEaten count] > 0) {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+//- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withPossibleMoveOrEatArray:(NSMutableArray *)possibleArray withHeight:(float)height
+//{
+//    CGRect suggestionFrame = CGRectMake(0, 0, height, height);
+//
+//    for (TileCoordinates *  coordinates in possibleArray) {
+//        
+//        SuggestionView * suggestionView = [[SuggestionView alloc] initWithFrame:suggestionFrame];
+//        Suggestion * suggest = [[Suggestion alloc] initWithCurrentX:coordinates.x currentY:coordinates.y imageName:[Globals suggest]];
+//        [suggestionView setSuggestionInfoWithSuggestion:suggest];
+//        [_currentGame.moveSuggestion addObject:suggestionView];
+//    }
+//}
+
 
 - (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height
 {
