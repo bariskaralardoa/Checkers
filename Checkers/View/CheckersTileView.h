@@ -16,16 +16,14 @@
 @interface CheckersTileView : UIView
 
 @property (nonatomic,retain) CheckersPieceView* pieceView;
+@property (nonatomic,retain) SuggestionView* suggestionView;
+@property (nonatomic,retain) SelectedPieceView* selectedPieceView;
+@property(nonatomic) TileCoordinates *tileCoordinates;
 
 @property(nonatomic) NSInteger indexX;
-
 @property(nonatomic) NSInteger indexY;
 
 @property(nonatomic) BOOL isClicked;
-@property(nonatomic) TileCoordinates *tileCoordinates;
 
-@property (nonatomic,retain) SuggestionView* suggestionView;
-
-@property (nonatomic,retain) SelectedPieceView* selectedPieceView;
 
 @end

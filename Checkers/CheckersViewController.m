@@ -18,25 +18,23 @@
 #import "SuggestionView.h"
 #import "SelectedPieceView.h"
 
-//#import "CheckersBoard.h"
-//#import "CheckersBoardView.h"
-
 @interface CheckersViewController ()
 
 @property id <ISetupBoard> boardSetupEngine;
 @property id <IGameState> gameStateEngine;
 @property id <IPieceMovements> pieceMovementsEngine;
 
+@property (strong, nonatomic) NSArray* currentPieces;
+@property (strong, nonatomic) NSArray* currentMoveSuggestion;
+@property (strong, nonatomic) NSArray* currentSelectedPiece;
+@property (nonatomic) TileCoordinates * clickedCoordinate;
+
+@property (assign, nonatomic) float pieceHeight;
+@property (assign, nonatomic) BOOL isPieceMustMove;
+
 @end
-@implementation CheckersViewController {
-    NSArray* currentPieces;
-    NSArray* currentMoveSuggestion;
-    NSArray* currentSelectedPiece;
-    TileCoordinates * clickedCoordinate;
-    float pieceHeight;
-    
-    BOOL isPieceMustMove;
-}
+
+@implementation CheckersViewController
 
 - (instancetype)initWithCoder:(NSCoder*)coder
 {
@@ -50,9 +48,6 @@
 {
     self = [super init];
     if (self) {
-        // EKincan: Alttakiler yanlış, bu init fonksiyonu hiçbir zaman çağırılmaz.
-        //        _boardSetupEngine = engine;
-        //        [_boardSetupEngine generateTilesWithTileHeight:30];
     }
     return self;
 }
@@ -62,82 +57,59 @@
     [super viewDidLoad];
     
     //Setup player properties on screen
-    _whitePlayerLabel.text = self.whitePlayerInfo.name;
-    _whitePlayerPointLabel.text = [NSString stringWithFormat:@"%@",self.whitePlayerInfo.wins];
-    _blackPlayerLabel.text = self.blackPlayerInfo.name;
-    _blackPlayerPointLabel.text = [NSString stringWithFormat:@"%@",self.blackPlayerInfo.wins];
-
+    self.whitePlayerLabel.text = self.whitePlayerInfo.name;
+    self.whitePlayerPointLabel.text = [NSString stringWithFormat:@"%@",self.whitePlayerInfo.wins];
+    self.blackPlayerLabel.text = self.blackPlayerInfo.name;
+    self.blackPlayerPointLabel.text = [NSString stringWithFormat:@"%@",self.blackPlayerInfo.wins];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-
-    // Ekincan: alttaki player yaratmalar geçici bir çözüm. Normalde playerInfo, daha önceden kaydedilmiş bir player olarak alınmalı ve bu ekranda değil daha önceki bir ekranda ilk olarak yaratılıp, global bir yere koyulmalı. Yani isme göre saklanmalı kaç kez kazandığı, kaybettiği adamın. Şimdilik burada, değişmesi lazım. PlayerInfo yani bizim için şu ana kadar options'dan falan ismini girip oynamış her oyuncuyu represent ediyor.
-//    PlayerInfo* blackPlayerInfo = [PlayerInfo new];
-//    blackPlayerInfo.name = @"Black Player";
-//    blackPlayerInfo.loses = 0;
-//    blackPlayerInfo.wins = 0;
-//
-//    PlayerInfo* whitePlayerInfo = [PlayerInfo new];
-//    whitePlayerInfo.name = @"White Player";
-//    whitePlayerInfo.loses = 0;
-//    whitePlayerInfo.wins = 0;
-
-    // Ekincan: PlayerInGame bize o oyun için gerekli olan playerlar sadece, şimdilik puanını tutuyoruz ama ileride başka istatistikler ve bilgiler de tutulabilinir. İçinde ana playerInfo'yu da tutuyoruz tabi, daha sonra kazanınca player onun wins'ini 1 arttırıp yeniden dosya sistemine kaydetmek için. Bir oyun bittiğinde yeni bir oyun başlarken bu playerInGame baştan yaratılmalı.
     PlayerInGame* blackPlayer = [[PlayerInGame alloc] initWithPlayerInfo:self.blackPlayerInfo];
     PlayerInGame* whitePlayer = [[PlayerInGame alloc] initWithPlayerInfo:self.whitePlayerInfo];
-
     
-    // Ekincan: Burada önce game engine yoksa eğer yarat, singleton yani. Normalde bu ekrana başka bir ekrandan gelineceği için, o önceki ekrandan buraya game engine pass edilebilir.
-    _boardSetupEngine = [GameEngine sharedInstance];
-    _gameStateEngine = [GameEngine sharedInstance];
-    _pieceMovementsEngine = [GameEngine sharedInstance];
-    
+    self.boardSetupEngine = [GameEngine sharedInstance];
+    self.gameStateEngine = [GameEngine sharedInstance];
+    self.pieceMovementsEngine = [GameEngine sharedInstance];
     
     float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
-    pieceHeight = tileHeight * [Globals pieceHeightToTileHeightProportion];
-    [_gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight withPieceHeight:pieceHeight]; /// Bu fonksiyon bizim için tile array'ını doldurdu ama henüz render edilmedi.
+    self.pieceHeight = tileHeight * [Globals pieceHeightToTileHeightProportion];
     
-    //    [_boardSetupEngine generateTilesWithTileHeight:40];
-    [self RenderTiles:[_boardSetupEngine getTiles]]; // Bu method, daha önceki adımda yaratılmış tile'ları render edecek. Bu fonkisyon bir kere her oyun başıdna çağırılıyor şu anda çünkü tile üzerinde oyun içinde bir değişiklik olmaz, rengi falan aynı. Yarın bir gün mayın falan koyma gibi dangalakça şeyler gelirse bu yine çağrılmalı.
-    [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
-
-    //        [self.boardViewOnController generateTiles];
-    //    [self.boardViewOnController generatePieces];
-    //
+    [self.gameStateEngine startNewGameWithWhitePlayer:whitePlayer withBlackPlayer:blackPlayer withTileHeight:tileHeight withPieceHeight:self.pieceHeight];
+    
+    [self RenderTiles:[self.boardSetupEngine getTiles]];
+    [self RenderPieces:[self.boardSetupEngine getPieces] withTileArray:[self.boardSetupEngine getTiles]];
+    
     [self addGestureRecognizer];
 }
 
 - (void)RenderTiles:(NSArray*)tiles
 {
-
     for (int row = 0; row < [Globals NumberOfTilesInXDirection]; row++) {
         for (int col = 0; col < [Globals NumberOfTilesInYDirection]; col++) {
-            [_boardViewOnController addSubview:tiles[row][col]];
+            [self.boardViewOnController addSubview:tiles[row][col]];
         }
     }
 }
 
 - (void)RenderPieces:(NSArray*)pieces withTileArray:(NSArray*)tiles
 {
-
-    [currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.currentPieces makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     for (CheckersPieceView* pieceView in pieces) {
         CheckersTileView* tileToPlace = tiles[pieceView.IndexY][pieceView.IndexX];
         tileToPlace.pieceView = pieceView;
-
+        
         [tileToPlace addSubview:pieceView];
         pieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
-        //        [pieceView refreshImage];
     }
-    currentPieces = [pieces copy]; // Tutalım ki bir sonraki gelişte yok edebilelim hepsini
+    self.currentPieces = [pieces copy];
 }
 
 - (void)RenderMoveSuggestion:(NSArray*)moveSuggestion withTileArray:(NSArray*)tiles
 {
-    
-    [currentMoveSuggestion makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.currentMoveSuggestion makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     for (SuggestionView* suggestionView in moveSuggestion) {
         CheckersTileView* tileToPlace = tiles[suggestionView.indexY][suggestionView.indexX];
@@ -146,13 +118,12 @@
         [tileToPlace addSubview:suggestionView];
         suggestionView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
     }
-    currentMoveSuggestion = [moveSuggestion copy];
+    self.currentMoveSuggestion = [moveSuggestion copy];
 }
 
 - (void)RenderSelectedPiece:(NSArray*)selectedPiece withTileArray:(NSArray*)tiles
 {
-    
-    [currentSelectedPiece makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.currentSelectedPiece makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     for (SelectedPieceView* selectedPieceView in selectedPiece) {
         CheckersTileView* tileToPlace = tiles[selectedPieceView.indexY][selectedPieceView.indexX];
@@ -161,87 +132,72 @@
         [tileToPlace addSubview:selectedPieceView];
         selectedPieceView.center = CGPointMake(tileToPlace.frame.size.width / 2, tileToPlace.frame.size.height / 2);
     }
-    currentSelectedPiece = [selectedPiece copy];
+    self.currentSelectedPiece = [selectedPiece copy];
 }
-
 
 #pragma mark - Touch functions
 
 - (void)addGestureRecognizer
 {
-    ///[self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector(viewTapped:) ]];
-    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(boardViewTapped:) ]]; /// Ekincan. Bu fonksiyonu yarat bir yerde
-//    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.boardViewOnController action:@selector([_pieceMovementsEngine  ])]];
-
-    //[_pieceMovementsEngine ]
-    
+    [self.boardViewOnController addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(boardViewTapped:) ]];
 }
-
 
 -(void) boardViewTapped: (UIGestureRecognizer *) recognizer
 {
     CGPoint touchPoint = [recognizer locationInView:_boardViewOnController];
-    //    CGPoint touchPoint2 = [recognizer locationOfTouch:0 inView:nil];
-    //    CGPoint touchPoint3 = [recognizer locationOfTouch:0 inView:self];
+    
     float tileHeight = _boardViewOnController.frame.size.width / [Globals NumberOfTilesInXDirection];
     
-    clickedCoordinate = [[TileCoordinates alloc] initWithX:floor(touchPoint.x/tileHeight) withY:floor(touchPoint.y/tileHeight)];
+    self.clickedCoordinate = [[TileCoordinates alloc] initWithX:floor(touchPoint.x/tileHeight) withY:floor(touchPoint.y/tileHeight)];
     
-    [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
-
+    [self.pieceMovementsEngine detectClickedCellStatus:self.clickedCoordinate];
+    
     //Check if clicked in range of possibleMoves or possibleEaten arrays
-    if ([self.pieceMovementsEngine isLegalMove:clickedCoordinate]) {
-        isPieceMustMove = NO;
-        [self.pieceMovementsEngine handleMoveAndCapture:clickedCoordinate];
-        [self RenderPieces:[_boardSetupEngine getPieces] withTileArray:[_boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
-
+    if ([self.pieceMovementsEngine isLegalMove:self.clickedCoordinate]) {
+        self.isPieceMustMove = NO;
+        [self.pieceMovementsEngine handleMoveAndCapture:self.clickedCoordinate];
+        [self RenderPieces:[self.boardSetupEngine getPieces] withTileArray:[self.boardSetupEngine getTiles]]; // Bu da pieceleri generate edicek.
         
-        //Clear indicators
-        [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
-
+        //Clear indicators and empty array
+        [self.pieceMovementsEngine clearIndicatorsAndArrays];
+        
         //Check again for edible possible next move
-        [self.pieceMovementsEngine detectClickedCellStatus:clickedCoordinate];
-
-        [self.pieceMovementsEngine calculatePossibleMovesWithMoveSuggestionIndicator:clickedCoordinate withHeight:tileHeight isCheckingNextEdiblePossibleMoves:YES];
-        [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
-
-        [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
+        [self.pieceMovementsEngine detectClickedCellStatus:self.clickedCoordinate];
+        
+        [self.pieceMovementsEngine calculatePossibleMovesWithMoveSuggestionIndicator:self.clickedCoordinate withHeight:tileHeight isCheckingNextEdiblePossibleMoves:YES];
+        [self RenderMoveSuggestion:[self.pieceMovementsEngine getMoveSuggestion] withTileArray:[self.boardSetupEngine getTiles]];
+        
+        [self.pieceMovementsEngine setSelectedPieceIndicator:self.clickedCoordinate withHeight:self.pieceHeight];
         
         //Next turn if possibleEaten array is empty,
         //Same player continues if possibleEaten has elements
         if ([self.pieceMovementsEngine isPossibleEatenArrayEmpty]) {
-            [self.pieceMovementsEngine clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:clickedCoordinate];
+            [self.pieceMovementsEngine clearIndicatorsAndArrays];
             [self.gameStateEngine nextTurn];
             [self changActivePlayerLabelImage];
             [self checkEndGame];
         }
         else
         {
-            isPieceMustMove = YES;
+            self.isPieceMustMove = YES;
         }
         
-        [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
-        
-
-        //[self.gameStateEngine nextTurn];
-        //[self changActivePlayerLabelImage];
+        [self RenderSelectedPiece:[self.pieceMovementsEngine getSelectedPieceArr] withTileArray:[self.boardSetupEngine getTiles]];
     }
-    else if (isPieceMustMove)
+    else if (self.isPieceMustMove)
     {
         //This prevents player to click on another cell while player must continue playing
     }
     else
     {
-    //Move suggestion
-    [self.pieceMovementsEngine calculatePossibleMovesWithMoveSuggestionIndicator:clickedCoordinate withHeight:tileHeight isCheckingNextEdiblePossibleMoves:NO];
-    [self RenderMoveSuggestion:[_pieceMovementsEngine getMoveSuggestion] withTileArray:[_boardSetupEngine getTiles]];
-    
-    //Selected piece
-    [self.pieceMovementsEngine selectedPieceIndicator:clickedCoordinate withHeight:pieceHeight];
-    [self RenderSelectedPiece:[_pieceMovementsEngine getSelectedPieceArr] withTileArray:[_boardSetupEngine getTiles]];
-
+        //Move suggestion
+        [self.pieceMovementsEngine calculatePossibleMovesWithMoveSuggestionIndicator:self.clickedCoordinate withHeight:tileHeight isCheckingNextEdiblePossibleMoves:NO];
+        [self RenderMoveSuggestion:[self.pieceMovementsEngine getMoveSuggestion] withTileArray:[self.boardSetupEngine getTiles]];
+        
+        //Selected piece
+        [self.pieceMovementsEngine setSelectedPieceIndicator:self.clickedCoordinate withHeight:self.pieceHeight];
+        [self RenderSelectedPiece:[self.pieceMovementsEngine getSelectedPieceArr] withTileArray:[self.boardSetupEngine getTiles]];
     }
-    
 }
 
 - (void)checkEndGame
@@ -261,21 +217,17 @@
     }
 }
 
-
 - (void)changActivePlayerLabelImage
 {
-    if ([_whiteImageView.image isEqual:[UIImage imageNamed:@"name.png"]]) {
-        [_whiteImageView setImage:[UIImage imageNamed:@"name-active"]];
-        [_blackImageView setImage:[UIImage imageNamed:@"name"]];
+    if ([self.whiteImageView.image isEqual:[UIImage imageNamed:@"name.png"]]) {
+        [self.whiteImageView setImage:[UIImage imageNamed:@"name-active"]];
+        [self.blackImageView setImage:[UIImage imageNamed:@"name"]];
     }
-    else if ([_whiteImageView.image isEqual:[UIImage imageNamed:@"name-active.png"]]) {
-        [_whiteImageView setImage:[UIImage imageNamed:@"name"]];
-        [_blackImageView setImage:[UIImage imageNamed:@"name-active"]];
+    else if ([self.whiteImageView.image isEqual:[UIImage imageNamed:@"name-active.png"]]) {
+        [self.whiteImageView setImage:[UIImage imageNamed:@"name"]];
+        [self.blackImageView setImage:[UIImage imageNamed:@"name-active"]];
     }
 }
-
-
-
 
 - (IBAction)exitButton:(id)sender {
     [self returnToInitialVc];
@@ -295,9 +247,7 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        
         [self returnToInitialVc];
-    
     }
 }
 

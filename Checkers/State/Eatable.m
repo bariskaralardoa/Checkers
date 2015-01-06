@@ -10,7 +10,7 @@
 
 @implementation Eatable
 
-- (instancetype)initWithCapturedPiece:(TileCoordinates * )coordinatesOfCapturedPiece possibleMoves:(TileCoordinates * )coordinateOfPossibleMove {
+- (instancetype)initWithCapturedPiece:(TileCoordinates *)coordinatesOfCapturedPiece possibleMoves:(TileCoordinates *)coordinateOfPossibleMove {
     self = [super init];
     if (self) {
         _coordinateOfPossibleMove = [[TileCoordinates alloc] initWithX:coordinateOfPossibleMove.x withY:coordinateOfPossibleMove.y];;

@@ -11,7 +11,6 @@
 		ACA62FAB1A438C790007E72B /* PlayerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FAA1A438C790007E72B /* PlayerInfo.m */; };
 		ACA62FB01A438D1B0007E72B /* PlayerInGame.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FAF1A438D1B0007E72B /* PlayerInGame.m */; };
 		ACA62FB81A438FB80007E72B /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62FB71A438FB80007E72B /* Globals.m */; };
-		C02672371A36E1F800C93D6C /* CheckersBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = C02672361A36E1F800C93D6C /* CheckersBoardView.m */; };
 		C0509B371A47252B00E69AFE /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0509B361A47252B00E69AFE /* SettingsTableViewController.m */; };
 		C0917E8F1A476E8A00D9A5F8 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0917E8E1A476E8A00D9A5F8 /* AboutTableViewController.m */; };
 		C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C091D1FE1A2C6FCE0033F8BD /* main.m */; };
@@ -33,10 +32,6 @@
 		C0B4D9AD1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D9AC1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.m */; };
 		C0BE386B1A4AA5DC008BCB3D /* Suggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = C0BE386A1A4AA5DC008BCB3D /* Suggestion.m */; };
 		C0BE386E1A4AC640008BCB3D /* SuggestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0BE386D1A4AC640008BCB3D /* SuggestionView.m */; };
-		C0DC69461A2FA84900C8CFC8 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */; };
-		C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC69481A2FA91A00C8CFC8 /* Board.m */; };
-		C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */; };
-		C0DC694F1A2FB45F00C8CFC8 /* BoardSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */; };
 		C0E562761A5026DC00B3C1B9 /* Eatable.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E562751A5026DC00B3C1B9 /* Eatable.m */; };
 		C0E562791A505F2C00B3C1B9 /* SelectedPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E562781A505F2C00B3C1B9 /* SelectedPiece.m */; };
 		C0E5627F1A5060EC00B3C1B9 /* SelectedPieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E5627E1A5060EC00B3C1B9 /* SelectedPieceView.m */; };
@@ -62,9 +57,6 @@
 		ACA62FB11A438E770007E72B /* IGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGameState.h; sourceTree = "<group>"; };
 		ACA62FB61A438FB80007E72B /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		ACA62FB71A438FB80007E72B /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
-		C02672351A36E1F800C93D6C /* CheckersBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckersBoardView.h; path = View/CheckersBoardView.h; sourceTree = "<group>"; };
-		C02672361A36E1F800C93D6C /* CheckersBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckersBoardView.m; path = View/CheckersBoardView.m; sourceTree = "<group>"; };
-		C02A10D81A2DAD78000C9CDE /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
 		C0509B351A47252B00E69AFE /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		C0509B361A47252B00E69AFE /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		C0917E8D1A476E8A00D9A5F8 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
@@ -108,14 +100,6 @@
 		C0BE386C1A4AC640008BCB3D /* SuggestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SuggestionView.h; path = View/SuggestionView.h; sourceTree = "<group>"; };
 		C0BE386D1A4AC640008BCB3D /* SuggestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SuggestionView.m; path = View/SuggestionView.m; sourceTree = "<group>"; };
 		C0C2F1491A48446600125BD7 /* IPieceMovements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPieceMovements.h; path = Business/IPieceMovements.h; sourceTree = "<group>"; };
-		C0DC69441A2FA84900C8CFC8 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
-		C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
-		C0DC69471A2FA91A00C8CFC8 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = Model/Board.h; sourceTree = "<group>"; };
-		C0DC69481A2FA91A00C8CFC8 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = Model/Board.m; sourceTree = "<group>"; };
-		C0DC694A1A2FB24F00C8CFC8 /* CheckersBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckersBoard.h; path = Model/CheckersBoard.h; sourceTree = "<group>"; };
-		C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckersBoard.m; path = Model/CheckersBoard.m; sourceTree = "<group>"; };
-		C0DC694D1A2FB45F00C8CFC8 /* BoardSquareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquareView.h; path = View/BoardSquareView.h; sourceTree = "<group>"; };
-		C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquareView.m; path = View/BoardSquareView.m; sourceTree = "<group>"; };
 		C0E562741A5026DC00B3C1B9 /* Eatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eatable.h; path = State/Eatable.h; sourceTree = "<group>"; };
 		C0E562751A5026DC00B3C1B9 /* Eatable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Eatable.m; path = State/Eatable.m; sourceTree = "<group>"; };
 		C0E562771A505F2C00B3C1B9 /* SelectedPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectedPiece.h; path = State/SelectedPiece.h; sourceTree = "<group>"; };
@@ -173,16 +157,6 @@
 			path = Crosscutting;
 			sourceTree = "<group>";
 		};
-		C04C871C1A40AAF50097E26E /* eski */ = {
-			isa = PBXGroup;
-			children = (
-				C0B4D99F1A383669000F3C41 /* eski */,
-				C0B4D9A01A38367F000F3C41 /* eski */,
-			);
-			name = eski;
-			path = Checkers;
-			sourceTree = "<group>";
-		};
 		C04C871D1A40AFE30097E26E /* State */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				C091D1FB1A2C6FCE0033F8BD /* Checkers */,
-				C04C871C1A40AAF50097E26E /* eski */,
 				C0DD99191A2C8C3A00E91DD9 /* Other */,
 			);
 			sourceTree = "<group>";
@@ -223,16 +196,13 @@
 		C091D1FB1A2C6FCE0033F8BD /* Checkers */ = {
 			isa = PBXGroup;
 			children = (
-				ACA62FB51A438FB80007E72B /* Crosscutting */,
-				C04C871D1A40AFE30097E26E /* State */,
 				C091D2001A2C6FCE0033F8BD /* AppDelegate.h */,
 				C091D2011A2C6FCE0033F8BD /* AppDelegate.m */,
-				C0B4D9A81A383D2B000F3C41 /* TileCoordinates.h */,
-				C0B4D9A91A383D2B000F3C41 /* TileCoordinates.m */,
-				C0DD99171A2C8BCA00E91DD9 /* Data */,
+				ACA62FB51A438FB80007E72B /* Crosscutting */,
+				C04C871D1A40AFE30097E26E /* State */,
 				C0DD99161A2C8BC700E91DD9 /* Business */,
 				C0DD99151A2C8BC400E91DD9 /* Presentation */,
-				C0DC69431A2FA83000C8CFC8 /* Utilities */,
+				C0DC69431A2FA83000C8CFC8 /* Other */,
 				C0DD99181A2C8BFD00E91DD9 /* Resources */,
 				C091D1FC1A2C6FCE0033F8BD /* Supporting Files */,
 			);
@@ -265,38 +235,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C0B4D99F1A383669000F3C41 /* eski */ = {
+		C0DC69431A2FA83000C8CFC8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				C02A10D81A2DAD78000C9CDE /* BoardCellState.h */,
-				C0DC69471A2FA91A00C8CFC8 /* Board.h */,
-				C0DC69481A2FA91A00C8CFC8 /* Board.m */,
-				C0DC694A1A2FB24F00C8CFC8 /* CheckersBoard.h */,
-				C0DC694B1A2FB24F00C8CFC8 /* CheckersBoard.m */,
-			);
-			name = eski;
-			sourceTree = "<group>";
-		};
-		C0B4D9A01A38367F000F3C41 /* eski */ = {
-			isa = PBXGroup;
-			children = (
-				C02672351A36E1F800C93D6C /* CheckersBoardView.h */,
-				C02672361A36E1F800C93D6C /* CheckersBoardView.m */,
-				C0DC694D1A2FB45F00C8CFC8 /* BoardSquareView.h */,
-				C0DC694E1A2FB45F00C8CFC8 /* BoardSquareView.m */,
-			);
-			name = eski;
-			sourceTree = "<group>";
-		};
-		C0DC69431A2FA83000C8CFC8 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
+				C0B4D9A81A383D2B000F3C41 /* TileCoordinates.h */,
+				C0B4D9A91A383D2B000F3C41 /* TileCoordinates.m */,
 				C0B4D9AB1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.h */,
 				C0B4D9AC1A38496C000F3C41 /* NSMutableArray+MultidimensionExtension.m */,
-				C0DC69441A2FA84900C8CFC8 /* MulticastDelegate.h */,
-				C0DC69451A2FA84900C8CFC8 /* MulticastDelegate.m */,
 			);
-			name = Utilities;
+			name = Other;
 			sourceTree = "<group>";
 		};
 		C0DD99151A2C8BC400E91DD9 /* Presentation */ = {
@@ -319,13 +266,6 @@
 				ACA62FAC1A438CE90007E72B /* Player Related */,
 			);
 			name = Business;
-			sourceTree = "<group>";
-		};
-		C0DD99171A2C8BCA00E91DD9 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Data;
 			sourceTree = "<group>";
 		};
 		C0DD99181A2C8BFD00E91DD9 /* Resources */ = {
@@ -479,10 +419,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C09D0A051A3F7E9400A35600 /* GameEngine.m in Sources */,
-				C0DC694F1A2FB45F00C8CFC8 /* BoardSquareView.m in Sources */,
 				C0BE386E1A4AC640008BCB3D /* SuggestionView.m in Sources */,
 				C0B4D9A31A3836A7000F3C41 /* CheckersTileView.m in Sources */,
-				C0DC69461A2FA84900C8CFC8 /* MulticastDelegate.m in Sources */,
 				C0B4D9981A3832DC000F3C41 /* Piece.m in Sources */,
 				C0509B371A47252B00E69AFE /* SettingsTableViewController.m in Sources */,
 				C0B4D9901A377148000F3C41 /* CheckersViewController.m in Sources */,
@@ -494,14 +432,11 @@
 				C091D2021A2C6FCE0033F8BD /* AppDelegate.m in Sources */,
 				ACA62FAB1A438C790007E72B /* PlayerInfo.m in Sources */,
 				AC1488701A438BAB00438E7D /* Game.m in Sources */,
-				C02672371A36E1F800C93D6C /* CheckersBoardView.m in Sources */,
 				C0B4D9AA1A383D2B000F3C41 /* TileCoordinates.m in Sources */,
-				C0DC69491A2FA91A00C8CFC8 /* Board.m in Sources */,
 				C0B4D9941A383247000F3C41 /* CheckersPieceView.m in Sources */,
 				ACA62FB81A438FB80007E72B /* Globals.m in Sources */,
 				C0E562791A505F2C00B3C1B9 /* SelectedPiece.m in Sources */,
 				C0E562761A5026DC00B3C1B9 /* Eatable.m in Sources */,
-				C0DC694C1A2FB24F00C8CFC8 /* CheckersBoard.m in Sources */,
 				C0E5627F1A5060EC00B3C1B9 /* SelectedPieceView.m in Sources */,
 				C091D1FF1A2C6FCE0033F8BD /* main.m in Sources */,
 				C0B4D99E1A3835C9000F3C41 /* CheckPiece.m in Sources */,

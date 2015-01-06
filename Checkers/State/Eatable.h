@@ -11,9 +11,9 @@
 
 @interface Eatable : NSObject
 
-@property (nonatomic,strong) TileCoordinates * coordinatesOfCapturedPiece;
-@property (nonatomic,strong) TileCoordinates * coordinateOfPossibleMove;
+@property (nonatomic,strong) TileCoordinates *coordinatesOfCapturedPiece;
+@property (nonatomic,strong) TileCoordinates *coordinateOfPossibleMove;
 
-- (instancetype)initWithCapturedPiece:(TileCoordinates * )coordinatesOfCapturedPiece possibleMoves:(TileCoordinates * )coordinateOfPossibleMove;
+- (instancetype)initWithCapturedPiece:(TileCoordinates *)coordinatesOfCapturedPiece possibleMoves:(TileCoordinates *)coordinateOfPossibleMove;
 
 @end

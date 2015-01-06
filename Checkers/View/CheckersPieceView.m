@@ -11,7 +11,7 @@
 @interface CheckersPieceView ()
 
 @property (nonatomic) UIImageView* pieceImageView;
-@property (nonatomic) UIImage* currentImage; //for selecting and unselecting purposes
+@property (nonatomic) UIImage* currentImage;
 
 @end
 
