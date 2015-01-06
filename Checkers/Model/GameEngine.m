@@ -159,7 +159,7 @@ __strong static id _sharedObject = nil;
 
     for (int i = 0; i < 8; i++) {
 
-        for (int j = 1; j < 2; j++) {
+        for (int j = 1; j < 3; j++) {
             //link CheckersTileView with CheckersPieceView
             //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
 
@@ -175,9 +175,23 @@ __strong static id _sharedObject = nil;
             [_currentGame.pieces addObject:pieceView];
         }
         
+      for (int k = 5; k < 7; k++) {
+        //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
         
+        CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+        //
+        //            currentTile.pieceView = pieceView;
+        //            [currentTile addSubview:pieceView];
         
+        RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteRegular] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
+        [pieceView setPieceInfoWithPiece:regularPiece];
         
+        //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+        [_currentGame.pieces addObject:pieceView];
+      }
+     
+      
+      
         
 //        for (int j = 6; j < 7; j++) {
 //            //link CheckersTileView with CheckersPieceView
@@ -196,36 +210,36 @@ __strong static id _sharedObject = nil;
 //        }
 
         
-        for (int k = 3; k < 4; k++) {
-            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
-            
-            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            //
-            //            currentTile.pieceView = pieceView;
-            //            [currentTile addSubview:pieceView];
-            
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-            
-            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.pieces addObject:pieceView];
-        }
-
-        for (int j = 4; j < 5; j++) {
-            //link CheckersTileView with CheckersPieceView
-            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
-            
-            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
-            //            currentTile.pieceView = pieceView;
-            //            [currentTile addSubview:pieceView];
-            
-            //link Piece with CheckersPieceView
-            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackChecker] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
-            [pieceView setPieceInfoWithPiece:regularPiece];
-            
-            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
-            [_currentGame.pieces addObject:pieceView];
-        }
+//        for (int k = 3; k < 4; k++) {
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
+//            
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//            
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals whiteChecker] currentPositionX:i currentPositionY:k playerSideType:pieceSideWhite];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//            
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
+//
+//        for (int j = 4; j < 5; j++) {
+//            //link CheckersTileView with CheckersPieceView
+//            //            CheckersTileView* currentTile = self.boardTilesArr[i][j];
+//            
+//            CheckersPieceView* pieceView = [[CheckersPieceView alloc] initWithFrame:pieceFrame];
+//            //            currentTile.pieceView = pieceView;
+//            //            [currentTile addSubview:pieceView];
+//            
+//            //link Piece with CheckersPieceView
+//            RegularPiece* regularPiece = [[RegularPiece alloc] initWithImageName:[Globals blackChecker] currentPositionX:i currentPositionY:j playerSideType:pieceSideBlack];
+//            [pieceView setPieceInfoWithPiece:regularPiece];
+//            
+//            //            pieceView.center = CGPointMake(currentTile.frame.size.width / 2, currentTile.frame.size.height / 2);
+//            [_currentGame.pieces addObject:pieceView];
+//        }
 
 //        for (int k = 1; k < 2; k++) {
 //            //            CheckersTileView* currentTile = self.boardTilesArr[i][k];
