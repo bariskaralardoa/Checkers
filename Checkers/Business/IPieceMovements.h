@@ -12,9 +12,9 @@
 @protocol IPieceMovements <NSObject>
 
 //- (void)createPieceOn:(TileCoordinates *) coord withHeight:(float)height;
-- (void)possibleMoveIndicator:(TileCoordinates *)coord withHeight:(float)height;
-- (void)calculatePossibleMovesWithMoveSuggestionIndicator:(TileCoordinates *) coord withHeight:(float)height isCheckingNextEdiblePossibleMoves:(BOOL)isChecking;
-- (void)selectedPieceIndicator:(TileCoordinates *) coord withHeight:(float)height;
+- (void)possibleMoveIndicator:(TileCoordinates*)coord withHeight:(float)height;
+- (void)calculatePossibleMovesWithMoveSuggestionIndicator:(TileCoordinates*)coord withHeight:(float)height isCheckingNextEdiblePossibleMoves:(BOOL)isChecking;
+- (void)selectedPieceIndicator:(TileCoordinates*)coord withHeight:(float)height;
 
 - (BOOL)isPossibleEatenArrayEmpty;
 //- (void)placePossibleMoveImageOnTile:(TileCoordinates *)coord withHeight:(float)height;
@@ -22,12 +22,13 @@
 - (NSArray*)getMoveSuggestion;
 - (NSArray*)getSelectedPieceArr;
 
-- (void)detectClickedCellStatus:(TileCoordinates *)coord;
+- (void)detectClickedCellStatus:(TileCoordinates*)coord;
 
-- (BOOL)isLegalMove:(TileCoordinates *)coord;
+- (BOOL)isLegalMove:(TileCoordinates*)coord;
 
-- (void)handleMoveAndCapture:(TileCoordinates *)coord;
+- (void)handleMoveAndCapture:(TileCoordinates*)coord;
 
-- (BOOL)isCellOccupied:(TileCoordinates *) coord;
-- (void)clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:(TileCoordinates *)coord;
+- (BOOL)isCellOccupied:(TileCoordinates*)coord;
+/// Ekincan-2: Bu metodun adını değiştirsene, array almıyor
+- (void)clearIndicatorsWithPossibleEatenAndPossibleMovesArrays:(TileCoordinates*)coord;
 @end
